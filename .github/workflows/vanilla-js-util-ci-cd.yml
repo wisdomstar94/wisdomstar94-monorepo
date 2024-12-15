@@ -3,7 +3,7 @@ name: vanilla-js-util-ci-cd
 on:
   push:
     tags:
-      - 'vanilla-js-util-v[0-9]+.[0-9]+.[0-9]+'
+      - "vanilla-js-util-v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   publish-release-registry:
@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+      - run: corepack enable
+      - run: corepack prepare yarn@stable --activate
       - run: yarn install
       - run: yarn @wisdomstar94/vanilla-js-util pack:build
       - run: yarn @wisdomstar94/vanilla-js-util npm:publish

@@ -3,7 +3,7 @@ name: react-keyboard-manager-ci-cd
 on:
   push:
     tags:
-      - 'react-keyboard-manager-v[0-9]+.[0-9]+.[0-9]+'
+      - "react-keyboard-manager-v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   publish-release-registry:
@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+      - run: corepack enable
+      - run: corepack prepare yarn@stable --activate
       - run: yarn install
       - run: yarn @wisdomstar94/react-add-event-listener pack:build
       - run: yarn @wisdomstar94/react-keyboard-manager pack:build
