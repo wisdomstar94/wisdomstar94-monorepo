@@ -1,1 +1,1 @@
-# @wisdomstar94/tailwind-config
+# @wisdomstar94/other-packages
