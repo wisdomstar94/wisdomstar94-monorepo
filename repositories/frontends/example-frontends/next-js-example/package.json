@@ -1,0 +1,41 @@
+{
+  "name": "@wisdomstar94/next-js-example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "ncu:update": "ncu -u",
+    "del:node_modules": "del-cli ./node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@wisdomstar94/react-add-event-listener": "workspace:^",
+    "@wisdomstar94/react-api": "workspace:^",
+    "@wisdomstar94/vanilla-js-util": "workspace:^",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "next": "^15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "set-cookie-parser": "^2.7.1",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "@types/set-cookie-parser": "^2.4.10",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "15.1.0",
+    "postcss": "^8.4.49",
+    "sass": "^1.83.0",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2"
+  }
+}

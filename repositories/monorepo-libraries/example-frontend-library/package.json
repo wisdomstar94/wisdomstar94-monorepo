@@ -1,0 +1,30 @@
+{
+  "name": "@wisdomstar94/example-frontend-library",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc-watch",
+    "ncu:update": "ncu -u"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/src/index.js"
+      },
+      "require": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/src/index.js"
+      }
+    }
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.16"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.16",
+    "tsc-watch": "6.2.1",
+    "typescript": "^5.7.2"
+  }
+}

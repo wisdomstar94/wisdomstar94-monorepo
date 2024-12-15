@@ -1,0 +1,40 @@
+{
+  "name": "@wisdomstar94/vanilla-js-util",
+  "version": "0.0.16",
+  "license": "MIT",
+  "scripts": {
+    "ncu:update": "ncu -u",
+    "pack:build": "vite build && tsc",
+    "npm:publish": "npm publish --access=public",
+    "del:dist": "del-cli ./dist",
+    "del:node_modules": "del-cli ./node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@wisdomstar94/tsconfig-library": "workspace:^",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "files": [
+    "package.json",
+    "dist/*",
+    "!dist/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  }
+}

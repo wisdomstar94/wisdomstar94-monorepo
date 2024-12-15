@@ -1,0 +1,14 @@
+{
+  "name": "@wisdomstar94/local-nginx",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "mkcert-install:mac": "brew install mkcert",
+    "mkcert-install:win": "choco install mkcert",
+    "make:cert-file-dir": "make-dir ./src/cert-files",
+    "cert": "yarn make:cert-file-dir && mkcert -install && mkcert -key-file ./src/cert-files/_wildcard-key.pem -cert-file ./src/cert-files/_wildcard.pem \"*.mydomainname.com\"",
+    "clear": "docker stop local-nginx || true && docker rm local-nginx || true && docker rmi local-nginx:latest || true",
+    "build": "docker build --no-cache -t local-nginx:latest ./src/",
+    "start": "docker run -i -d -t -p 80:80 -p 443:443 --name local-nginx local-nginx:latest"
+  }
+}

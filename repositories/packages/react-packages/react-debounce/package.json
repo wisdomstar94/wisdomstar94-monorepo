@@ -1,0 +1,49 @@
+{
+  "name": "@wisdomstar94/react-debounce",
+  "version": "0.0.3",
+  "license": "MIT",
+  "scripts": {
+    "ncu:update": "ncu -u",
+    "pack:build": "vite build && tsc",
+    "npm:publish": "npm publish --access=public",
+    "del:dist": "del-cli ./dist",
+    "del:node_modules": "del-cli ./node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@wisdomstar94/tsconfig-library": "workspace:^",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "files": [
+    "package.json",
+    "dist/*",
+    "!dist/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  }
+}

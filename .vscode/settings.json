@@ -1,0 +1,10 @@
+{
+  "css.customData": [".vscode/tailwind.json"],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*Classes", ".*ClassName*", ".*classes*"],
+  "tailwindCSS.experimental.classRegex": [":(?:.|\n)*?[\"'`]([^\"'`]*).*?,"]
+}

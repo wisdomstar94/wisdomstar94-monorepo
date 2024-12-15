@@ -1,0 +1,9 @@
+{
+  "extends": "@wisdomstar94/tsconfig-library/tsconfig.react-package.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist"
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}

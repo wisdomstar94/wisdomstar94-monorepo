@@ -1,0 +1,14 @@
+{
+  "name": "@wisdomstar94/tsconfig-library",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig.react-package.json": {
+      "default": "./src/tsconfig.react-package.json"
+    },
+    "./tsconfig.next.json": {
+      "default": "./src/tsconfig.next.json"
+    }
+  }
+}

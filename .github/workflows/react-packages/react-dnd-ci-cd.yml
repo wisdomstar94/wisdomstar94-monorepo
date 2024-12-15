@@ -1,0 +1,28 @@
+name: react-dnd-ci-cd
+
+on:
+  push:
+    tags:
+      - 'react-dnd-v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish-release-registry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      - run: yarn install
+      - run: yarn @wisdomstar94/vanilla-js-util pack:build
+      - run: yarn @wisdomstar94/react-add-event-listener pack:build
+      - run: yarn @wisdomstar94/react-scroll-controller pack:build
+      - run: yarn @wisdomstar94/react-request-animation-frame-manager pack:build
+      - run: yarn @wisdomstar94/react-dnd pack:build
+      - run: yarn @wisdomstar94/react-dnd npm:publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.PACKAGE_PUBLISH_KEY_NPM}}
