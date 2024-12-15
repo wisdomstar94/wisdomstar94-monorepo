@@ -1,0 +1,16 @@
+[workspace]
+members = [
+  "repositories/packages/rust-packages/*"
+]
+
+[package]
+name = "wisdomstar94-monorepo"
+version = "0.0.1"
+edition = "2021"
+
+[[bin]]
+name = "wisdomstar94-monorepo"
+path = "./main.rs"
+
+[dependencies]
+

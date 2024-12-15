@@ -4440,6 +4440,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@wisdomstar94/useful-cli@workspace:repositories/packages/rust-packages/useful-cli":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/useful-cli@workspace:repositories/packages/rust-packages/useful-cli"
+  languageName: unknown
+  linkType: soft
+
 "@wisdomstar94/vanilla-js-util@workspace:^, @wisdomstar94/vanilla-js-util@workspace:repositories/packages/vanilla-js-packages/vanilla-js-util":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/vanilla-js-util@workspace:repositories/packages/vanilla-js-packages/vanilla-js-util"

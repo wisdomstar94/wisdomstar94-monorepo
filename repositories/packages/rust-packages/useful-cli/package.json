@@ -1,0 +1,8 @@
+{
+  "name": "@wisdomstar94/useful-cli",
+  "version": "0.0.1",
+  "scripts": {
+    "cargo": "cargo",
+    "cargo:run": "yarn cargo run"
+  }
+}
