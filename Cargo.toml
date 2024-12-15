@@ -1,5 +1,6 @@
 [workspace]
 members = [
+  "repositories/monorepo-rust-libraries/*",
   "repositories/packages/rust-packages/*"
 ]
 

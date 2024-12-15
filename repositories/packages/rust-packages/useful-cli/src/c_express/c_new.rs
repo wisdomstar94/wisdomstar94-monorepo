@@ -1,3 +1,4 @@
+use rust_utils::working_dir::get_working_dir_path_buf;
 
 #[derive(clap::Args, Debug)]
 #[command(
@@ -5,11 +6,14 @@
   long_about = None
 )]
 pub struct CliArgs {
-  /// 프로젝트명을 입력하세요.
+  /// (required) 프로젝트명을 입력하세요.
   #[arg(short='n', long="name")]
-  name: Option<String>,
+  name: String,
 }
 
 pub fn run(args: &CliArgs) {
   println!("express new args {:?}", args);
-}
+  
+  let working_dir_path_buf = get_working_dir_path_buf().unwrap();
+  println!("working_dir_path_buf {:?}", working_dir_path_buf);
+} 
