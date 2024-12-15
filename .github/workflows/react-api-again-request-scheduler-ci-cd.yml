@@ -20,6 +20,7 @@ jobs:
       - run: corepack enable
       - run: corepack prepare yarn@stable --activate
       - run: yarn install
+      - run: yarn monorepo-libraries:build
       - run: yarn @wisdomstar94/react-indexeddb-manager pack:build & yarn @wisdomstar94/react-promise-interval pack:build
       - run: yarn @wisdomstar94/react-api-again-request-scheduler pack:build
       - run: yarn @wisdomstar94/react-api-again-request-scheduler npm:publish

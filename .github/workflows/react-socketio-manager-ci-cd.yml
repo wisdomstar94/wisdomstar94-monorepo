@@ -20,6 +20,7 @@ jobs:
       - run: corepack enable
       - run: corepack prepare yarn@stable --activate
       - run: yarn install
+      - run: yarn monorepo-libraries:build
       - run: yarn @wisdomstar94/react-socketio-manager pack:build
       - run: yarn @wisdomstar94/react-socketio-manager npm:publish
         env:
