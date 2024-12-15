@@ -1,0 +1,25 @@
+{
+  "name": "@wisdomstar94/express-ts-template",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.express.json",
+    "watch": "tsc-watch -p ./tsconfig.express.json",
+    "ncu:update": "ncu -u",
+    "nodemon:start": "nodemon",
+    "dev": "yarn build && concurrently \"yarn nodemon:start\" \"yarn watch\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2",
+    "@types/express": "^5.0.0",
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.9",
+    "npm-check-updates": "^17.1.11",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.7.2"
+  }
+}

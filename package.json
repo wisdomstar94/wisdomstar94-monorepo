@@ -55,6 +55,8 @@
     "@wisdomstar94/postgresql": "yarn workspace @wisdomstar94/postgresql",
     "@wisdomstar94/nexus": "yarn workspace @wisdomstar94/nexus",
     "@wisdomstar94/local-nginx": "yarn workspace @wisdomstar94/local-nginx",
+    "########## templates ##########": "",
+    "@wisdomstar94/express-ts-template": "yarn workspace @wisdomstar94/express-ts-template",
     "########## root scripts ##########": "",
     "all": "yarn workspaces foreach -A run",
     "all:del:dist": "yarn all del:dist",
@@ -78,7 +80,8 @@
     "repositories/packages/other-packages/*",
     "repositories/packages/react-packages/*",
     "repositories/packages/rust-packages/*",
-    "repositories/packages/vanilla-js-packages/*"
+    "repositories/packages/vanilla-js-packages/*",
+    "repositories/templates/*"
   ],
   "devDependencies": {
     "concurrently": "^8.2.2",
