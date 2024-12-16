@@ -50,6 +50,8 @@
     "@wisdomstar94/next-js-jwt-auth-sample": "yarn workspace @wisdomstar94/next-js-jwt-auth-sample",
     "@wisdomstar94/next-js-tanstack-query-example": "yarn workspace @wisdomstar94/next-js-tanstack-query-example",
     "@wisdomstar94/github-page-test": "yarn workspace @wisdomstar94/github-page-test",
+    "########## backends ##########": "",
+    "@wisdomstar94/test-socket": "yarn workspace @wisdomstar94/test-socket",
     "########## dockers ##########": "",
     "@wisdomstar94/redis": "yarn workspace @wisdomstar94/redis",
     "@wisdomstar94/postgresql": "yarn workspace @wisdomstar94/postgresql",
@@ -73,6 +75,8 @@
   },
   "workspaces": [
     "repositories/dockers/*",
+    "repositories/backends/other-backends/*",
+    "repositories/backends/socket-backends/*",
     "repositories/frontends/example-frontends/*",
     "repositories/frontends/other-frontends/*",
     "repositories/monorepo-libraries/*",
