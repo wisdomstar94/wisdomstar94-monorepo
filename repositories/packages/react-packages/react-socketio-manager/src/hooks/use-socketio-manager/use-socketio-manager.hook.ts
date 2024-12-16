@@ -9,7 +9,10 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
   const [manager] = useState(new Manager(props.baseUrl, { autoConnect: false, ...props.managerOptions }));
   const socketItemsRef = useRef<Map<string, IUseSocketioManager.SocketItem<T>>>(new Map());
   const socketCallbackItemsRef = useRef<
-    Map<`${IUseSocketioManager.SocketNamespace<T>}.${IUseSocketioManager.SocketEventName}`, IUseSocketioManager.SocketOnListener>
+    Map<
+      `${IUseSocketioManager.SocketNamespace<T>}.${IUseSocketioManager.SocketEventName}`,
+      IUseSocketioManager.SocketOnListener
+    >
   >(new Map());
 
   function getManager() {
@@ -141,6 +144,12 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
     }
   }
 
+  function isConnected(namespace: T) {
+    const target = getSocketItemsMap().get(namespace);
+    if (target === undefined) return false;
+    return target.socket.connected;
+  }
+
   useEffect(() => {
     getSocketItemsMap().forEach((socketItem) => {
       socketItem.socket.removeAllListeners('connect');
@@ -184,6 +193,7 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
     disconnect,
     setListener,
     emit,
+    isConnected,
     allConnectConnectItems,
     allDisconnectConnectItems,
   };

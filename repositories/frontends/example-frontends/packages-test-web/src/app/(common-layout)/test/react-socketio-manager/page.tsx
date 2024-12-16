@@ -159,6 +159,20 @@ export default function Page() {
       >
         allDisconnectConnectItems with removeInConnectItems
       </button>
+      <button
+        onClick={() => {
+          console.log(`socketioManager.isConnected('/')`, socketioManager.isConnected("/"));
+        }}
+      >
+        / 연결되었나?
+      </button>
+      <button
+        onClick={() => {
+          console.log(`socketioManager.isConnected('/users')`, socketioManager.isConnected("/users"));
+        }}
+      >
+        /users 연결되었나?
+      </button>
     </>
   );
 }

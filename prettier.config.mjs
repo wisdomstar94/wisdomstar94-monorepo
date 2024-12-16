@@ -4,9 +4,9 @@
  */
 const config = {
   tabWidth: 2,
-  singleQuote: false,
+  singleQuote: true,
   printWidth: 120,
-  trailingComma: "es5",
+  trailingComma: 'es5',
   semi: true,
   bracketSpacing: true,
   bracketSameLine: false,
