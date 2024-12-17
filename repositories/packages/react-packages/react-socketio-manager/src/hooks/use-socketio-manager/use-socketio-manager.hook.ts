@@ -1,12 +1,11 @@
 'use client';
 
-import { Manager } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useEffect, useRef, useState } from 'react';
 import type { IUseSocketioManager } from './use-socketio-manager.interface';
 
 export function useSocketioManager<T extends string = string>(props: IUseSocketioManager.Props<T>) {
   const [initializeAutoConnects] = useState(props.initializeAutoConnects);
-  const [manager] = useState(new Manager(props.baseUrl, { autoConnect: false, ...props.managerOptions }));
   const socketItemsRef = useRef<Map<string, IUseSocketioManager.SocketItem<T>>>(new Map());
   const socketCallbackItemsRef = useRef<
     Map<
@@ -14,10 +13,6 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
       IUseSocketioManager.SocketOnListener
     >
   >(new Map());
-
-  function getManager() {
-    return manager;
-  }
 
   function getSocketItemsMap() {
     return socketItemsRef.current;
@@ -36,7 +31,7 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
       return;
     }
 
-    const socket = getManager().socket(connectOptions.namespace, connectOptions.options);
+    const socket = io(`${props.baseUrl}${connectOptions.namespace}`, connectOptions.options);
 
     socket.on('connect', () => {
       if (typeof props.onConnected === 'function') {
@@ -188,7 +183,6 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
   }, [props.managerOptions?.autoConnect]);
 
   return {
-    getManager,
     connect,
     disconnect,
     setListener,

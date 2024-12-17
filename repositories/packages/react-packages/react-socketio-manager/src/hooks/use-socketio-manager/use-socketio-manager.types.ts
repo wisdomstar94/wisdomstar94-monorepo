@@ -19,7 +19,7 @@ export type Props<T extends string = string> = {
 
 export type ConnectOptions<T extends string = string> = {
   namespace: T;
-  options?: Partial<SocketOptions>;
+  options?: Partial<ManagerOptions & SocketOptions>;
 };
 
 export type DisconnectOptions<T extends string = string> = {
@@ -30,7 +30,7 @@ export type DisconnectOptions<T extends string = string> = {
 export type SocketItem<T extends string = string> = {
   namespace: T;
   socket: Socket;
-  options?: Partial<SocketOptions>;
+  options?: Partial<ManagerOptions & SocketOptions>;
 };
 
 export type SetListenerOptions<T extends string = string> = {

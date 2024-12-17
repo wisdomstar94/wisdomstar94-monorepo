@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { usePromiseInterval } from "@wisdomstar94/react-promise-interval";
-import { useSocketioManager } from "@wisdomstar94/react-socketio-manager";
-import { useEffect, useState } from "react";
+import { usePromiseInterval } from '@wisdomstar94/react-promise-interval';
+import { useSocketioManager } from '@wisdomstar94/react-socketio-manager';
+import { useEffect, useState } from 'react';
 
 type MyData = {
   name: string;
@@ -21,63 +21,63 @@ export default function Page() {
   });
 
   useEffect(() => {
-    console.log("@number", number);
+    console.log('@number', number);
   }, [number]);
 
   const socketioManager = useSocketioManager<string>({
-    baseUrl: "localhost:3040",
+    baseUrl: 'localhost:3040',
     initializeAutoConnects: {
       items: [
         {
-          namespace: "/",
+          namespace: '/',
         },
       ],
     },
     onConnected(namespace, socket) {
-      console.log("@onConnected", { namespace, socket, number });
+      console.log('@onConnected', { namespace, socket, number });
     },
     onDisconnected(namespace, socket, reason) {
       switch (reason) {
-        case "transport close":
+        case 'transport close':
           // 소켓 서버에서 소켓이 내려간 경우 (listen 하지 않는 경우)
           // 소켓 서버에서 io 내부에서 throw 에러가 발생한 경우
           // 네트워크 연결이 끊겨서 소켓 연결이 끊긴 경우
           break;
-        case "io server disconnect":
+        case 'io server disconnect':
           // 서버 측에서 명시적으로 disconnect 한 경우
           break;
-        case "io client disconnect":
+        case 'io client disconnect':
           // 클라이언트에서 명시적으로 disconnect 한 경우
           break;
-        case "transport error":
+        case 'transport error':
           break;
-        case "parse error":
+        case 'parse error':
           break;
-        case "ping timeout":
+        case 'ping timeout':
           break;
       }
 
-      console.log("@onDisconnected", { namespace, socket, reason, number });
+      console.log('@onDisconnected', { namespace, socket, reason, number });
     },
   });
 
   socketioManager.setListener({
-    namespace: "/",
-    eventName: "my-event",
+    namespace: '/',
+    eventName: 'my-event',
     callback(data: MyData) {
-      console.log("@@@ my-event!!!", data);
-      console.log("@@@ my-event!!! data.name", data.name);
-      console.log("@@@ my-event!!! data.t", data.t);
-      console.log("@@@ component.number!!!", number);
+      console.log('@@@ my-event!!!', data);
+      console.log('@@@ my-event!!! data.name', data.name);
+      console.log('@@@ my-event!!! data.t', data.t);
+      console.log('@@@ component.number!!!', number);
     },
   });
 
   socketioManager.setListener({
-    namespace: "/users",
-    eventName: "user:list",
+    namespace: '/users',
+    eventName: 'user:list',
     callback(data) {
-      console.log("@@@ user:list!!!", data);
-      console.log("@@@ component.number!!!", number);
+      console.log('@@@ user:list!!!', data);
+      console.log('@@@ component.number!!!', number);
     },
   });
 
@@ -91,7 +91,8 @@ export default function Page() {
       <button
         onClick={() => {
           socketioManager.connect({
-            namespace: "/",
+            namespace: '/',
+            options: {},
           });
         }}
       >
@@ -100,7 +101,7 @@ export default function Page() {
       <button
         onClick={() => {
           socketioManager.disconnect({
-            namespace: "/",
+            namespace: '/',
           });
         }}
       >
@@ -109,7 +110,7 @@ export default function Page() {
       <button
         onClick={() => {
           socketioManager.connect({
-            namespace: "/users",
+            namespace: '/users',
           });
         }}
       >
@@ -118,7 +119,7 @@ export default function Page() {
       <button
         onClick={() => {
           socketioManager.disconnect({
-            namespace: "/users",
+            namespace: '/users',
           });
         }}
       >
@@ -127,10 +128,10 @@ export default function Page() {
       <button
         onClick={() => {
           socketioManager.emit({
-            namespace: "/users",
-            eventName: "user-event",
+            namespace: '/users',
+            eventName: 'user-event',
             data: {
-              from: "client",
+              from: 'client',
               age: 11,
             },
           });
@@ -161,14 +162,14 @@ export default function Page() {
       </button>
       <button
         onClick={() => {
-          console.log(`socketioManager.isConnected('/')`, socketioManager.isConnected("/"));
+          console.log(`socketioManager.isConnected('/')`, socketioManager.isConnected('/'));
         }}
       >
         / 연결되었나?
       </button>
       <button
         onClick={() => {
-          console.log(`socketioManager.isConnected('/users')`, socketioManager.isConnected("/users"));
+          console.log(`socketioManager.isConnected('/users')`, socketioManager.isConnected('/users'));
         }}
       >
         /users 연결되었나?
