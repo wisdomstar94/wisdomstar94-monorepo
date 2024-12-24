@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "baseUrl": ".",
+    "emitDeclarationOnly": true
+  },
+  "references": [{ "path": "./tsconfig.express.json" }]
+}
