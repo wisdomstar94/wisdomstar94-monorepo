@@ -25,7 +25,7 @@ export function Sidebar() {
           'sidebar-opend:left-0',
 
           'fixed z-[2] transition-all duration-300',
-          'bg-red-400'
+          'bg-slate-100'
         )}
       ></aside>
     </>

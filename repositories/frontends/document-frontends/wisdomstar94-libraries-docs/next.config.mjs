@@ -16,9 +16,6 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   basePath: '/wisdomstar94-monorepo',
   output: 'export',
-  // experimental: {
-  //   mdxRs: false,
-  // },
   trailingSlash: true,
 };
 

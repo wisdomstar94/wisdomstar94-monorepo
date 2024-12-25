@@ -11,14 +11,14 @@ export function Topbar() {
           'top-layout-topbar-top-m lg:top-layout-topbar-top',
           'left-layout-topbar-left-m lg:left-layout-topbar-left',
           'fixed transition-all duration-300',
-          'bg-slate-400',
+          'bg-slate-200',
           'flex justify-between gap-2 px-4 box-border items-center'
         )}
       >
         {/* left */}
         <div className={cn('inline-flex items-center gap-2 relative')}>
           <button
-            className={cn('p-2 cursor-pointer')}
+            className={cn('p-2 cursor-pointer', 'inline-flex lg:hidden')}
             onClick={() => {
               document.body.classList.add('sidebar-opend');
               document.body.classList.remove('sidebar-collapsed');
