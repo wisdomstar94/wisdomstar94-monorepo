@@ -4,20 +4,41 @@
 
 - repositories
   - backends
-    - 마이그레이션 대기중
+    - socket-backends
+      - babylon-js-example-socket
+      - test-socket
   - dockers
+    - babylon-js-example-server-set
     - local-nginx
     - nexus
     - postgresql
     - redis
   - frontends
     - example-frontends
+      - ant-design-example
+      - babylon-js-example
+      - github-page-test
+      - next-js-example
+      - next-js-jotai-sample
+      - next-js-jwt-auth-sample
+      - next-js-tanstack-query-example
+      - next-js-zod-sample
+      - packages-test-web
+      - react-example
+      - shadcn-ui-example
+      - tailwindcss-example
     - other-frontends
   - monorepo-libraries
     - example-frontend-library
     - example-next-library
     - tsconfig-library
     - vite-config-library
+  - monorepo-rust-libraries
+    - commander
+    - downloader
+    - file_manager
+    - flater
+    - rust-utils
   - packages
     - next-packages
       - next-utils
@@ -46,6 +67,8 @@
       - react-touch-container
       - react-web-rtc-manager
     - rust-packages
-      - 준비중
+      - useful-cli
     - vanilla-js-util
       - vanilla-js-util
+  - templates
+    - express-ts-template
