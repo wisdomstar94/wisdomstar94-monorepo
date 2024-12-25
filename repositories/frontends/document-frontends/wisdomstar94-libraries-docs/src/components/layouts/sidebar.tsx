@@ -41,18 +41,18 @@ export function Sidebar() {
         <div className={cn('w-full flex items-center justify-center p-4 box-border')}>
           <Logo />
         </div>
-        <ul className={cn('w-full flex flex-col gap-2 relative box-border')}>
+        <ul className={cn('w-full flex flex-col gap-0 relative box-border')}>
           {SIDE_MENU_LIST.map((item) => {
             return (
               <li
                 key={item.href}
-                className={cn('inline-flex w-full p-2 relative box-border', 'group/menu-item')}
+                className={cn('inline-flex w-full relative box-border', 'group/menu-item')}
                 data-active={pathname.startsWith(item.href)}
               >
                 <Link
                   href={item.href}
                   className={cn(
-                    'inline-flex w-full p-2 box-border cursor-pointer hover:bg-slate-200 items-center gap-4',
+                    'inline-flex w-full box-border cursor-pointer hover:bg-slate-200 items-center gap-4 p-2',
                     'group-data-[active=true]/menu-item:bg-slate-200 group-data-[active=true]/menu-item:hover:bg-slate-300'
                   )}
                 >
