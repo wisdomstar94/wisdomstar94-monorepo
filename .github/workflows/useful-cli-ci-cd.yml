@@ -1,0 +1,183 @@
+name: 'useful-cli-ci-cd'
+
+# This will trigger the action on each push to the `release` branch.
+on:
+  push:
+    tags:
+      - 'useful-cli-v[0-9]+.[0-9]+.[0-9]+'
+
+env:
+  CLI_NAME: useful-cli
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-24.04, windows-latest]
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      ### mac os
+      - name: cargo build (macos only)
+        if: matrix.platform == 'macos-latest'
+        run: |
+          rustup target add aarch64-apple-darwin
+          rustup target add x86_64-apple-darwin
+          yarn @wisdomstar94/useful-cli build --target aarch64-apple-darwin
+          yarn @wisdomstar94/useful-cli build --target x86_64-apple-darwin
+
+          mkdir -p builds/${{ env.CLI_NAME }}-aarch64-apple-darwin
+          cp target/aarch64-apple-darwin/release/${{ env.CLI_NAME }} builds/${{ env.CLI_NAME }}-aarch64-apple-darwin/${{ env.CLI_NAME }}
+          tar -C builds -czvf ${{ env.CLI_NAME }}-aarch64-apple-darwin.tar.gz ${{ env.CLI_NAME }}-aarch64-apple-darwin
+
+          mkdir -p builds/${{ env.CLI_NAME }}-x86_64-apple-darwin
+          cp target/x86_64-apple-darwin/release/${{ env.CLI_NAME }} builds/${{ env.CLI_NAME }}-x86_64-apple-darwin/${{ env.CLI_NAME }}
+          tar -C builds -czvf ${{ env.CLI_NAME }}-x86_64-apple-darwin.tar.gz ${{ env.CLI_NAME }}-x86_64-apple-darwin
+
+      - name: asset upload - aarch64 (macos only)
+        if: matrix.platform == 'macos-latest'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.CLI_NAME }}-aarch64-apple-darwin.tar.gz
+          asset_name: ${{ env.CLI_NAME }}-aarch64-apple-darwin.tar.gz
+          tag: ${{ github.ref }}
+
+      - name: asset upload - x86_64 (macos only)
+        if: matrix.platform == 'macos-latest'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.CLI_NAME }}-x86_64-apple-darwin.tar.gz
+          asset_name: ${{ env.CLI_NAME }}-x86_64-apple-darwin.tar.gz
+          tag: ${{ github.ref }}
+
+      ### ubuntu (linux)
+      - name: cargo build (ubuntu only)
+        if: matrix.platform == 'ubuntu-24.04'
+        run: |
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+
+          export OPENSSL_DIR=/usr/lib/ssl
+
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+          sudo apt-get update -y
+          sudo systemctl start docker
+          cargo install cross --git https://github.com/cross-rs/cross
+
+          rustup target add aarch64-unknown-linux-gnu
+          rustup target add x86_64-unknown-linux-gnu
+          yarn @wisdomstar94/useful-cli cross:build --target aarch64-unknown-linux-gnu
+          yarn @wisdomstar94/useful-cli cross:build --target x86_64-unknown-linux-gnu
+
+          mkdir -p builds/${{ env.CLI_NAME }}-aarch64-linux-gnu
+          cp target/aarch64-unknown-linux-gnu/release/${{ env.CLI_NAME }} builds/${{ env.CLI_NAME }}-aarch64-linux-gnu/${{ env.CLI_NAME }}
+          tar -C builds -czvf ${{ env.CLI_NAME }}-aarch64-linux-gnu.tar.gz ${{ env.CLI_NAME }}-aarch64-linux-gnu
+
+          mkdir -p builds/${{ env.CLI_NAME }}-x86_64-linux-gnu
+          cp target/x86_64-unknown-linux-gnu/release/${{ env.CLI_NAME }} builds/${{ env.CLI_NAME }}-x86_64-linux-gnu/${{ env.CLI_NAME }}
+          tar -C builds -czvf ${{ env.CLI_NAME }}-x86_64-linux-gnu.tar.gz ${{ env.CLI_NAME }}-x86_64-linux-gnu
+
+      - name: asset upload - aarch64 (ubuntu only)
+        if: matrix.platform == 'ubuntu-24.04'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.CLI_NAME }}-aarch64-linux-gnu.tar.gz
+          asset_name: ${{ env.CLI_NAME }}-aarch64-linux-gnu.tar.gz
+          tag: ${{ github.ref }}
+
+      - name: asset upload - x86_64 (ubuntu only)
+        if: matrix.platform == 'ubuntu-24.04'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.CLI_NAME }}-x86_64-linux-gnu.tar.gz
+          asset_name: ${{ env.CLI_NAME }}-x86_64-linux-gnu.tar.gz
+          tag: ${{ github.ref }}
+
+      ### windows os
+      - name: cargo build (windows only)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          rustup target add aarch64-pc-windows-msvc
+          rustup target add x86_64-pc-windows-msvc
+          yarn @wisdomstar94/useful-cli build --target aarch64-pc-windows-msvc
+          yarn @wisdomstar94/useful-cli build --target x86_64-pc-windows-msvc
+
+          mkdir -p builds/${{ env.CLI_NAME }}-aarch64-pc-windows-msvc
+          cp target/aarch64-pc-windows-msvc/release/${{ env.CLI_NAME }}.exe builds/${{ env.CLI_NAME }}-aarch64-pc-windows-msvc/${{ env.CLI_NAME }}.exe
+          tar -C builds -czvf ${{ env.CLI_NAME }}-aarch64-pc-windows-msvc.tar.gz ${{ env.CLI_NAME }}-aarch64-pc-windows-msvc
+
+          mkdir -p builds/${{ env.CLI_NAME }}-x86_64-pc-windows-msvc
+          cp target/x86_64-pc-windows-msvc/release/${{ env.CLI_NAME }}.exe builds/${{ env.CLI_NAME }}-x86_64-pc-windows-msvc/${{ env.CLI_NAME }}.exe
+          tar -C builds -czvf ${{ env.CLI_NAME }}-x86_64-pc-windows-msvc.tar.gz ${{ env.CLI_NAME }}-x86_64-pc-windows-msvc
+
+      - name: asset upload - aarch64 (windows only)
+        if: matrix.platform == 'windows-latest'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.CLI_NAME }}-aarch64-pc-windows-msvc.tar.gz
+          asset_name: ${{ env.CLI_NAME }}-aarch64-pc-windows-msvc.tar.gz
+          tag: ${{ github.ref }}
+
+      - name: asset upload - x86_64 (windows only)
+        if: matrix.platform == 'windows-latest'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.CLI_NAME }}-x86_64-pc-windows-msvc.tar.gz
+          asset_name: ${{ env.CLI_NAME }}-x86_64-pc-windows-msvc.tar.gz
+          tag: ${{ github.ref }}
+
+  express-ts-template-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      - run: yarn express-ts-template:tar
+      - name: express-ts-template asset upload
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: express-ts-template.tar.gz
+          asset_name: express-ts-template.tar.gz
+          tag: ${{ github.ref }}
+
+  npm-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          yarn @wisdomstar94/useful-cli npm:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_NPM }}
+    needs: [build, express-ts-template-upload]

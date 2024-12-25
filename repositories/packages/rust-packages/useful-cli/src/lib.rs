@@ -12,12 +12,13 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum SubCommands {
+  /// express 관련 명령어를 제공합니다.
   Express(c_express::ExpressCommand)
 }
 
-pub fn run() {
+pub async fn run() {
   let parse_cli = Cli::parse();
   match &parse_cli.command {
-    SubCommands::Express(express_command) => c_express::run(express_command),
+    SubCommands::Express(express_command) => c_express::run(express_command).await,
   }
 }

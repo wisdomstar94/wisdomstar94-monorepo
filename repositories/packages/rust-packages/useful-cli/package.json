@@ -1,8 +1,22 @@
 {
   "name": "@wisdomstar94/useful-cli",
   "version": "0.0.1",
+  "bin": "./npm/run.js",
   "scripts": {
+    "postinstall": "node ./npm/install.js",
     "cargo": "cargo",
-    "cargo:run": "yarn cargo run"
+    "cargo:run": "yarn cargo run",
+    "build": "cargo build --release",
+    "cross:build": "cross build --release",
+    "npm:publish": "npm publish --access=public"
+  },
+  "files": [
+    "npm/**/*"
+  ],
+  "dependencies": {
+    "binary-install": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=22.11.0"
   }
 }

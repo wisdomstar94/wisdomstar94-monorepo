@@ -75,7 +75,8 @@
     "pack:build:step1": "yarn workspaces foreach -A --include @wisdomstar94/vanilla-js-util run pack:build",
     "pack:build:step2": "yarn workspaces foreach -A --include @wisdomstar94/ip-utils --include @wisdomstar94/react-add-event-listener --include @wisdomstar94/react-body --include @wisdomstar94/react-debounce --include @wisdomstar94/react-promise-interval --include @wisdomstar94/react-promise-timeout --include @wisdomstar94/react-indexeddb-manager --include @wisdomstar94/react-request-animation-frame-manager --include @wisdomstar94/react-scroll-controller run pack:build",
     "pack:build:step3": "yarn workspaces foreach -A --exclude @wisdomstar94/vanilla-js-util --exclude @wisdomstar94/ip-utils --exclude @wisdomstar94/react-add-event-listener --exclude @wisdomstar94/react-body --exclude @wisdomstar94/react-debounce --exclude @wisdomstar94/react-promise-interval --exclude @wisdomstar94/react-promise-timeout --exclude @wisdomstar94/react-indexeddb-manager --exclude @wisdomstar94/react-request-animation-frame-manager --exclude @wisdomstar94/react-scroll-controller run pack:build",
-    "prettier": "yarn prettier"
+    "prettier": "yarn prettier",
+    "express-ts-template:tar": "tar -czvf ./express-ts-template.tar.gz -C ./repositories/templates/express-ts-template ."
   },
   "workspaces": [
     "repositories/dockers/*",

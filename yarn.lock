@@ -4614,6 +4614,10 @@ __metadata:
 "@wisdomstar94/useful-cli@workspace:repositories/packages/rust-packages/useful-cli":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/useful-cli@workspace:repositories/packages/rust-packages/useful-cli"
+  dependencies:
+    binary-install: "npm:^1.1.0"
+  bin:
+    useful-cli: ./npm/run.js
   languageName: unknown
   linkType: soft
 
@@ -5134,6 +5138,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^0.26.1":
+  version: 0.26.1
+  resolution: "axios@npm:0.26.1"
+  dependencies:
+    follow-redirects: "npm:^1.14.8"
+  checksum: 10c0/77ad7f1e6ca04fcd3fa8af1795b09d8b7c005b71a31f28d99ba40cda0bdcc12a4627801d7fac5efa62b9f667a8402bd54c669039694373bc8d44f6be611f785c
+  languageName: node
+  linkType: hard
+
 "axios@npm:^1.7.9":
   version: 1.7.9
   resolution: "axios@npm:1.7.9"
@@ -5184,6 +5197,17 @@ __metadata:
   version: 2.3.0
   resolution: "binary-extensions@npm:2.3.0"
   checksum: 10c0/75a59cafc10fb12a11d510e77110c6c7ae3f4ca22463d52487709ca7f18f69d886aa387557cc9864fbdb10153d0bdb4caacabf11541f55e89ed6e18d12ece2b5
+  languageName: node
+  linkType: hard
+
+"binary-install@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "binary-install@npm:1.1.0"
+  dependencies:
+    axios: "npm:^0.26.1"
+    rimraf: "npm:^3.0.2"
+    tar: "npm:^6.1.11"
+  checksum: 10c0/c0c94a81262c037a1a84f12ff9acfe667b7938b126e764b0f066d5be128d21e0bb8ac5700f4d89f8f7b860b660882deddeaca300dea0ff218d94676999a133a1
   languageName: node
   linkType: hard
 
@@ -7821,7 +7845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.14.8, follow-redirects@npm:^1.15.6":
   version: 1.15.9
   resolution: "follow-redirects@npm:1.15.9"
   peerDependenciesMeta:

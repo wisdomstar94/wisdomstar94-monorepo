@@ -12,8 +12,8 @@ enum ExpressSubCommand {
   New(c_new::CliArgs),
 }
 
-pub fn run(express_command: &ExpressCommand) {
+pub async fn run(express_command: &ExpressCommand) {
   match &express_command.command {
-    ExpressSubCommand::New(cli_args) => c_new::run(cli_args),
+    ExpressSubCommand::New(cli_args) => c_new::run(cli_args).await,
   }
 }
