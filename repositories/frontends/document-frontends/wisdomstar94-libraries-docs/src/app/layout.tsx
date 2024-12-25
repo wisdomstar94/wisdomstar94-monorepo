@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'wisdomstar94-libraries',
   description: 'wisdomstar94-libraries',
   icons: {
-    icon: '/wisdomstar94-monorepo/favicon.ico',
+    icon: '/wisdomstar94-monorepo/favicon.png',
   },
 };
 
