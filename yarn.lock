@@ -3719,6 +3719,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@wisdomstar94/babylon-js-example-server-set@workspace:repositories/dockers/babylon-js-example-server-set":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/babylon-js-example-server-set@workspace:repositories/dockers/babylon-js-example-server-set"
+  languageName: unknown
+  linkType: soft
+
 "@wisdomstar94/babylon-js-example-socket@workspace:repositories/backends/socket-backends/babylon-js-example-socket":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/babylon-js-example-socket@workspace:repositories/backends/socket-backends/babylon-js-example-socket"

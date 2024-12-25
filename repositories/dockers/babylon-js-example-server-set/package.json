@@ -1,0 +1,11 @@
+{
+  "name": "@wisdomstar94/babylon-js-example-server-set",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "clear": "docker stop babylon-js-example-server-set || true && docker rm babylon-js-example-server-set || true && docker rmi babylon-js-example-server-set:latest || true",
+    "build": "docker build --no-cache -t babylon-js-example-server-set ./src/",
+    "build:cache": "docker build -t babylon-js-example-server-set ./src/",
+    "start": "docker run -i -d -t -p 3000:3000 -p 3040:3040 -p 3478:3478 -p 5349:5349 --name babylon-js-example-server-set babylon-js-example-server-set:latest"
+  }
+}

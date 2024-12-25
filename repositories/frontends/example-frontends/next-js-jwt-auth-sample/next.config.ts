@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 import { load } from 'dotenv-mono';
-load();
+load({
+  depth: 8,
+});
 
 const config = {
   experimental: {

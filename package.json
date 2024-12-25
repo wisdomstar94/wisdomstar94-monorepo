@@ -58,6 +58,7 @@
     "@wisdomstar94/postgresql": "yarn workspace @wisdomstar94/postgresql",
     "@wisdomstar94/nexus": "yarn workspace @wisdomstar94/nexus",
     "@wisdomstar94/local-nginx": "yarn workspace @wisdomstar94/local-nginx",
+    "@wisdomstar94/babylon-js-example-server-set": "yarn workspace @wisdomstar94/babylon-js-example-server-set",
     "########## templates ##########": "",
     "@wisdomstar94/express-ts-template": "yarn workspace @wisdomstar94/express-ts-template",
     "########## types ##########": "",

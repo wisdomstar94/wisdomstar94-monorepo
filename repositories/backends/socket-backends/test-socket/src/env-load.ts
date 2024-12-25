@@ -1,7 +1,7 @@
-import { load } from "dotenv-mono";
+import { load } from 'dotenv-mono';
 load({
   priorities: {
     [`.env.${process.env.APP_ENV}`]: 100,
   },
-  depth: 6,
+  depth: 8,
 });
