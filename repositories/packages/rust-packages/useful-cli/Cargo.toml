@@ -12,3 +12,4 @@ downloader = { path = "../../../monorepo-rust-libraries/downloader" }
 flater = { path = "../../../monorepo-rust-libraries/flater" }
 file_manager = { path = "../../../monorepo-rust-libraries/file_manager" }
 commander = { path = "../../../monorepo-rust-libraries/commander" }
+openssl = { version = "0.10.68", features = ["vendored"] }
