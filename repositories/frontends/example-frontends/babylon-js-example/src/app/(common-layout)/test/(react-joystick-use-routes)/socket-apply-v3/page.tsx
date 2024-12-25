@@ -220,7 +220,9 @@ export default function Page() {
     isForceCallWhenFnExecuting: true,
   });
 
-  function emitOpponentCurrentPositionAndRotation(params: { peerConnectionInfos?: IUseWebRtcManager.RTCPeerConnectionInfo<MetaData>[] }) {
+  function emitOpponentCurrentPositionAndRotation(params: {
+    peerConnectionInfos?: IUseWebRtcManager.RTCPeerConnectionInfo<MetaData>[];
+  }) {
     const { peerConnectionInfos } = params;
 
     const c = babylonCharacterController.getCharacter(characterId);
@@ -250,7 +252,9 @@ export default function Page() {
     }
   }
 
-  function emitOpponentConnectInfo(params: { peerConnectionInfos?: IUseWebRtcManager.RTCPeerConnectionInfo<MetaData>[] }) {
+  function emitOpponentConnectInfo(params: {
+    peerConnectionInfos?: IUseWebRtcManager.RTCPeerConnectionInfo<MetaData>[];
+  }) {
     const { peerConnectionInfos } = params;
 
     const meCharacter = babylonCharacterController.getCharacter(characterId);
@@ -283,6 +287,10 @@ export default function Page() {
       });
     }
   }
+
+  const socketioManager = useSocketioManager({
+    baseUrl: `${process.env.NEXT_PUBLIC_WEBS_BABYLON_JS_EXAMPLE_SOCKET_CONNECT_URL}`,
+  });
 
   const webRtcManager = useWebRtcManager<MetaData>({
     defaultRtcConfiguration: {
@@ -454,6 +462,7 @@ export default function Page() {
         rtcPeerConnection.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true }).then((sdp) => {
           rtcPeerConnection.setLocalDescription(new RTCSessionDescription(sdp));
           socketioManager.emit({
+            namespace: '/',
             eventName: 'sendOffer',
             data: {
               sdp,
@@ -465,31 +474,36 @@ export default function Page() {
       }
 
       if (peerConnectionInfo.type === 'getOffer' && peerConnectionInfo.sdp !== undefined) {
-        peerConnectionInfo.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(peerConnectionInfo.sdp)).then(() => {
-          peerConnectionInfo.rtcPeerConnection
-            .createAnswer({ offerToReceiveVideo: true, offerToReceiveAudio: true })
-            .then((sdp) => {
-              peerConnectionInfo.rtcPeerConnection.setLocalDescription(new RTCSessionDescription(sdp));
-              socketioManager.emit({
-                eventName: 'sendAnswer',
-                data: {
-                  sdp,
-                  clientId: peerConnectionInfo.clientId,
-                  receiveId: peerConnectionInfo.receiveId,
-                },
+        peerConnectionInfo.rtcPeerConnection
+          .setRemoteDescription(new RTCSessionDescription(peerConnectionInfo.sdp))
+          .then(() => {
+            peerConnectionInfo.rtcPeerConnection
+              .createAnswer({ offerToReceiveVideo: true, offerToReceiveAudio: true })
+              .then((sdp) => {
+                peerConnectionInfo.rtcPeerConnection.setLocalDescription(new RTCSessionDescription(sdp));
+                socketioManager.emit({
+                  namespace: '/',
+                  eventName: 'sendAnswer',
+                  data: {
+                    sdp,
+                    clientId: peerConnectionInfo.clientId,
+                    receiveId: peerConnectionInfo.receiveId,
+                  },
+                });
+              })
+              .catch((error) => {
+                console.error(error);
               });
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+          });
       }
     },
     onIceCandidate(peerConnectionInfo, event) {
       if (event.candidate) {
-        let receiveId = peerConnectionInfo.clientId !== characterId ? peerConnectionInfo.clientId : peerConnectionInfo.receiveId;
+        let receiveId =
+          peerConnectionInfo.clientId !== characterId ? peerConnectionInfo.clientId : peerConnectionInfo.receiveId;
 
         socketioManager.emit({
+          namespace: '/',
           eventName: 'sendCandidate',
           data: {
             candidate: event.candidate,
@@ -518,9 +532,13 @@ export default function Page() {
           webRtcManager.closePeerConnection(peerConnectionInfo.clientId, peerConnectionInfo.receiveId);
           if (peerConnectionInfo.type === 'sendOffer') {
             socketioManager.emit({
+              namespace: '/',
               eventName: 'requestOneUser',
               data: {
-                targetClientId: characterId !== peerConnectionInfo.clientId ? peerConnectionInfo.clientId : peerConnectionInfo.receiveId,
+                targetClientId:
+                  characterId !== peerConnectionInfo.clientId
+                    ? peerConnectionInfo.clientId
+                    : peerConnectionInfo.receiveId,
               },
             });
           }
@@ -530,76 +548,81 @@ export default function Page() {
     onClosedPeerConnectionInfo(peerConnectionInfo) {},
   });
 
-  const socketioManager = useSocketioManager({
-    listeners: [
-      {
-        eventName: 'allUsers',
-        callback(clientIds: string[]) {
-          for (const id of clientIds) {
-            if (id === characterId) continue;
+  socketioManager.setListener({
+    namespace: '/',
+    eventName: 'allUsers',
+    callback(clientIds: string[]) {
+      for (const id of clientIds) {
+        if (id === characterId) continue;
 
-            webRtcManager.createPeerConnection({
-              clientId: characterId,
-              receiveId: id,
-              type: 'sendOffer',
-              meta: {
-                nickName: authCheck.payload?.characterNickName ?? '',
-              },
-            });
-          }
+        webRtcManager.createPeerConnection({
+          clientId: characterId,
+          receiveId: id,
+          type: 'sendOffer',
+          meta: {
+            nickName: authCheck.payload?.characterNickName ?? '',
+          },
+        });
+      }
+    },
+  });
+
+  socketioManager.setListener({
+    namespace: '/',
+    eventName: 'oneUser',
+    callback(data: { clientId: string; isExist: boolean }) {
+      if (data.isExist) {
+        webRtcManager.createPeerConnection({
+          clientId: characterId,
+          receiveId: data.clientId,
+          type: 'sendOffer',
+          meta: {
+            nickName: authCheck.payload?.characterNickName ?? '',
+          },
+        });
+      }
+    },
+  });
+
+  socketioManager.setListener({
+    namespace: '/',
+    eventName: 'getOffer',
+    callback(data: { sdp: RTCSessionDescriptionInit; clientId: string; receiveId: string }) {
+      webRtcManager.closePeerConnection(data.clientId, data.receiveId);
+      webRtcManager.createPeerConnection({
+        clientId: data.receiveId,
+        receiveId: data.clientId,
+        type: 'getOffer',
+        sdp: data.sdp,
+        meta: {
+          nickName: authCheck.payload?.characterNickName ?? '',
         },
-      },
-      {
-        eventName: 'oneUser',
-        callback(data: { clientId: string; isExist: boolean }) {
-          if (data.isExist) {
-            webRtcManager.createPeerConnection({
-              clientId: characterId,
-              receiveId: data.clientId,
-              type: 'sendOffer',
-              meta: {
-                nickName: authCheck.payload?.characterNickName ?? '',
-              },
-            });
-          }
-        },
-      },
-      {
-        eventName: 'getOffer',
-        callback(data: { sdp: RTCSessionDescriptionInit; clientId: string; receiveId: string }) {
-          webRtcManager.closePeerConnection(data.clientId, data.receiveId);
-          webRtcManager.createPeerConnection({
-            clientId: data.receiveId,
-            receiveId: data.clientId,
-            type: 'getOffer',
-            sdp: data.sdp,
-            meta: {
-              nickName: authCheck.payload?.characterNickName ?? '',
-            },
-          });
-        },
-      },
-      {
-        eventName: 'getAnswer',
-        callback(data: { sdp: RTCSessionDescriptionInit; clientId: string; receiveId: string }) {
-          const peerConnectionInfo = webRtcManager.getPeerConnectionInfo(data.clientId, data.receiveId);
-          if (peerConnectionInfo === undefined) {
-            throw new Error(`peerConnectionInfo is undefined.`);
-          }
-          peerConnectionInfo.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
-        },
-      },
-      {
-        eventName: 'getCandidate',
-        callback(data: { candidate: RTCIceCandidate; clientId: string; receiveId: string }) {
-          const peerConnectionInfo = webRtcManager.getPeerConnectionInfo(data.clientId, data.receiveId);
-          if (peerConnectionInfo === undefined) {
-            throw new Error(`peerConnectionInfo is undefined.`);
-          }
-          peerConnectionInfo.rtcPeerConnection.addIceCandidate(new RTCIceCandidate(data.candidate)).then(() => {});
-        },
-      },
-    ],
+      });
+    },
+  });
+
+  socketioManager.setListener({
+    namespace: '/',
+    eventName: 'getAnswer',
+    callback(data: { sdp: RTCSessionDescriptionInit; clientId: string; receiveId: string }) {
+      const peerConnectionInfo = webRtcManager.getPeerConnectionInfo(data.clientId, data.receiveId);
+      if (peerConnectionInfo === undefined) {
+        throw new Error(`peerConnectionInfo is undefined.`);
+      }
+      peerConnectionInfo.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+    },
+  });
+
+  socketioManager.setListener({
+    namespace: '/',
+    eventName: 'getCandidate',
+    callback(data: { candidate: RTCIceCandidate; clientId: string; receiveId: string }) {
+      const peerConnectionInfo = webRtcManager.getPeerConnectionInfo(data.clientId, data.receiveId);
+      if (peerConnectionInfo === undefined) {
+        throw new Error(`peerConnectionInfo is undefined.`);
+      }
+      peerConnectionInfo.rtcPeerConnection.addIceCandidate(new RTCIceCandidate(data.candidate)).then(() => {});
+    },
   });
 
   function disposeMoving(params: {
@@ -915,7 +938,12 @@ export default function Page() {
       physicsBody: (params) => {
         const { mesh } = params;
         const body = new PhysicsBody(mesh, PhysicsMotionType.STATIC, false, scene);
-        body.shape = new PhysicsShapeBox(new Vector3(0, 0, 0), Quaternion.Identity(), new Vector3(1.5, 1.5, 1.5), scene);
+        body.shape = new PhysicsShapeBox(
+          new Vector3(0, 0, 0),
+          Quaternion.Identity(),
+          new Vector3(1.5, 1.5, 1.5),
+          scene
+        );
         body.setMassProperties({ mass: 0 });
         return body;
       },
@@ -1034,12 +1062,8 @@ export default function Page() {
   useEffect(() => {
     if (!meCharacterLoaded) return;
     socketioManager.connect({
-      socketUrl:
-        process.env.NEXT_PUBLIC_WEBS_BABYLON_JS_EXAMPLE_SOCKET_CONNECT_URL ??
-        (() => {
-          throw new Error(`NEXT_PUBLIC_WEBS_BABYLON_JS_EXAMPLE_SOCKET_CONNECT_URL 값이 없습니다.`);
-        })(),
-      opts: {
+      namespace: '/',
+      options: {
         auth: {
           token: authCheck.accessToken ?? '',
           clientId: characterId,
@@ -1079,8 +1103,8 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (socketioManager.isConnected === true && characterId !== '') {
-      socketioManager.emit({ eventName: 'requestAllUsers', data: { clientId: characterId } });
+    if (socketioManager.isConnected('/') === true && characterId !== '') {
+      socketioManager.emit({ namespace: '/', eventName: 'requestAllUsers', data: { clientId: characterId } });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socketioManager.isConnected, characterId]);
