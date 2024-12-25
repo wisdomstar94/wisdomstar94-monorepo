@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.express.json",
     "watch": "tsc-watch -p ./tsconfig.express.json",
-    "ncu:update": "ncu -u",
+    "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\"",
     "nodemon:start": "nodemon",
     "dev": "yarn build && concurrently \"yarn nodemon:start\" \"yarn watch\""
   },
@@ -21,7 +21,7 @@
     "concurrently": "^9.1.0",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.9",
-    "npm-check-updates": "^17.1.11",
+    "npm-check-updates": "^17.1.12",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.7.2"
   }

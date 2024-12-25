@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "ncu:update": "ncu -u",
+    "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\"",
     "pack:build": "vite build && tsc",
     "npm:publish": "npm publish --access=public",
     "del:dist": "del-cli ./dist",
@@ -18,7 +18,7 @@
     "@wisdomstar94/tsconfig-library": "workspace:^",
     "ipaddr.js": "^2.2.0",
     "typescript": "^5.7.2",
-    "vite": "^6.0.3"
+    "vite": "^6.0.5"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",

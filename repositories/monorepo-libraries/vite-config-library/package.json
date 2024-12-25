@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc-watch",
-    "ncu:update": "ncu -u"
+    "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\""
   },
   "exports": {
     ".": {
@@ -21,11 +21,11 @@
     }
   },
   "peerDependencies": {
-    "vite": "^6.0.3"
+    "vite": "^6.0.5"
   },
   "devDependencies": {
     "tsc-watch": "6.2.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.3"
+    "vite": "^6.0.5"
   }
 }

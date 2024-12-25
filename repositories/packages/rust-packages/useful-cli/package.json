@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "node ./npm/install.js || true",
     "del:node_modules": "del-cli ./node_modules",
-    "ncu:update": "ncu -u",
+    "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\"",
     "cargo": "cargo",
     "cargo:run": "yarn cargo run",
     "build": "cargo build --release",
