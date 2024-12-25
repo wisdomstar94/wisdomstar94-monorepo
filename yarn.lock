@@ -329,14 +329,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babylonjs/core@npm:^7.40.2":
+"@babylonjs/core@npm:^7.41.1":
   version: 7.41.1
   resolution: "@babylonjs/core@npm:7.41.1"
   checksum: 10c0/3ae0e35193daccd62f5a5689989168627bc42977de5405e45355e39c3318984c7cbcf681ab494bd73e8a47fad6b7d89ef4a62ec1a54ccc31f5df8428e30724e2
   languageName: node
   linkType: hard
 
-"@babylonjs/gui@npm:^7.40.2":
+"@babylonjs/gui@npm:^7.41.1":
   version: 7.41.1
   resolution: "@babylonjs/gui@npm:7.41.1"
   peerDependencies:
@@ -354,7 +354,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babylonjs/loaders@npm:^7.40.2":
+"@babylonjs/loaders@npm:^7.41.1":
   version: 7.41.1
   resolution: "@babylonjs/loaders@npm:7.41.1"
   peerDependencies:
@@ -1225,16 +1225,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:15.1.0":
-  version: 15.1.0
-  resolution: "@next/eslint-plugin-next@npm:15.1.0"
+"@next/eslint-plugin-next@npm:15.1.2":
+  version: 15.1.2
+  resolution: "@next/eslint-plugin-next@npm:15.1.2"
   dependencies:
     fast-glob: "npm:3.3.1"
-  checksum: 10c0/d20c396d9c298523e31b4402d126e28d536cfa151bc6a9a9da3e74bddd5770547c76d5fbda59fe4332ffaea3af1e7f489b2358336cb2f921d3561577a0f4cd1a
+  checksum: 10c0/9caf0763247cba8925d89596b7fdb21ec5d3cd0f5251e1e3f70c19815c7439cf358c694e59f0eedf08520c3a75c063395288af92661c75781bd7441de1063dc2
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^15.1.0":
+"@next/mdx@npm:^15.1.2":
   version: 15.1.2
   resolution: "@next/mdx@npm:15.1.2"
   dependencies:
@@ -1743,7 +1743,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-context-menu@npm:^2.2.3":
+"@radix-ui/react-context-menu@npm:^2.2.4":
   version: 2.2.4
   resolution: "@radix-ui/react-context-menu@npm:2.2.4"
   dependencies:
@@ -1780,7 +1780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:^1.1.3":
+"@radix-ui/react-dialog@npm:^1.1.4":
   version: 1.1.4
   resolution: "@radix-ui/react-dialog@npm:1.1.4"
   dependencies:
@@ -1848,7 +1848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dropdown-menu@npm:^2.1.3":
+"@radix-ui/react-dropdown-menu@npm:^2.1.4":
   version: 2.1.4
   resolution: "@radix-ui/react-dropdown-menu@npm:2.1.4"
   dependencies:
@@ -1967,7 +1967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-menubar@npm:^1.1.3":
+"@radix-ui/react-menubar@npm:^1.1.4":
   version: 1.1.4
   resolution: "@radix-ui/react-menubar@npm:1.1.4"
   dependencies:
@@ -1995,7 +1995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-popover@npm:^1.1.3":
+"@radix-ui/react-popover@npm:^1.1.4":
   version: 1.1.4
   resolution: "@radix-ui/react-popover@npm:1.1.4"
   dependencies:
@@ -2210,7 +2210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-tooltip@npm:^1.1.5":
+"@radix-ui/react-tooltip@npm:^1.1.6":
   version: 1.1.6
   resolution: "@radix-ui/react-tooltip@npm:1.1.6"
   dependencies:
@@ -2719,7 +2719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.62.7":
+"@tanstack/react-query@npm:^5.62.10":
   version: 5.62.10
   resolution: "@tanstack/react-query@npm:5.62.10"
   dependencies:
@@ -3337,7 +3337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.0.1":
+"@types/react@npm:^19.0.2":
   version: 19.0.2
   resolution: "@types/react@npm:19.0.2"
   dependencies:
@@ -3411,7 +3411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/eslint-plugin@npm:^8.18.0":
+"@typescript-eslint/eslint-plugin@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/eslint-plugin@npm:^8.18.2":
   version: 8.18.2
   resolution: "@typescript-eslint/eslint-plugin@npm:8.18.2"
   dependencies:
@@ -3432,7 +3432,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/parser@npm:^8.18.0":
+"@typescript-eslint/parser@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/parser@npm:^8.18.2":
   version: 8.18.2
   resolution: "@typescript-eslint/parser@npm:8.18.2"
   dependencies:
@@ -3704,17 +3704,17 @@ __metadata:
     "@ant-design/icons": "npm:^5.5.2"
     "@ant-design/nextjs-registry": "npm:^1.0.2"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@wisdomstar94/tsconfig-library": "workspace:^"
-    antd: "npm:^5.22.5"
+    antd: "npm:^5.22.6"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
-    next: "npm:^15.1.0"
+    eslint-config-next: "npm:15.1.2"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
@@ -3740,7 +3740,7 @@ __metadata:
     express: "npm:^5.0.1"
     jsonwebtoken: "npm:^9.0.2"
     nodemon: "npm:^3.1.9"
-    npm-check-updates: "npm:^17.1.11"
+    npm-check-updates: "npm:^17.1.12"
     socket.io: "npm:^4.8.1"
     tsc-watch: "npm:^6.2.1"
     typescript: "npm:^5.7.2"
@@ -3751,14 +3751,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/babylon-js-example@workspace:repositories/frontends/example-frontends/babylon-js-example"
   dependencies:
-    "@babylonjs/core": "npm:^7.40.2"
-    "@babylonjs/gui": "npm:^7.40.2"
+    "@babylonjs/core": "npm:^7.41.1"
+    "@babylonjs/gui": "npm:^7.41.1"
     "@babylonjs/havok": "npm:^1.3.10"
-    "@babylonjs/loaders": "npm:^7.40.2"
+    "@babylonjs/loaders": "npm:^7.41.1"
     "@types/animejs": "npm:^3.1.12"
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@types/uuid": "npm:^10.0.0"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -3773,15 +3773,15 @@ __metadata:
     "@wisdomstar94/react-touch-container": "workspace:^"
     "@wisdomstar94/react-web-rtc-manager": "workspace:^"
     animejs: "npm:^3.2.2"
-    babylonjs-gltf2interface: "npm:^7.40.2"
+    babylonjs-gltf2interface: "npm:^7.41.1"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
+    eslint-config-next: "npm:15.1.2"
     jsonwebtoken: "npm:^9.0.2"
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
     uuid: "npm:^11.0.3"
   languageName: unknown
@@ -3791,11 +3791,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/example-frontend-library@workspace:repositories/monorepo-libraries/example-frontend-library"
   dependencies:
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     tsc-watch: "npm:6.2.1"
     typescript: "npm:^5.7.2"
   peerDependencies:
-    tailwindcss: ^3.4.16
+    tailwindcss: ^3.4.17
   languageName: unknown
   linkType: soft
 
@@ -3803,13 +3803,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/example-next-library@workspace:repositories/monorepo-libraries/example-next-library"
   dependencies:
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     tsc-watch: "npm:6.2.1"
     typescript: "npm:^5.7.2"
   peerDependencies:
-    next: ^15.1.0
+    next: ^15.1.2
     react: ^19.0.0
     react-dom: ^19.0.0
   languageName: unknown
@@ -3825,7 +3825,7 @@ __metadata:
     cors: "npm:^2.8.5"
     express: "npm:^5.0.1"
     nodemon: "npm:^3.1.9"
-    npm-check-updates: "npm:^17.1.11"
+    npm-check-updates: "npm:^17.1.12"
     tsc-watch: "npm:^6.2.1"
     typescript: "npm:^5.7.2"
   languageName: unknown
@@ -3837,20 +3837,20 @@ __metadata:
   dependencies:
     "@mdx-js/loader": "npm:^3.1.0"
     "@mdx-js/react": "npm:^3.1.0"
-    "@next/mdx": "npm:^15.1.0"
+    "@next/mdx": "npm:^15.1.2"
     "@types/gh-pages": "npm:^6.1.0"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
+    eslint-config-next: "npm:15.1.2"
     gh-pages: "npm:^6.2.0"
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
     webpack: "npm:^5.97.1"
   languageName: unknown
@@ -3864,7 +3864,7 @@ __metadata:
     "@wisdomstar94/tsconfig-library": "workspace:^"
     ipaddr.js: "npm:^2.2.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     ipaddr.js: ^2.2.0
   languageName: unknown
@@ -3884,23 +3884,23 @@ __metadata:
     "@types/js-cookie": "npm:^3.0.6"
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@types/set-cookie-parser": "npm:^2.4.10"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
     "@wisdomstar94/react-api": "workspace:^"
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
+    eslint-config-next: "npm:15.1.2"
     js-cookie: "npm:^3.0.5"
     jsonwebtoken: "npm:^9.0.2"
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
     sass: "npm:^1.83.0"
     set-cookie-parser: "npm:^2.7.1"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
     winston: "npm:^3.17.0"
   languageName: unknown
@@ -3911,17 +3911,17 @@ __metadata:
   resolution: "@wisdomstar94/next-js-jotai-sample@workspace:repositories/frontends/example-frontends/next-js-jotai-sample"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@wisdomstar94/example-frontend-library": "workspace:^"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
-    jotai: "npm:^2.10.3"
-    next: "npm:^15.1.0"
+    eslint-config-next: "npm:15.1.2"
+    jotai: "npm:^2.11.0"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
@@ -3932,21 +3932,21 @@ __metadata:
   dependencies:
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@types/set-cookie-parser": "npm:^2.4.10"
     "@wisdomstar94/next-utils": "workspace:^"
     "@wisdomstar94/react-api": "workspace:^"
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
+    eslint-config-next: "npm:15.1.2"
     jsonwebtoken: "npm:^9.0.2"
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
     set-cookie-parser: "npm:^2.7.1"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
@@ -3955,17 +3955,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/next-js-tanstack-query-example@workspace:repositories/frontends/example-frontends/next-js-tanstack-query-example"
   dependencies:
-    "@tanstack/react-query": "npm:^5.62.7"
+    "@tanstack/react-query": "npm:^5.62.10"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
-    next: "npm:^15.1.0"
+    eslint-config-next: "npm:15.1.2"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
@@ -3975,15 +3975,15 @@ __metadata:
   resolution: "@wisdomstar94/next-js-zod-sample@workspace:repositories/frontends/example-frontends/next-js-zod-sample"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
-    next: "npm:^15.1.0"
+    eslint-config-next: "npm:15.1.2"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
     zod: "npm:^3.24.1"
   languageName: unknown
@@ -3995,21 +3995,21 @@ __metadata:
   dependencies:
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@types/set-cookie-parser": "npm:^2.4.10"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     jose: "npm:^5.9.6"
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     set-cookie-parser: "npm:^2.7.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     jose: ^5.9.6
-    next: ^15.1.0
+    next: ^15.1.2
     react: ^19.0.0
     react-dom: ^19.0.0
     set-cookie-parser: ^2.7.1
@@ -4030,7 +4030,7 @@ __metadata:
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@types/luxon": "npm:^3.4.2"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@types/set-cookie-parser": "npm:^2.4.10"
     "@types/uuid": "npm:^10.0.0"
@@ -4056,17 +4056,17 @@ __metadata:
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     axios: "npm:^1.7.9"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
+    eslint-config-next: "npm:15.1.2"
     ipaddr.js: "npm:^2.2.0"
     js-cookie: "npm:^3.0.5"
     jsonwebtoken: "npm:^9.0.2"
     luxon: "npm:^3.5.0"
-    next: "npm:^15.1.0"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
     set-cookie-parser: "npm:^2.7.1"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
     uuid: "npm:^11.0.3"
     zod: "npm:^3.24.1"
@@ -4084,7 +4084,7 @@ __metadata:
   resolution: "@wisdomstar94/react-add-event-listener@workspace:repositories/packages/react-packages/react-add-event-listener"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
@@ -4092,7 +4092,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4104,7 +4104,7 @@ __metadata:
   resolution: "@wisdomstar94/react-api-again-request-scheduler@workspace:repositories/packages/react-packages/react-api-again-request-scheduler"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-indexeddb-manager": "workspace:^"
@@ -4114,7 +4114,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     axios: ^1.7.9
     react: ^19.0.0
@@ -4127,14 +4127,14 @@ __metadata:
   resolution: "@wisdomstar94/react-api@workspace:repositories/packages/react-packages/react-api"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4145,10 +4145,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-babylon-utils@workspace:repositories/packages/react-packages/react-babylon-utils"
   dependencies:
-    "@babylonjs/core": "npm:^7.40.2"
+    "@babylonjs/core": "npm:^7.41.1"
     "@types/animejs": "npm:^3.1.12"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -4158,9 +4158,9 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
-    "@babylonjs/core": ^7.40.2
+    "@babylonjs/core": ^7.41.1
     animejs: ^3.2.2
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4172,14 +4172,14 @@ __metadata:
   resolution: "@wisdomstar94/react-body@workspace:repositories/packages/react-packages/react-body"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4191,14 +4191,14 @@ __metadata:
   resolution: "@wisdomstar94/react-debounce@workspace:repositories/packages/react-packages/react-debounce"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4210,7 +4210,7 @@ __metadata:
   resolution: "@wisdomstar94/react-dnd@workspace:repositories/packages/react-packages/react-dnd"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -4221,7 +4221,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4232,19 +4232,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-example@workspace:repositories/frontends/example-frontends/react-example"
   dependencies:
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
-    "@typescript-eslint/eslint-plugin": "npm:^8.18.0"
-    "@typescript-eslint/parser": "npm:^8.18.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.18.2"
+    "@typescript-eslint/parser": "npm:^8.18.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     eslint: "npm:^9.17.0"
     eslint-plugin-react-hooks: "npm:^5.1.0"
     eslint-plugin-react-refresh: "npm:^0.4.16"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    react-router-dom: "npm:^7.0.2"
+    react-router-dom: "npm:^7.1.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   languageName: unknown
   linkType: soft
 
@@ -4253,14 +4253,14 @@ __metadata:
   resolution: "@wisdomstar94/react-indexeddb-manager@workspace:repositories/packages/react-packages/react-indexeddb-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4272,7 +4272,7 @@ __metadata:
   resolution: "@wisdomstar94/react-joystick@workspace:repositories/packages/react-packages/react-joystick"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -4280,7 +4280,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4292,7 +4292,7 @@ __metadata:
   resolution: "@wisdomstar94/react-keyboard-manager@workspace:repositories/packages/react-packages/react-keyboard-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -4300,7 +4300,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4312,14 +4312,14 @@ __metadata:
   resolution: "@wisdomstar94/react-multiple-api-manager@workspace:repositories/packages/react-packages/react-multiple-api-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4331,14 +4331,14 @@ __metadata:
   resolution: "@wisdomstar94/react-promise-interval@workspace:repositories/packages/react-packages/react-promise-interval"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4350,14 +4350,14 @@ __metadata:
   resolution: "@wisdomstar94/react-promise-timeout@workspace:repositories/packages/react-packages/react-promise-timeout"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4369,14 +4369,14 @@ __metadata:
   resolution: "@wisdomstar94/react-request-animation-frame-manager@workspace:repositories/packages/react-packages/react-request-animation-frame-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4388,7 +4388,7 @@ __metadata:
   resolution: "@wisdomstar94/react-scroll-controller@workspace:repositories/packages/react-packages/react-scroll-controller"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
@@ -4396,7 +4396,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4409,7 +4409,7 @@ __metadata:
   dependencies:
     "@types/d3": "npm:^7"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -4417,7 +4417,7 @@ __metadata:
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     d3: "npm:^7.9.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     d3: ^7.9.0
     react: ^19.0.0
@@ -4430,7 +4430,7 @@ __metadata:
   resolution: "@wisdomstar94/react-socketio-manager@workspace:repositories/packages/react-packages/react-socketio-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
@@ -4438,7 +4438,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     socket.io-client: "npm:^4.8.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4451,14 +4451,14 @@ __metadata:
   resolution: "@wisdomstar94/react-sse-manager@workspace:repositories/packages/react-packages/react-sse-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4470,7 +4470,7 @@ __metadata:
   resolution: "@wisdomstar94/react-throttle@workspace:repositories/packages/react-packages/react-throttle"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-promise-interval": "workspace:^"
@@ -4478,7 +4478,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4490,7 +4490,7 @@ __metadata:
   resolution: "@wisdomstar94/react-touch-container@workspace:repositories/packages/react-packages/react-touch-container"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
@@ -4498,7 +4498,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4510,14 +4510,14 @@ __metadata:
   resolution: "@wisdomstar94/react-web-rtc-manager@workspace:repositories/packages/react-packages/react-web-rtc-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4536,33 +4536,33 @@ __metadata:
   dependencies:
     "@radix-ui/react-avatar": "npm:^1.1.2"
     "@radix-ui/react-collapsible": "npm:^1.1.2"
-    "@radix-ui/react-context-menu": "npm:^2.2.3"
-    "@radix-ui/react-dialog": "npm:^1.1.3"
-    "@radix-ui/react-dropdown-menu": "npm:^2.1.3"
+    "@radix-ui/react-context-menu": "npm:^2.2.4"
+    "@radix-ui/react-dialog": "npm:^1.1.4"
+    "@radix-ui/react-dropdown-menu": "npm:^2.1.4"
     "@radix-ui/react-icons": "npm:^1.3.2"
-    "@radix-ui/react-menubar": "npm:^1.1.3"
-    "@radix-ui/react-popover": "npm:^1.1.3"
+    "@radix-ui/react-menubar": "npm:^1.1.4"
+    "@radix-ui/react-popover": "npm:^1.1.4"
     "@radix-ui/react-scroll-area": "npm:^1.2.2"
     "@radix-ui/react-slot": "npm:^1.1.1"
     "@radix-ui/react-tabs": "npm:^1.1.2"
-    "@radix-ui/react-tooltip": "npm:^1.1.5"
+    "@radix-ui/react-tooltip": "npm:^1.1.6"
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     embla-carousel-react: "npm:^8.5.1"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
+    eslint-config-next: "npm:15.1.2"
     geist: "npm:^1.3.1"
-    lucide-react: "npm:^0.468.0"
-    next: "npm:^15.1.0"
+    lucide-react: "npm:^0.469.0"
+    next: "npm:^15.1.2"
     next-themes: "npm:^0.4.4"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    tailwind-merge: "npm:^2.5.5"
-    tailwindcss: "npm:^3.4.16"
+    tailwind-merge: "npm:^2.6.0"
+    tailwindcss: "npm:^3.4.17"
     tailwindcss-animate: "npm:^1.0.7"
     typescript: "npm:^5.7.2"
   languageName: unknown
@@ -4573,15 +4573,15 @@ __metadata:
   resolution: "@wisdomstar94/tailwindcss-example@workspace:repositories/frontends/example-frontends/tailwindcss-example"
   dependencies:
     "@types/node": "npm:^22.10.2"
-    "@types/react": "npm:^19.0.1"
+    "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.0"
-    next: "npm:^15.1.0"
+    eslint-config-next: "npm:15.1.2"
+    next: "npm:^15.1.2"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    tailwindcss: "npm:^3.4.16"
+    tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
@@ -4598,7 +4598,7 @@ __metadata:
     dotenv-mono: "npm:^1.3.14"
     express: "npm:^5.0.1"
     nodemon: "npm:^3.1.9"
-    npm-check-updates: "npm:^17.1.11"
+    npm-check-updates: "npm:^17.1.12"
     socket.io: "npm:^4.8.1"
     tsc-watch: "npm:^6.2.1"
     typescript: "npm:^5.7.2"
@@ -4628,7 +4628,7 @@ __metadata:
     "@types/node": "npm:^22.10.2"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   languageName: unknown
   linkType: soft
 
@@ -4638,9 +4638,9 @@ __metadata:
   dependencies:
     tsc-watch: "npm:6.2.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.5"
   peerDependencies:
-    vite: ^6.0.3
+    vite: ^6.0.5
   languageName: unknown
   linkType: soft
 
@@ -4849,7 +4849,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:^5.22.5":
+"antd@npm:^5.22.6":
   version: 5.22.6
   resolution: "antd@npm:5.22.6"
   dependencies:
@@ -5164,7 +5164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babylonjs-gltf2interface@npm:^7.40.2":
+"babylonjs-gltf2interface@npm:^7.41.1":
   version: 7.41.1
   resolution: "babylonjs-gltf2interface@npm:7.41.1"
   checksum: 10c0/6b2a45ec480204c3dea279c5c20111ac48b56ee37a6fea4a2495e9bc574bc0e7b1c65b5a3db0219edc3fdec816fad59890075905a027b1b2de28ee50fd9afbbe
@@ -7207,11 +7207,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:15.1.0":
-  version: 15.1.0
-  resolution: "eslint-config-next@npm:15.1.0"
+"eslint-config-next@npm:15.1.2":
+  version: 15.1.2
+  resolution: "eslint-config-next@npm:15.1.2"
   dependencies:
-    "@next/eslint-plugin-next": "npm:15.1.0"
+    "@next/eslint-plugin-next": "npm:15.1.2"
     "@rushstack/eslint-patch": "npm:^1.10.3"
     "@typescript-eslint/eslint-plugin": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
     "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
@@ -7227,7 +7227,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/53f244e49964bb6bfd89d5b6978b5c1650f927c913f7c6d8f251fc2528a9fbae04e5a6371c9856886b0b1e008c23f6aba1e1270537f8cb97c5306288052c0a1d
+  checksum: 10c0/570775cc12ae044d85f9a44774aa5288695ab47b937e8a97cc707455daff4281e9f61823213bf3f7da9bd4067f8e6e2373ff74781aaa52a148e1a6c4e667763e
   languageName: node
   linkType: hard
 
@@ -9176,7 +9176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.10.3":
+"jotai@npm:^2.11.0":
   version: 2.11.0
   resolution: "jotai@npm:2.11.0"
   peerDependencies:
@@ -9612,12 +9612,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.468.0":
-  version: 0.468.0
-  resolution: "lucide-react@npm:0.468.0"
+"lucide-react@npm:^0.469.0":
+  version: 0.469.0
+  resolution: "lucide-react@npm:0.469.0"
   peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
-  checksum: 10c0/da7640e4ad09d8987716e9124fd85c4a0c49b7658dbbf45db64547fc0f155f7e8b2d7f68115ada3e24012f3e1a4f209d7a87762ba4de5ca3dd753f6b68d8e622
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/0ee78d110550579b848a01446a440f733fd17e1bf1850aa01551b61f415e03e5f5ab7f26b56f1c648edc93856177f5476ff9f8f6f5d80e8fe45913d208f49961
   languageName: node
   linkType: hard
 
@@ -10609,7 +10609,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^15.1.0":
+"next@npm:^15.1.2":
   version: 15.1.2
   resolution: "next@npm:15.1.2"
   dependencies:
@@ -10855,7 +10855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-check-updates@npm:^17.1.11":
+"npm-check-updates@npm:^17.1.12":
   version: 17.1.12
   resolution: "npm-check-updates@npm:17.1.12"
   bin:
@@ -12244,7 +12244,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^7.0.2":
+"react-router-dom@npm:^7.1.1":
   version: 7.1.1
   resolution: "react-router-dom@npm:7.1.1"
   dependencies:
@@ -13735,7 +13735,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^2.5.5":
+"tailwind-merge@npm:^2.6.0":
   version: 2.6.0
   resolution: "tailwind-merge@npm:2.6.0"
   checksum: 10c0/fc8a5535524de9f4dacf1c16ab298581c7bb757d68a95faaf28942b1c555a619bba9d4c6726fe83986e44973b315410c1a5226e5354c30ba82353bd6d2288fa5
@@ -13751,7 +13751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.16":
+"tailwindcss@npm:^3.4.17":
   version: 3.4.17
   resolution: "tailwindcss@npm:3.4.17"
   dependencies:
@@ -14551,7 +14551,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.3":
+"vite@npm:^6.0.5":
   version: 6.0.5
   resolution: "vite@npm:6.0.5"
   dependencies:
