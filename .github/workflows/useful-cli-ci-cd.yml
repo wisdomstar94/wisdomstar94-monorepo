@@ -25,10 +25,13 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+
+      - run: corepack enable
+      - run: corepack prepare yarn@stable --activate
 
       ### mac os
       - name: cargo build (macos only)
@@ -176,6 +179,8 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+      - run: corepack enable
+      - run: corepack prepare yarn@stable --activate
       - run: |
           yarn @wisdomstar94/useful-cli npm:publish
         env:
