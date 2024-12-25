@@ -7,7 +7,7 @@
     "watch": "tsc-watch -p ./tsconfig.express.json",
     "ncu:update": "ncu -u",
     "nodemon:start": "nodemon",
-    "dev": "yarn build && concurrently \"yarn nodemon:start\" \"yarn watch\""
+    "dev": "npm run build && concurrently \"npm run nodemon:start\" \"npm run watch\""
   },
   "dependencies": {
     "cors": "^2.8.5",
