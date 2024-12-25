@@ -32,6 +32,7 @@ jobs:
 
       - run: corepack enable
       - run: corepack prepare yarn@stable --activate
+      - run: yarn install
 
       ### mac os
       - name: cargo build (macos only)
@@ -161,6 +162,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: corepack enable
       - run: corepack prepare yarn@stable --activate
+      - run: yarn install
       - run: yarn express-ts-template:tar
       - name: express-ts-template asset upload
         uses: svenstaro/upload-release-action@v2
@@ -183,6 +185,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: corepack enable
       - run: corepack prepare yarn@stable --activate
+      - run: yarn install
       - run: |
           yarn @wisdomstar94/useful-cli npm:publish
         env:
