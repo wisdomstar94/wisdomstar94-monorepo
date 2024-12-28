@@ -18,7 +18,7 @@
     "@wisdomstar94/vanilla-js-util": "workspace:^",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
-    "next": "^15.1.2",
+    "next": "canary",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "set-cookie-parser": "^2.7.1",

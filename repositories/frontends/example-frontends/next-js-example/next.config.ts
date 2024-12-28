@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 const config = {
   reactStrictMode: false,
   experimental: {
+    dynamicIO: true,
     staleTimes: {
       dynamic: 0,
     },

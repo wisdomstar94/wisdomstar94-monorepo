@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { LayoutClient } from './_components/layout-client';
 
 // 백엔드 필요: yarn @wisdomstar94/test-epxress dev
 
@@ -32,6 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           탭 4
         </Link>
       </ul>
+      <LayoutClient />
       <div className="w-full relative block">{children}</div>
     </div>
   );
