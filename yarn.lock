@@ -4099,6 +4099,7 @@ __metadata:
     "@wisdomstar94/react-add-event-listener": "workspace:^"
     "@wisdomstar94/react-api": "workspace:^"
     "@wisdomstar94/react-api-again-request-scheduler": "workspace:^"
+    "@wisdomstar94/react-blob-url-cache": "workspace:^"
     "@wisdomstar94/react-body": "workspace:^"
     "@wisdomstar94/react-debounce": "workspace:^"
     "@wisdomstar94/react-dnd": "workspace:^"
@@ -4228,7 +4229,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@wisdomstar94/react-blob-url-cache@workspace:repositories/packages/react-packages/react-blob-url-cache":
+"@wisdomstar94/react-blob-url-cache@workspace:^, @wisdomstar94/react-blob-url-cache@workspace:repositories/packages/react-packages/react-blob-url-cache":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-blob-url-cache@workspace:repositories/packages/react-packages/react-blob-url-cache"
   dependencies:
@@ -4256,6 +4257,26 @@ __metadata:
     "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@vitejs/plugin-react": "npm:^4.3.4"
+    "@wisdomstar94/tsconfig-library": "workspace:^"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    typescript: "npm:^5.7.2"
+    vite: "npm:^6.0.5"
+  peerDependencies:
+    react: ^19.0.0
+    react-dom: ^19.0.0
+  languageName: unknown
+  linkType: soft
+
+"@wisdomstar94/react-browser-permission-manager@workspace:repositories/packages/react-packages/react-browser-permission-manager":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/react-browser-permission-manager@workspace:repositories/packages/react-packages/react-browser-permission-manager"
+  dependencies:
+    "@types/node": "npm:^22.10.2"
+    "@types/react": "npm:^19.0.2"
+    "@types/react-dom": "npm:^19.0.2"
+    "@vitejs/plugin-react": "npm:^4.3.4"
+    "@wisdomstar94/react-promise-interval": "workspace:^"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
@@ -4530,6 +4551,25 @@ __metadata:
 "@wisdomstar94/react-sse-manager@workspace:^, @wisdomstar94/react-sse-manager@workspace:repositories/packages/react-packages/react-sse-manager":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-sse-manager@workspace:repositories/packages/react-packages/react-sse-manager"
+  dependencies:
+    "@types/node": "npm:^22.10.2"
+    "@types/react": "npm:^19.0.2"
+    "@types/react-dom": "npm:^19.0.2"
+    "@vitejs/plugin-react": "npm:^4.3.4"
+    "@wisdomstar94/tsconfig-library": "workspace:^"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    typescript: "npm:^5.7.2"
+    vite: "npm:^6.0.5"
+  peerDependencies:
+    react: ^19.0.0
+    react-dom: ^19.0.0
+  languageName: unknown
+  linkType: soft
+
+"@wisdomstar94/react-state-manager@workspace:repositories/packages/react-packages/react-state-manager":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/react-state-manager@workspace:repositories/packages/react-packages/react-state-manager"
   dependencies:
     "@types/node": "npm:^22.10.2"
     "@types/react": "npm:^19.0.2"

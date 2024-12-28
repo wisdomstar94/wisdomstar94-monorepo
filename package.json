@@ -24,6 +24,8 @@
     "@wisdomstar94/react-debounce": "yarn workspace @wisdomstar94/react-debounce",
     "@wisdomstar94/react-throttle": "yarn workspace @wisdomstar94/react-throttle",
     "@wisdomstar94/react-blob-url-cache": "yarn workspace @wisdomstar94/react-blob-url-cache",
+    "@wisdomstar94/react-browser-permission-manager": "yarn workspace @wisdomstar94/react-browser-permission-manager",
+    "@wisdomstar94/react-state-manager": "yarn workspace @wisdomstar94/react-state-manager",
     "--------------------------------------- monorepo-libraries ---------------------------------------": "",
     "@wisdomstar94/example-frontend-library": "yarn workspace @wisdomstar94/example-frontend-library",
     "@wisdomstar94/example-next-library": "yarn workspace @wisdomstar94/example-next-library",
