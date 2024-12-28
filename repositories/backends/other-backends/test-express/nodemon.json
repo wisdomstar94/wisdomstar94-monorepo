@@ -1,0 +1,11 @@
+{
+  "watch": [
+    "dist"
+  ],
+  "ext": "js,mjs,ts,mts,json",
+  "exec": "cross-env APP_ENV=local node ./dist/src/app.js",
+  "ignore": [
+    "**/logs/**/*",
+    "**/node_modules/**/*"
+  ]
+}

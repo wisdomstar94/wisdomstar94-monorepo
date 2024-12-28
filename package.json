@@ -57,6 +57,7 @@
     "--------------------------------------- backends ---------------------------------------": "",
     "@wisdomstar94/test-socket": "yarn workspace @wisdomstar94/test-socket",
     "@wisdomstar94/babylon-js-example-socket": "yarn workspace @wisdomstar94/babylon-js-example-socket",
+    "@wisdomstar94/test-express": "yarn workspace @wisdomstar94/test-express",
     "--------------------------------------- dockers ---------------------------------------": "",
     "@wisdomstar94/redis": "yarn workspace @wisdomstar94/redis",
     "@wisdomstar94/postgresql": "yarn workspace @wisdomstar94/postgresql",
