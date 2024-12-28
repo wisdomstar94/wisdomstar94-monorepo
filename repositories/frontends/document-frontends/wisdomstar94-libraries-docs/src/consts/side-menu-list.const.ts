@@ -7,4 +7,8 @@ export const SIDE_MENU_LIST = [
     label: 'react-add-event-listener',
     href: '/react-add-event-listener',
   },
+  {
+    label: 'react-api-again-request-scheduler',
+    href: '/react-api-again-request-scheduler',
+  },
 ];

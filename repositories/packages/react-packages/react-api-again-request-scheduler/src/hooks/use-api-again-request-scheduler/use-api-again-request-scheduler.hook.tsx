@@ -67,15 +67,15 @@ export function useApiAgainRequestScheduler(props?: IUseApiAgainRequestScheduler
             });
           },
           onError(event) {
-            console.error(`에러 발생 일시:`, new Date());
+            console.error(`#20 에러 발생 일시:`, new Date());
             console.error('에러가 발생하였습니다.', event);
           },
         });
       })
       .catch((error) => {
         target.isFetching = false;
-        console.error(`에러 발생 일시:`, new Date());
-        console.error('api 요청 중 에러가 발생하였습니다.', error);
+        // console.error(`#30 에러 발생 일시:`, new Date());
+        // console.error('api 요청 중 에러가 발생하였습니다.', error);
         target.retryCount++;
       });
   }
@@ -139,7 +139,7 @@ export function useApiAgainRequestScheduler(props?: IUseApiAgainRequestScheduler
         });
       },
       onError(event) {
-        console.error(`에러 발생 일시:`, new Date());
+        console.error(`#40 에러 발생 일시:`, new Date());
         console.error(event);
       },
     });
@@ -167,7 +167,7 @@ export function useApiAgainRequestScheduler(props?: IUseApiAgainRequestScheduler
         _onDatabaseDataUpdated();
       },
       onError(event) {
-        console.error(`에러 발생 일시:`, new Date());
+        console.error(`#50 에러 발생 일시:`, new Date());
         console.error(event);
         if (typeof onError === 'function') {
           onError(event);
@@ -194,7 +194,7 @@ export function useApiAgainRequestScheduler(props?: IUseApiAgainRequestScheduler
         if (typeof onError === 'function') {
           onError(event);
         }
-        console.error(`에러 발생 일시:`, new Date());
+        console.error(`#60 에러 발생 일시:`, new Date());
         console.error(event);
       },
     });
@@ -208,7 +208,7 @@ export function useApiAgainRequestScheduler(props?: IUseApiAgainRequestScheduler
       deleteKeys: [key],
       onSuccess(result) {},
       onError(event) {
-        console.error(`에러 발생 일시:`, new Date());
+        console.error(`#70 에러 발생 일시:`, new Date());
         console.error('에러가 발생하였습니다.', event);
       },
     });
@@ -277,7 +277,7 @@ export function useApiAgainRequestScheduler(props?: IUseApiAgainRequestScheduler
         }
       },
       onError(event) {
-        console.error(`에러 발생 일시:`, new Date());
+        console.error(`#10 에러 발생 일시:`, new Date());
         console.error(event);
       },
     });

@@ -19,5 +19,5 @@ app.use(globalErrorHandlerMiddleware);
 
 // start socket listen
 app.listen(Number(EXPRESS_LISTEN_PORT), () => {
-  console.log(`test-socket listening, ${EXPRESS_LISTEN_PORT} port...`);
+  console.log(`test-express listening, ${EXPRESS_LISTEN_PORT} port...`);
 });
