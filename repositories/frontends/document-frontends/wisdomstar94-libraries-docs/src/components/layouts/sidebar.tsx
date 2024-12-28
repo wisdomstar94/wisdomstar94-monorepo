@@ -58,7 +58,9 @@ export function Sidebar() {
                 >
                   {/* <LuDot /> */}
                   <FaRegCircleDot className={cn('flex-shrink-0 flex-grow-0')} />
-                  <div className={cn('w-full min-w-0 relative break-all text-left')}>{item.label}</div>
+                  <div className={cn('w-full min-w-0 relative break-all text-left text-sm tracking-tight')}>
+                    {item.label}
+                  </div>
                 </Link>
               </li>
             );

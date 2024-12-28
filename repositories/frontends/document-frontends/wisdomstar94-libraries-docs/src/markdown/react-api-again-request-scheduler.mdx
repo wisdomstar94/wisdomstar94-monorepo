@@ -26,5 +26,68 @@ api 호출에 실패했을 때 해당 api 호출 정보를 저장하고 성공�
 ## 사용 예시
 
 ```tsx
+'use client';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { DateTime } from 'luxon';
+import { useApiAgainRequestScheduler } from '@wisdomstar94/react-api-again-request-scheduler';
 
+export default function Page() {
+  const apiAgainRequestScheduler = useApiAgainRequestScheduler();
+
+  const apiRequest1 = useCallback(() => {
+    const url = `http://localhost:3010/api/test/count-error`;
+    const data = {
+      a: 'b',
+    };
+
+    apiAgainRequestScheduler.holdApi(
+      {
+        key: url + JSON.stringify(data),
+        url: url,
+        method: 'get',
+        requestDataType: 'query-string',
+        data: data,
+        headers: {
+          test1: 'zzzzzzzzz',
+        },
+        retryIntervalMillisecond: 1000,
+        expiredDate: DateTime.now().plus({ second: 50 }).toJSDate(),
+      },
+      (apiItem) => {
+        axios({
+          url: apiItem.url,
+          method: apiItem.method,
+          data: apiItem.requestDataType === 'body' ? apiItem.data : undefined,
+          params: apiItem.requestDataType === 'query-string' ? apiItem.data : undefined,
+          timeout: 4000,
+        })
+          .then((res) => {
+            apiAgainRequestScheduler.holdCancelApi(apiItem.key);
+          })
+          .catch((error) => {
+            apiAgainRequestScheduler.holdCancelApi(apiItem.key);
+            apiAgainRequestScheduler.saveApi([apiItem]);
+          });
+      }
+    );
+  }, [apiAgainRequestScheduler]);
+
+  useEffect(() => {
+    if (!apiAgainRequestScheduler.isReady) return;
+    apiAgainRequestScheduler.start();
+  }, [apiAgainRequestScheduler.isReady]);
+
+  return (
+    <>
+      <div>
+        <button onClick={apiRequest1}>api 요청하기</button>
+      </div>
+      <div>
+        <button onClick={() => apiAgainRequestScheduler.start()}>스케줄러 돌리기</button>
+        <button onClick={() => apiAgainRequestScheduler.stop()}>스케줄러 멈추기</button>
+      </div>
+    </>
+  );
+}
 ```
