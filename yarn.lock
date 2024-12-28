@@ -4228,6 +4228,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@wisdomstar94/react-blob-url-cache@workspace:repositories/packages/react-packages/react-blob-url-cache":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/react-blob-url-cache@workspace:repositories/packages/react-packages/react-blob-url-cache"
+  dependencies:
+    "@types/node": "npm:^22.10.2"
+    "@types/react": "npm:^19.0.2"
+    "@types/react-dom": "npm:^19.0.2"
+    "@vitejs/plugin-react": "npm:^4.3.4"
+    "@wisdomstar94/react-indexeddb-manager": "workspace:^"
+    "@wisdomstar94/tsconfig-library": "workspace:^"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    typescript: "npm:^5.7.2"
+    vite: "npm:^6.0.5"
+  peerDependencies:
+    react: ^19.0.0
+    react-dom: ^19.0.0
+  languageName: unknown
+  linkType: soft
+
 "@wisdomstar94/react-body@workspace:^, @wisdomstar94/react-body@workspace:repositories/packages/react-packages/react-body":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-body@workspace:repositories/packages/react-packages/react-body"

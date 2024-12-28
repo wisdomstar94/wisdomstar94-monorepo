@@ -23,6 +23,7 @@
     "@wisdomstar94/react-scroll-controller": "yarn workspace @wisdomstar94/react-scroll-controller",
     "@wisdomstar94/react-debounce": "yarn workspace @wisdomstar94/react-debounce",
     "@wisdomstar94/react-throttle": "yarn workspace @wisdomstar94/react-throttle",
+    "@wisdomstar94/react-blob-url-cache": "yarn workspace @wisdomstar94/react-blob-url-cache",
     "--------------------------------------- monorepo-libraries ---------------------------------------": "",
     "@wisdomstar94/example-frontend-library": "yarn workspace @wisdomstar94/example-frontend-library",
     "@wisdomstar94/example-next-library": "yarn workspace @wisdomstar94/example-next-library",
