@@ -2,6 +2,10 @@ use clap::{Args, Subcommand};
 pub mod c_del_node_modules_dist;
 
 #[derive(Args)]
+#[command(
+  about="file system 관련 명령어를 제공합니다.", 
+  long_about = None
+)]
 pub struct FsCommand {
   #[clap(subcommand)]
   command: FsSubCommand,

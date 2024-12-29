@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 pub mod c_express;
 pub mod c_fs;
+pub mod c_version;
 
 #[derive(Parser)] // requires `derive` feature
 #[command(name = "useful-cli")]
@@ -13,10 +14,12 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum SubCommands {
-  /// express 관련 명령어를 제공합니다.
+  #[clap(name = "express")]
   Express(c_express::ExpressCommand),
-  /// file system 관련 명령어를 제공합니다.
-  Fs(c_fs::FsCommand)
+  #[clap(name = "fs")]
+  Fs(c_fs::FsCommand),
+  #[clap(name = "version")]
+  Version(c_version::CliArgs)
 }
 
 pub async fn run() {
@@ -24,5 +27,6 @@ pub async fn run() {
   match &parse_cli.command {
     SubCommands::Express(express_command) => c_express::run(express_command).await,
     SubCommands::Fs(fs_command) => c_fs::run(fs_command),
+    SubCommands::Version(args) => c_version::run(args),
   }
 }

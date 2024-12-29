@@ -1,6 +1,6 @@
 {
   "name": "@wisdomstar94/useful-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "bin": "./npm/run.js",
   "scripts": {
     "postinstall": "node ./npm/install.js || true",
