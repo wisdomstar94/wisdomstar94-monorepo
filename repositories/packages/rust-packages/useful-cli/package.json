@@ -8,6 +8,7 @@
     "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\"",
     "cargo": "cargo",
     "cargo:run": "yarn cargo run",
+    "build:dev": "cargo build",
     "build": "cargo build --release",
     "cross:build": "cross build --release",
     "npm:publish": "npm publish --access=public"
