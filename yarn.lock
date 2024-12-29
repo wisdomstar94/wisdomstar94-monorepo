@@ -329,14 +329,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babylonjs/core@npm:^7.41.1":
+"@babylonjs/core@npm:^7.42.0":
   version: 7.42.0
   resolution: "@babylonjs/core@npm:7.42.0"
   checksum: 10c0/6dd9df70e4ac8589684536c4645c019006eb410234c89750c6808d317ed3df700c8bee22d9e6cf874910d4db61d5dd73e3d302b1549e40d4235ba12c33540805
   languageName: node
   linkType: hard
 
-"@babylonjs/gui@npm:^7.41.1":
+"@babylonjs/gui@npm:^7.42.0":
   version: 7.42.0
   resolution: "@babylonjs/gui@npm:7.42.0"
   peerDependencies:
@@ -354,7 +354,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babylonjs/loaders@npm:^7.41.1":
+"@babylonjs/loaders@npm:^7.42.0":
   version: 7.42.0
   resolution: "@babylonjs/loaders@npm:7.42.0"
   peerDependencies:
@@ -1255,7 +1255,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^15.1.2":
+"@next/eslint-plugin-next@npm:15.1.3":
+  version: 15.1.3
+  resolution: "@next/eslint-plugin-next@npm:15.1.3"
+  dependencies:
+    fast-glob: "npm:3.3.1"
+  checksum: 10c0/60e85ad10d0d3afafe6d6e02a70636681b78aacff8bcef2bbe18d77b3192f91ea999bc471d19d22b37abaa3fee72d35299c040b9cce0bc6fd7848d031590abde
+  languageName: node
+  linkType: hard
+
+"@next/mdx@npm:^15.1.2, @next/mdx@npm:^15.1.3":
   version: 15.1.3
   resolution: "@next/mdx@npm:15.1.3"
   dependencies:
@@ -2904,7 +2913,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.62.10":
+"@tanstack/react-query@npm:^5.62.11":
   version: 5.62.11
   resolution: "@tanstack/react-query@npm:5.62.11"
   dependencies:
@@ -3901,10 +3910,10 @@ __metadata:
     "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     "@wisdomstar94/tsconfig-library": "workspace:^"
-    antd: "npm:^5.22.6"
+    antd: "npm:^5.22.7"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
-    next: "npm:^15.1.2"
+    eslint-config-next: "npm:15.1.3"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -3927,7 +3936,7 @@ __metadata:
     "@types/express": "npm:^5.0.0"
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@wisdomstar94/react-babylon-utils": "workspace:^"
-    concurrently: "npm:^9.1.0"
+    concurrently: "npm:^9.1.1"
     cors: "npm:^2.8.5"
     cross-env: "npm:^7.0.3"
     dotenv-mono: "npm:^1.3.14"
@@ -3945,10 +3954,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/babylon-js-example@workspace:repositories/frontends/example-frontends/babylon-js-example"
   dependencies:
-    "@babylonjs/core": "npm:^7.41.1"
-    "@babylonjs/gui": "npm:^7.41.1"
+    "@babylonjs/core": "npm:^7.42.0"
+    "@babylonjs/gui": "npm:^7.42.0"
     "@babylonjs/havok": "npm:^1.3.10"
-    "@babylonjs/loaders": "npm:^7.41.1"
+    "@babylonjs/loaders": "npm:^7.42.0"
     "@types/animejs": "npm:^3.1.12"
     "@types/jsonwebtoken": "npm:^9.0.7"
     "@types/node": "npm:^22.10.2"
@@ -3967,11 +3976,11 @@ __metadata:
     "@wisdomstar94/react-touch-container": "workspace:^"
     "@wisdomstar94/react-web-rtc-manager": "workspace:^"
     animejs: "npm:^3.2.2"
-    babylonjs-gltf2interface: "npm:^7.41.1"
+    babylonjs-gltf2interface: "npm:^7.42.0"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     jsonwebtoken: "npm:^9.0.2"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -3997,13 +4006,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/example-next-library@workspace:repositories/monorepo-libraries/example-next-library"
   dependencies:
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     tsc-watch: "npm:6.2.1"
     typescript: "npm:^5.7.2"
   peerDependencies:
-    next: ^15.1.2
+    next: ^15.1.3
     react: ^19.0.0
     react-dom: ^19.0.0
   languageName: unknown
@@ -4015,7 +4024,7 @@ __metadata:
   dependencies:
     "@types/cors": "npm:^2"
     "@types/express": "npm:^5.0.0"
-    concurrently: "npm:^9.1.0"
+    concurrently: "npm:^9.1.1"
     cors: "npm:^2.8.5"
     express: "npm:^5.0.1"
     nodemon: "npm:^3.1.9"
@@ -4031,16 +4040,16 @@ __metadata:
   dependencies:
     "@mdx-js/loader": "npm:^3.1.0"
     "@mdx-js/react": "npm:^3.1.0"
-    "@next/mdx": "npm:^15.1.2"
+    "@next/mdx": "npm:^15.1.3"
     "@types/gh-pages": "npm:^6.1.0"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:^22.10.2"
     "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     gh-pages: "npm:^6.2.0"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
@@ -4058,7 +4067,7 @@ __metadata:
     "@wisdomstar94/tsconfig-library": "workspace:^"
     ipaddr.js: "npm:^2.2.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     ipaddr.js: ^2.2.0
   languageName: unknown
@@ -4085,7 +4094,7 @@ __metadata:
     "@wisdomstar94/react-api": "workspace:^"
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     js-cookie: "npm:^3.0.5"
     jsonwebtoken: "npm:^9.0.2"
     next: "npm:canary"
@@ -4109,9 +4118,9 @@ __metadata:
     "@types/react-dom": "npm:^19.0.2"
     "@wisdomstar94/example-frontend-library": "workspace:^"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     jotai: "npm:^2.11.0"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -4133,9 +4142,9 @@ __metadata:
     "@wisdomstar94/react-api": "workspace:^"
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     jsonwebtoken: "npm:^9.0.2"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -4149,13 +4158,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/next-js-tanstack-query-example@workspace:repositories/frontends/example-frontends/next-js-tanstack-query-example"
   dependencies:
-    "@tanstack/react-query": "npm:^5.62.10"
+    "@tanstack/react-query": "npm:^5.62.11"
     "@types/node": "npm:^22.10.2"
     "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
-    next: "npm:^15.1.2"
+    eslint-config-next: "npm:15.1.3"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
@@ -4172,8 +4181,8 @@ __metadata:
     "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
-    next: "npm:^15.1.2"
+    eslint-config-next: "npm:15.1.3"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -4195,15 +4204,15 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.3.4"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     jose: "npm:^5.9.6"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     set-cookie-parser: "npm:^2.7.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     jose: ^5.9.6
-    next: ^15.1.2
+    next: ^15.1.3
     react: ^19.0.0
     react-dom: ^19.0.0
     set-cookie-parser: ^2.7.1
@@ -4252,12 +4261,12 @@ __metadata:
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     axios: "npm:^1.7.9"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     ipaddr.js: "npm:^2.2.0"
     js-cookie: "npm:^3.0.5"
     jsonwebtoken: "npm:^9.0.2"
     luxon: "npm:^3.5.0"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -4288,7 +4297,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4310,7 +4319,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     axios: ^1.7.9
     react: ^19.0.0
@@ -4330,7 +4339,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4341,7 +4350,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-babylon-utils@workspace:repositories/packages/react-packages/react-babylon-utils"
   dependencies:
-    "@babylonjs/core": "npm:^7.41.1"
+    "@babylonjs/core": "npm:^7.42.0"
     "@types/animejs": "npm:^3.1.12"
     "@types/node": "npm:^22.10.2"
     "@types/react": "npm:^19.0.2"
@@ -4354,9 +4363,9 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
-    "@babylonjs/core": ^7.41.1
+    "@babylonjs/core": ^7.42.0
     animejs: ^3.2.2
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4376,7 +4385,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4395,7 +4404,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4415,7 +4424,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4434,7 +4443,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4457,7 +4466,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4480,7 +4489,7 @@ __metadata:
     react-dom: "npm:19.0.0"
     react-router-dom: "npm:^7.1.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   languageName: unknown
   linkType: soft
 
@@ -4496,7 +4505,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4516,7 +4525,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4536,7 +4545,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4555,7 +4564,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4574,7 +4583,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4593,7 +4602,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4612,7 +4621,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4632,7 +4641,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4653,7 +4662,7 @@ __metadata:
     "@wisdomstar94/vanilla-js-util": "workspace:^"
     d3: "npm:^7.9.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     d3: ^7.9.0
     react: ^19.0.0
@@ -4674,7 +4683,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     socket.io-client: "npm:^4.8.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4694,7 +4703,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4713,7 +4722,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4733,7 +4742,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4753,7 +4762,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4772,7 +4781,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
     react: ^19.0.0
     react-dom: ^19.0.0
@@ -4808,10 +4817,10 @@ __metadata:
     clsx: "npm:^2.1.1"
     embla-carousel-react: "npm:^8.5.1"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
+    eslint-config-next: "npm:15.1.3"
     geist: "npm:^1.3.1"
     lucide-react: "npm:^0.469.0"
-    next: "npm:^15.1.2"
+    next: "npm:^15.1.3"
     next-themes: "npm:^0.4.4"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
@@ -4831,8 +4840,8 @@ __metadata:
     "@types/react": "npm:^19.0.2"
     "@types/react-dom": "npm:^19.0.2"
     eslint: "npm:^9.17.0"
-    eslint-config-next: "npm:15.1.2"
-    next: "npm:^15.1.2"
+    eslint-config-next: "npm:15.1.3"
+    next: "npm:^15.1.3"
     postcss: "npm:^8.4.49"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -4847,7 +4856,7 @@ __metadata:
   dependencies:
     "@types/cors": "npm:^2"
     "@types/express": "npm:^5.0.0"
-    concurrently: "npm:^9.1.0"
+    concurrently: "npm:^9.1.1"
     cors: "npm:^2.8.5"
     cross-env: "npm:^7.0.3"
     dotenv-mono: "npm:^1.3.14"
@@ -4865,7 +4874,7 @@ __metadata:
   dependencies:
     "@types/cors": "npm:^2"
     "@types/express": "npm:^5.0.0"
-    concurrently: "npm:^9.1.0"
+    concurrently: "npm:^9.1.1"
     cors: "npm:^2.8.5"
     cross-env: "npm:^7.0.3"
     dotenv-mono: "npm:^1.3.14"
@@ -4901,7 +4910,7 @@ __metadata:
     "@types/node": "npm:^22.10.2"
     "@wisdomstar94/tsconfig-library": "workspace:^"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   languageName: unknown
   linkType: soft
 
@@ -4911,9 +4920,9 @@ __metadata:
   dependencies:
     tsc-watch: "npm:6.2.1"
     typescript: "npm:^5.7.2"
-    vite: "npm:^6.0.5"
+    vite: "npm:^6.0.6"
   peerDependencies:
-    vite: ^6.0.5
+    vite: ^6.0.6
   languageName: unknown
   linkType: soft
 
@@ -5154,7 +5163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:^5.22.6":
+"antd@npm:^5.22.7":
   version: 5.22.7
   resolution: "antd@npm:5.22.7"
   dependencies:
@@ -5469,7 +5478,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babylonjs-gltf2interface@npm:^7.41.1":
+"babylonjs-gltf2interface@npm:^7.42.0":
   version: 7.42.0
   resolution: "babylonjs-gltf2interface@npm:7.42.0"
   checksum: 10c0/9a8d7e39d8a11c654dea825698856bbeb22183629ff31d694aab7dad3d3f138f064ce23a995a9fb58946990c5dbf65ba06e3037737ebe53633c88921af6dd4d8
@@ -6125,7 +6134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:^9.1.0":
+"concurrently@npm:^9.1.1":
   version: 9.1.1
   resolution: "concurrently@npm:9.1.1"
   dependencies:
@@ -7557,6 +7566,30 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/570775cc12ae044d85f9a44774aa5288695ab47b937e8a97cc707455daff4281e9f61823213bf3f7da9bd4067f8e6e2373ff74781aaa52a148e1a6c4e667763e
+  languageName: node
+  linkType: hard
+
+"eslint-config-next@npm:15.1.3":
+  version: 15.1.3
+  resolution: "eslint-config-next@npm:15.1.3"
+  dependencies:
+    "@next/eslint-plugin-next": "npm:15.1.3"
+    "@rushstack/eslint-patch": "npm:^1.10.3"
+    "@typescript-eslint/eslint-plugin": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
+    "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
+    eslint-import-resolver-node: "npm:^0.3.6"
+    eslint-import-resolver-typescript: "npm:^3.5.2"
+    eslint-plugin-import: "npm:^2.31.0"
+    eslint-plugin-jsx-a11y: "npm:^6.10.0"
+    eslint-plugin-react: "npm:^7.37.0"
+    eslint-plugin-react-hooks: "npm:^5.0.0"
+  peerDependencies:
+    eslint: ^7.23.0 || ^8.0.0 || ^9.0.0
+    typescript: ">=3.3.1"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/e9e27f7b4426f57d55ceb107505354ef639afae8b8ec78ead62c7400ef51fe8e572619a61d3da38f0019c5387f7cc184a0ffc7a4c7c499f8020d198403153fa9
   languageName: node
   linkType: hard
 
@@ -11282,7 +11315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^15.1.2":
+"next@npm:^15.1.3":
   version: 15.1.3
   resolution: "next@npm:15.1.3"
   dependencies:
@@ -15453,7 +15486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.5":
+"vite@npm:^6.0.6":
   version: 6.0.6
   resolution: "vite@npm:6.0.6"
   dependencies:
