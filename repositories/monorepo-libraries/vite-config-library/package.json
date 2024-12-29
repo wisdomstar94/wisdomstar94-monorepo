@@ -21,11 +21,11 @@
     }
   },
   "peerDependencies": {
-    "vite": "^6.0.5"
+    "vite": "^6.0.6"
   },
   "devDependencies": {
     "tsc-watch": "6.2.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.5"
+    "vite": "^6.0.6"
   }
 }

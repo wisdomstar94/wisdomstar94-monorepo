@@ -18,7 +18,7 @@
     "@wisdomstar94/tsconfig-library": "workspace:^",
     "ipaddr.js": "^2.2.0",
     "typescript": "^5.7.2",
-    "vite": "^6.0.5"
+    "vite": "^6.0.6"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",

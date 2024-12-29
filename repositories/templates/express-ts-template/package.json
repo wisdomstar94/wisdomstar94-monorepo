@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/cors": "^2",
     "@types/express": "^5.0.0",
-    "concurrently": "^9.1.0",
+    "concurrently": "^9.1.1",
     "nodemon": "^3.1.9",
     "npm-check-updates": "^17.1.12",
     "tsc-watch": "^6.2.1",
