@@ -6,3 +6,8 @@
 
 /* static variant */
 @variant my-active (.my-active &, .my-active&);
+
+/* utility class */
+@utility my-btn {
+  @apply bg-red-500 text-3xl text-white border-4 border-blue-500;
+}

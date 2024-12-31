@@ -1,3 +1,8 @@
 export default function Home() {
-  return <main className="h4 my-active:bg-red-500">hi</main>;
+  return (
+    <main className="h4 flex flex-col gap-2">
+      <div className="my-active:bg-red-500">hi</div>
+      <button className="my-btn">my btn</button>
+    </main>
+  );
 }
