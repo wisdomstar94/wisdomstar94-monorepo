@@ -54,6 +54,7 @@
     "@wisdomstar94/next-js-tanstack-query-example": "yarn workspace @wisdomstar94/next-js-tanstack-query-example",
     "@wisdomstar94/github-page-test": "yarn workspace @wisdomstar94/github-page-test",
     "@wisdomstar94/wisdomstar94-libraries-docs": "yarn workspace @wisdomstar94/wisdomstar94-libraries-docs",
+    "@wisdomstar94/tailwindcss-v4-example": "yarn workspace @wisdomstar94/tailwindcss-v4-example",
     "--------------------------------------- backends ---------------------------------------": "",
     "@wisdomstar94/test-socket": "yarn workspace @wisdomstar94/test-socket",
     "@wisdomstar94/babylon-js-example-socket": "yarn workspace @wisdomstar94/babylon-js-example-socket",
