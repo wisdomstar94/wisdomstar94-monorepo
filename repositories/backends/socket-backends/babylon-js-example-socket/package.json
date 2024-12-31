@@ -21,10 +21,10 @@
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@wisdomstar94/react-babylon-utils": "workspace:^",
-    "concurrently": "^9.1.1",
+    "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.9",
-    "npm-check-updates": "^17.1.12",
+    "npm-check-updates": "^17.1.13",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.7.2"
   }
