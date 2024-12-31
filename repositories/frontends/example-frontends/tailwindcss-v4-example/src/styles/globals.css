@@ -11,3 +11,6 @@
 @utility my-btn {
   @apply bg-red-500 text-3xl text-white border-4 border-blue-500;
 }
+
+/* custom height base responsive */
+@variant h-sm (@media (height > 680px));
