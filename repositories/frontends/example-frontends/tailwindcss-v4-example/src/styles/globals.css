@@ -14,3 +14,10 @@
 
 /* custom height base responsive */
 @variant h-sm (@media (height > 680px));
+
+/* scrollbar custom utility class */
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
