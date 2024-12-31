@@ -3,3 +3,6 @@
 @theme {
   --breakpoint-3xl: 1920px;
 }
+
+/* static variant */
+@variant my-active (.my-active &, .my-active&);
