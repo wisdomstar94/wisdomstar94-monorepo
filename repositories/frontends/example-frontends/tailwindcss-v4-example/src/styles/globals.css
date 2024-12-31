@@ -4,6 +4,10 @@
   --breakpoint-3xl: 1920px;
 }
 
+@theme {
+  --my-color-a: rgba(0, 255, 0, 1);
+}
+
 /* static variant */
 @variant my-active (.my-active &, .my-active&);
 
