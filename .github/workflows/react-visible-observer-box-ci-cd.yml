@@ -1,0 +1,27 @@
+name: react-visible-observer-box-ci-cd
+
+on:
+  push:
+    tags:
+      - 'react-visible-observer-box-v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish-release-registry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      - run: corepack enable
+      - run: corepack prepare yarn@stable --activate
+      - run: yarn install
+      - run: yarn monorepo-libraries:build
+      - run: yarn @wisdomstar94/react-visible-observer-box pack:build
+      - run: yarn @wisdomstar94/react-visible-observer-box npm:publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.PACKAGE_PUBLISH_KEY_NPM}}

@@ -37,6 +37,7 @@ export default function Layout({
     { name: 'test/react-throttle', href: '/test/react-throttle' },
     { name: 'test/react-blob-url-cache', href: '/test/react-blob-url-cache' },
     { name: 'test/sound-play', href: '/test/sound-play' },
+    { name: 'test/react-visible-observer-box', href: '/test/react-visible-observer-box' },
 
     // test/vanilla-js-util
     { name: 'test/vanilla-js-util/apply-overlay-scroll', href: '/test/vanilla-js-util/apply-overlay-scroll' },

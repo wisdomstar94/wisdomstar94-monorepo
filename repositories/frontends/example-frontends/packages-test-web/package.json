@@ -32,6 +32,7 @@
     "@wisdomstar94/react-sse-manager": "workspace:^",
     "@wisdomstar94/react-throttle": "workspace:^",
     "@wisdomstar94/react-touch-container": "workspace:^",
+    "@wisdomstar94/react-visible-observer-box": "workspace:^",
     "@wisdomstar94/react-web-rtc-manager": "workspace:^",
     "@wisdomstar94/vanilla-js-util": "workspace:^",
     "axios": "^1.7.9",
