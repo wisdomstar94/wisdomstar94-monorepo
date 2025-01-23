@@ -5,6 +5,8 @@ import type { IUseDebounce } from './use-debounce.interface';
 
 export function useDebounce(props: IUseDebounce.Props) {
   const { fn } = props;
+  const fnRef = useRef(fn);
+  fnRef.current = fn;
   const defaultDebounceTime = props.debounceTime;
   const [isPending, setIsPending] = useState(false);
 
@@ -16,7 +18,7 @@ export function useDebounce(props: IUseDebounce.Props) {
     setIsPending(true);
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      fn();
+      fnRef.current();
       setIsPending(false);
     }, applyDebounceTime);
   }
