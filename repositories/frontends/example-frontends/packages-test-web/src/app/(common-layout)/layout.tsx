@@ -14,6 +14,7 @@ export default function Layout({
       href: '/test/react-indexeddb-manager/sync-get-and-delete-test',
     },
     { name: 'test/react-multiple-api-manager', href: '/test/react-multiple-api-manager' },
+    { name: 'test/date-test', href: '/test/date-test' },
     { name: 'test/react-api', href: '/test/react-api' },
     { name: 'test/react-api-2', href: '/test/react-api-2' },
     { name: 'test/react-promise-interval', href: '/test/react-promise-interval' },

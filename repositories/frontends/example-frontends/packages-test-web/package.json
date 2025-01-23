@@ -36,6 +36,7 @@
     "@wisdomstar94/react-web-rtc-manager": "workspace:^",
     "@wisdomstar94/vanilla-js-util": "workspace:^",
     "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
     "ipaddr.js": "^2.2.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
