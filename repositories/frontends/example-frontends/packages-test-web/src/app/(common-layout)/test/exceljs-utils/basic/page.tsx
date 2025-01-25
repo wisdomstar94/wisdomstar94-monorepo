@@ -15,6 +15,7 @@ export default function Page() {
                   datas: [
                     [
                       {
+                        width: 60,
                         value: 10000,
                         numberFormat: '#,##원',
                         style: {
@@ -36,7 +37,21 @@ export default function Page() {
                         },
                       },
                       {
-                        value: 25390,
+                        // value: 25390,
+                        richText: [
+                          {
+                            text: '25',
+                          },
+                          {
+                            text: '390',
+                            font: {
+                              bold: true,
+                              color: {
+                                argb: 'FFFF0000',
+                              },
+                            },
+                          },
+                        ],
                         numberFormat: '#,##',
                         merge: {
                           colSpan: 3,
@@ -84,7 +99,8 @@ export default function Page() {
                     ],
                     [
                       {
-                        value: '4',
+                        value: new Date(),
+                        numberFormat: `yyyy-mm-dd hh:mm:ss`,
                       },
                       {
                         value: 15000,

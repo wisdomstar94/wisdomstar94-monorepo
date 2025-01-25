@@ -1,10 +1,11 @@
-import ExcelJS, { Borders } from 'exceljs';
+import ExcelJS, { Borders, RichText } from 'exceljs';
 
 export type CellItem = {
   width?: number;
   height?: number;
-  value?: string | number;
+  value?: string | number | Date;
   numberFormat?: string;
+  richText?: RichText[];
   style?: {
     bgColor?: string;
     border?: Partial<Borders>;

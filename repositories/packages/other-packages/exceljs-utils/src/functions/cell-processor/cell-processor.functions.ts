@@ -36,6 +36,11 @@ export function processCellValue(props: ICellProcessor.ProcessCellFnCommonProps)
   if (cellItem.value !== undefined) {
     cell.value = cellItem.value;
   }
+  if (cellItem.richText !== undefined) {
+    cell.value = {
+      richText: cellItem.richText,
+    };
+  }
   if (cellItem.numberFormat !== undefined) {
     cell.numFmt = cellItem.numberFormat;
   }
