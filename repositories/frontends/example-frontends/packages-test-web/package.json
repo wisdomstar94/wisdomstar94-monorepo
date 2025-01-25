@@ -35,6 +35,7 @@
     "@wisdomstar94/react-visible-observer-box": "workspace:^",
     "@wisdomstar94/react-web-rtc-manager": "workspace:^",
     "@wisdomstar94/vanilla-js-util": "workspace:^",
+    "@wisdomstar94/xlsx-utils": "workspace:^",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
     "ipaddr.js": "^2.2.0",

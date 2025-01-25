@@ -4516,6 +4516,7 @@ __metadata:
     "@wisdomstar94/react-visible-observer-box": "workspace:^"
     "@wisdomstar94/react-web-rtc-manager": "workspace:^"
     "@wisdomstar94/vanilla-js-util": "workspace:^"
+    "@wisdomstar94/xlsx-utils": "workspace:^"
     axios: "npm:^1.7.9"
     date-fns: "npm:^4.1.0"
     eslint: "npm:^9.17.0"
@@ -5252,6 +5253,20 @@ __metadata:
     tailwind-merge: "npm:^2.6.0"
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5"
+  languageName: unknown
+  linkType: soft
+
+"@wisdomstar94/xlsx-utils@workspace:^, @wisdomstar94/xlsx-utils@workspace:repositories/packages/other-packages/xlsx-utils":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/xlsx-utils@workspace:repositories/packages/other-packages/xlsx-utils"
+  dependencies:
+    "@types/node": "npm:^22.10.2"
+    "@wisdomstar94/tsconfig-library": "workspace:^"
+    typescript: "npm:^5.7.2"
+    vite: "npm:^6.0.6"
+    xlsx: "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  peerDependencies:
+    xlsx: "*"
   languageName: unknown
   linkType: soft
 
@@ -16251,6 +16266,15 @@ __metadata:
   version: 5.1.0
   resolution: "xdg-basedir@npm:5.1.0"
   checksum: 10c0/c88efabc71ffd996ba9ad8923a8cc1c7c020a03e2c59f0ffa72e06be9e724ad2a0fccef488757bc6ed3d8849d753dd25082d1035d95cb179e79eae4d034d0b80
+  languageName: node
+  linkType: hard
+
+"xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz":
+  version: 0.20.3
+  resolution: "xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  bin:
+    xlsx: ./bin/xlsx.njs
+  checksum: 10c0/eb20749e56ffa23ffc4a5a6fd983524e0406308e53992e24112424de9f30ec64d7dd80e8e56363e39c3853687f7b4151f97a6f5373050b23c0c2758796803b6b
   languageName: node
   linkType: hard
 
