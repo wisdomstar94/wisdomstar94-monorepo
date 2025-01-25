@@ -8,6 +8,10 @@ export default function Page() {
       <div className="w-full flex flex-wrap gap-2 relative">
         <button
           onClick={() => {
+            // https://github.com/exceljs/exceljs/issues/486#issuecomment-2165556667
+            const date = new Date();
+            const utcDate = new Date(date.getTime() - date.getTimezoneOffset() * 60_000);
+
             generateExcel({
               sheets: [
                 {
@@ -99,7 +103,7 @@ export default function Page() {
                     ],
                     [
                       {
-                        value: new Date(),
+                        value: utcDate,
                         numberFormat: `yyyy-mm-dd hh:mm:ss`,
                       },
                       {
