@@ -39,6 +39,7 @@
     "--------------------------------------- other-packages ---------------------------------------": "",
     "@wisdomstar94/ip-utils": "yarn workspace @wisdomstar94/ip-utils",
     "@wisdomstar94/xlsx-utils": "yarn workspace @wisdomstar94/xlsx-utils",
+    "@wisdomstar94/exceljs-utils": "yarn workspace @wisdomstar94/exceljs-utils",
     "@wisdomstar94/packages-common-lib": "yarn workspace @wisdomstar94/packages-common-lib",
     "--------------------------------------- rust-packages ---------------------------------------": "",
     "@wisdomstar94/useful-cli": "yarn workspace @wisdomstar94/useful-cli",

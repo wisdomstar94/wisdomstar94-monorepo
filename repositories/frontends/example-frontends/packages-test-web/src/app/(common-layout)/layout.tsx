@@ -40,6 +40,7 @@ export default function Layout({
     { name: 'test/sound-play', href: '/test/sound-play' },
     { name: 'test/react-visible-observer-box', href: '/test/react-visible-observer-box' },
     { name: 'test/xlsx-utils/basic', href: '/test/xlsx-utils/basic' },
+    { name: 'test/exceljs-utils/basic', href: 'test/exceljs-utils/basic' },
 
     // test/vanilla-js-util
     { name: 'test/vanilla-js-util/apply-overlay-scroll', href: '/test/vanilla-js-util/apply-overlay-scroll' },

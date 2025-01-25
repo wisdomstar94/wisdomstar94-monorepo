@@ -1,0 +1,44 @@
+{
+  "name": "@wisdomstar94/exceljs-utils",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\"",
+    "pack:build": "vite build && tsc",
+    "npm:publish": "npm publish --access=public",
+    "del:dist": "del-cli ./dist",
+    "del:node_modules": "del-cli ./node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@wisdomstar94/tsconfig-library": "workspace:^",
+    "exceljs": "^4.4.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.6"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "files": [
+    "package.json",
+    "dist/*",
+    "!dist/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  }
+}
