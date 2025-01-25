@@ -3,7 +3,8 @@ import ExcelJS, { Borders } from 'exceljs';
 export type CellItem = {
   width?: number;
   height?: number;
-  value?: string;
+  value?: string | number;
+  numberFormat?: string;
   style?: {
     bgColor?: string;
     border?: Partial<Borders>;

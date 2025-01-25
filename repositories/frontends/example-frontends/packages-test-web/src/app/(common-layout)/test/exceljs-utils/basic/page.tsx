@@ -15,18 +15,71 @@ export default function Page() {
                   datas: [
                     [
                       {
-                        value: '1',
+                        value: 10000,
+                        numberFormat: '#,##원',
+                        style: {
+                          bgColor: 'FFEEEEEE',
+                          border: {
+                            bottom: {
+                              style: 'thin',
+                              color: {
+                                argb: 'FF999999',
+                              },
+                            },
+                            right: {
+                              style: 'thin',
+                              color: {
+                                argb: 'FF999999',
+                              },
+                            },
+                          },
+                        },
                       },
                       {
-                        value: '2',
+                        value: 25390,
+                        numberFormat: '#,##',
                         merge: {
                           colSpan: 3,
+                        },
+                        style: {
+                          bgColor: 'FFEEEEEE',
+                          border: {
+                            bottom: {
+                              style: 'thin',
+                              color: {
+                                argb: 'FF999999',
+                              },
+                            },
+                            right: {
+                              style: 'thin',
+                              color: {
+                                argb: 'FF999999',
+                              },
+                            },
+                          },
                         },
                       },
                       null,
                       null,
                       {
                         value: '3',
+                        style: {
+                          bgColor: 'FFEEEEEE',
+                          border: {
+                            bottom: {
+                              style: 'thin',
+                              color: {
+                                argb: 'FF999999',
+                              },
+                            },
+                            right: {
+                              style: 'thin',
+                              color: {
+                                argb: 'FF999999',
+                              },
+                            },
+                          },
+                        },
                       },
                     ],
                     [
@@ -34,10 +87,12 @@ export default function Page() {
                         value: '4',
                       },
                       {
-                        value: '5',
+                        value: 15000,
+                        numberFormat: '#,##',
                       },
                       {
-                        value: '6',
+                        value: 4900,
+                        numberFormat: '#,##',
                       },
                     ],
                   ],

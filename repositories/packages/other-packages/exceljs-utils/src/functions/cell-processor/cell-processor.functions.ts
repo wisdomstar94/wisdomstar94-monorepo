@@ -33,8 +33,12 @@ export function processCellMerge(props: ICellProcessor.ProcessCellMergeProps) {
 
 export function processCellValue(props: ICellProcessor.ProcessCellFnCommonProps) {
   const { cell, cellItem } = props;
-  if (cellItem.value === undefined) return;
-  cell.value = cellItem.value;
+  if (cellItem.value !== undefined) {
+    cell.value = cellItem.value;
+  }
+  if (cellItem.numberFormat !== undefined) {
+    cell.numFmt = cellItem.numberFormat;
+  }
 }
 
 export function processCellSize(props: ICellProcessor.ProcessCellSizeProps) {
