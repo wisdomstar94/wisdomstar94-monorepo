@@ -16,6 +16,7 @@ export default async function middleware(request: NextRequest) {
       refreshTokenCookieName: 'refreshToken',
     },
     cookieDomain: '*',
+    cookieResSecure: () => true,
     logoutRedirectPathname: '/login',
     refreshApiUrl: `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh`,
     refreshBelowTime: 1000 * 60,

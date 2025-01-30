@@ -1,6 +1,6 @@
+import * as jose from 'jose';
 import { NextRequest, NextResponse } from 'next/server';
 import setCookie from 'set-cookie-parser';
-import * as jose from 'jose';
 
 export type JwtCookieMiddlewareCookieNames = {
   accessTokenCookieName: string;
@@ -12,6 +12,9 @@ export type JwtCookieMiddlewareProps<T extends NextRequest, K extends NextRespon
   response?: K;
   isNoAuth: (request: NextRequest) => boolean;
   cookieNames: JwtCookieMiddlewareCookieNames;
+  cookieDomain: string;
+  cookieResSecure: () => boolean;
+  // deleteAtTargetCookieDomains: string[];
   refreshBelowTime: number;
   refreshApiUrl: string;
   refreshApiMethod?: 'GET' | 'POST';
@@ -19,12 +22,23 @@ export type JwtCookieMiddlewareProps<T extends NextRequest, K extends NextRespon
   debug?: boolean;
   noAuthButLoggedIn: (request: NextRequest, response: NextResponse) => void;
   authAndLoggedIn?: (request: NextRequest, response: NextResponse) => void;
-  cookieDomain: string;
 };
 
-export async function jwtCookieMiddleware<T extends NextRequest, K extends NextResponse>(props: JwtCookieMiddlewareProps<T, K>) {
-  const { request, response, isNoAuth, logoutRedirectPathname, cookieNames, debug, noAuthButLoggedIn, authAndLoggedIn, cookieDomain } =
-    props;
+export async function jwtCookieMiddleware<T extends NextRequest, K extends NextResponse>(
+  props: JwtCookieMiddlewareProps<T, K>
+) {
+  const {
+    request,
+    response,
+    isNoAuth,
+    logoutRedirectPathname,
+    cookieNames,
+    debug,
+    noAuthButLoggedIn,
+    authAndLoggedIn,
+    cookieDomain,
+    cookieResSecure,
+  } = props;
 
   if (debug === true) {
     console.log('\n\n');
@@ -35,95 +49,140 @@ export async function jwtCookieMiddleware<T extends NextRequest, K extends NextR
   if (isNoAuth(request)) {
     if (debug === true) console.log('[jwtCookieMiddleware] [no-auth] 시작');
     const res = NextResponse.next(response);
-
-    const refreshTokenCookie = request.cookies.get(cookieNames.refreshTokenCookieName);
-    if (refreshTokenCookie !== undefined) {
-      const refreshToken = jose.decodeJwt(refreshTokenCookie.value);
-      if (debug === true) {
-        console.log('[jwtCookieMiddleware] [no-auth] refreshToken', refreshToken);
-      }
-      const exp = getExp(refreshToken);
-      if (exp > Date.now()) {
-        if (debug === true) {
-          console.log('[jwtCookieMiddleware] [no-auth] refresh token 이 아직 만료 이전임!');
-          console.log('[jwtCookieMiddleware] [no-auth] noAuthButLoggedIn() 콜백 실행됨!');
-        }
-        noAuthButLoggedIn(request, res);
-      }
+    const checkAuthResult = await checkAuth(request, { ...props, isNoAuth: () => false });
+    const { result } = checkAuthResult;
+    if (result === 'refresh-failed' || result == 'logout') {
+      return res;
     }
-
+    const myResponse = getResponseByResult({
+      checkAuthResult,
+      cookieNames,
+      cookieDomain,
+      logoutRedirectPathname,
+      request,
+      response: res,
+      cookieResSecure,
+    });
+    if (myResponse !== undefined) {
+      if (result === 'auth-verify' || result === 'refresh-success-must-rewrite') {
+        noAuthButLoggedIn(request, myResponse);
+      }
+      return myResponse;
+    }
+    if (result === 'auth-verify' || result === 'refresh-success-must-rewrite') {
+      noAuthButLoggedIn(request, res);
+    }
     return res;
   }
 
   const checkAuthResult = await checkAuth(request, props);
-  const { result, responseCookies } = checkAuthResult;
 
-  if (debug === true) {
-    console.log('[jwtCookieMiddleware] [checkAuth] result =', result);
+  const myResponse = getResponseByResult({
+    checkAuthResult,
+    cookieNames,
+    cookieDomain,
+    logoutRedirectPathname,
+    request,
+    response,
+    cookieResSecure,
+  });
+  if (myResponse !== undefined) {
+    return myResponse;
   }
+
+  const r = NextResponse.next(response);
+  if (typeof authAndLoggedIn === 'function') {
+    authAndLoggedIn(request, r);
+  }
+  return r;
+}
+
+type GetResponseByResultProps<T extends NextRequest, K extends NextResponse> = {
+  checkAuthResult: CheckAuthReturnParams;
+  request: T;
+  response?: K;
+  logoutRedirectPathname: string;
+  cookieNames: JwtCookieMiddlewareCookieNames;
+  cookieDomain: string;
+  cookieResSecure: () => boolean;
+};
+
+function getResponseByResult<T extends NextRequest, K extends NextResponse>(props: GetResponseByResultProps<T, K>) {
+  const { checkAuthResult, request, response, logoutRedirectPathname, cookieNames, cookieDomain, cookieResSecure } =
+    props;
+  const { result, responseCookies } = checkAuthResult;
 
   if (result === 'logout') {
     if (!request.nextUrl.pathname.startsWith(logoutRedirectPathname)) {
       const res = NextResponse.redirect(new URL(logoutRedirectPathname, request.url), response);
+
+      const secure = cookieResSecure();
       res.cookies.delete({
         name: cookieNames.accessTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
       res.cookies.delete({
         name: cookieNames.refreshTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
+
       return res;
     } else {
       const res = NextResponse.next(response);
+      const secure = cookieResSecure();
       res.cookies.delete({
         name: cookieNames.accessTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
       res.cookies.delete({
         name: cookieNames.refreshTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
+
       return res;
     }
-  } else if (result === 'refresh-failed' && !request.nextUrl.pathname.startsWith(logoutRedirectPathname)) {
+  } else if (result === 'refresh-failed') {
     if (!request.nextUrl.pathname.startsWith(logoutRedirectPathname)) {
       const res = NextResponse.redirect(new URL(logoutRedirectPathname, request.url), response);
+      const secure = cookieResSecure();
       res.cookies.delete({
         name: cookieNames.accessTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
       res.cookies.delete({
         name: cookieNames.refreshTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
+
       return res;
     } else {
       const res = NextResponse.next(response);
+      const secure = cookieResSecure();
       res.cookies.delete({
         name: cookieNames.accessTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
       res.cookies.delete({
         name: cookieNames.refreshTokenCookieName,
         httpOnly: true,
-        secure: true,
+        secure,
         domain: cookieDomain,
       });
+
       return res;
     }
   } else if (result === 'refresh-success-must-rewrite') {
@@ -134,11 +193,12 @@ export async function jwtCookieMiddleware<T extends NextRequest, K extends NextR
     // 서버 사이드에서 받은 쿠키를 클라이언트에 전달하는 과정
     for (const c of responseCookies ?? []) {
       const cookieInfo = setCookie.parseString(c);
+      const secure = cookieResSecure();
       res.cookies.set(cookieInfo.name, cookieInfo.value, {
         expires: cookieInfo.expires,
         httpOnly: cookieInfo.httpOnly,
         maxAge: cookieInfo.maxAge,
-        secure: cookieInfo.secure,
+        secure,
         sameSite: cookieInfo.sameSite as true | false | 'lax' | 'strict' | 'none' | undefined,
         domain: cookieInfo.domain,
         path: cookieInfo.path,
@@ -146,12 +206,6 @@ export async function jwtCookieMiddleware<T extends NextRequest, K extends NextR
     }
     return res;
   }
-
-  const r = NextResponse.next(response);
-  if (typeof authAndLoggedIn === 'function') {
-    authAndLoggedIn(request, r);
-  }
-  return r;
 }
 
 type CheckAuthReturnParams = {
@@ -163,7 +217,7 @@ async function checkAuth<T extends NextRequest, K extends NextResponse>(
   request: NextRequest,
   props: JwtCookieMiddlewareProps<T, K>
 ): Promise<CheckAuthReturnParams> {
-  const { cookieNames, refreshBelowTime, refreshApiUrl, refreshApiMethod, debug } = props;
+  const { cookieNames, refreshBelowTime, refreshApiUrl, refreshApiMethod, debug, isNoAuth } = props;
   if (debug === true) {
     console.log('[jwtCookieMiddleware] [checkAuth] 시작');
   }
@@ -177,6 +231,7 @@ async function checkAuth<T extends NextRequest, K extends NextResponse>(
   // 아래 패턴에 해당하는 url 은 인증을 체크하지 않음.
   if (pathname.startsWith('/_next')) return { result: 'no-auth' };
   if (pathname.startsWith('/favicon')) return { result: 'no-auth' };
+  if (isNoAuth(request)) return { result: 'no-auth' };
 
   // 인증 체크 시작
   if (debug === true) {
@@ -258,19 +313,19 @@ async function checkAuth<T extends NextRequest, K extends NextResponse>(
     const accessToken = jose.decodeJwt(accessTokenCookie.value);
     if (typeof accessToken === 'string') {
       if (debug === true) {
-        console.log('[jwtCookieMiddleware] [checkAuth] access token 을 decode 했는데 객체가 아닌 문자열이 나옴');
+        console.error('[jwtCookieMiddleware] [checkAuth] access token 을 decode 했는데 객체가 아닌 문자열이 나옴');
       }
       return { result: 'logout' };
     }
     if (accessToken === null) {
       if (debug === true) {
-        console.log('[jwtCookieMiddleware] [checkAuth] access token 을 decode 했는데 null 이 나옴');
+        console.error('[jwtCookieMiddleware] [checkAuth] access token 을 decode 했는데 null 이 나옴');
       }
       return { result: 'logout' };
     }
     if (typeof accessToken.exp !== 'number') {
       if (debug === true) {
-        console.log('[jwtCookieMiddleware] [checkAuth] decode 한 결과에서 exp 값이 숫자가 아님');
+        console.error('[jwtCookieMiddleware] [checkAuth] decode 한 결과에서 exp 값이 숫자가 아님');
       }
       return { result: 'logout' };
     }
@@ -321,7 +376,8 @@ async function checkAuth<T extends NextRequest, K extends NextResponse>(
         }
         const refreshResCookies = res.headers.getSetCookie();
 
-        if (debug === true) console.log('[jwtCookieMiddleware] [checkAuth] 갱신 api 로 부터 응답헤더에 받은 쿠키 정보들');
+        if (debug === true)
+          console.log('[jwtCookieMiddleware] [checkAuth] 갱신 api 로 부터 응답헤더에 받은 쿠키 정보들');
         for (const c of refreshResCookies) {
           const cookieInfo = setCookie.parseString(c);
           if (debug === true) {
