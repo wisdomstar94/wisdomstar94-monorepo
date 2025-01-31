@@ -16,11 +16,16 @@ export async function fetchV2(url: string, init?: FetchV2Init) {
     const calledFn = eConnRefusedRetryOptions?.called;
     let retryCount = 0;
 
+    let convertedUrl = url;
+
     const call = function () {
       if (typeof calledFn === 'function') {
         calledFn(retryCount);
       }
-      fetch(url, init)
+
+      const instance = createFetch(convertedUrl, init);
+      instance
+        .call()
         .then((res) => {
           resolve(res);
         })
@@ -33,6 +38,7 @@ export async function fetchV2(url: string, init?: FetchV2Init) {
             if (retryCount < retryMaxCount) {
               setTimeout(() => {
                 retryCount++;
+                convertedUrl = url + `#t=${Date.now()}`; // url 이 첫 요청과 동일하면 react 의 요청 메모이제이션에 의해 계속 error 응답을 받게 됨.
                 call();
               }, retryIntervalTime);
               return;
@@ -46,6 +52,14 @@ export async function fetchV2(url: string, init?: FetchV2Init) {
 
     call();
   });
+}
+
+function createFetch(url: string, init?: FetchV2Init) {
+  return {
+    call: () => {
+      return fetch(url, init);
+    },
+  };
 }
 
 function isCauseObject(value: unknown): value is Record<string, unknown> {
