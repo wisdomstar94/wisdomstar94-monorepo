@@ -51,6 +51,8 @@ export default function Layout({
     { name: 'test/vanilla-js-util/get-info-by-scroll', href: '/test/vanilla-js-util/get-info-by-scroll' },
     { name: 'test/vanilla-js-util/get-time-ago-info', href: '/test/vanilla-js-util/get-time-ago-info' },
     { name: 'test/vanilla-js-util/fetch-instance', href: '/test/vanilla-js-util/fetch-instance' },
+    { name: 'test/vanilla-js-util/fetch-v2', href: '/test/vanilla-js-util/fetch-v2' },
+
     {
       name: 'test/vanilla-js-util/generate-query-string-url',
       href: '/test/vanilla-js-util/generate-query-string-url?tag=안녕&tag=하세&tag=요&name=홍길동',

@@ -21,3 +21,4 @@ export * from './get-max-scroll-values.function';
 export * from './to-json-string.function';
 export * from './to-query-string.function';
 export * from './hangul';
+export * from './fetch-v2';
