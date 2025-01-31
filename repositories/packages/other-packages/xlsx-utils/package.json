@@ -14,10 +14,10 @@
     "xlsx": "*"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.12.0",
     "@wisdomstar94/tsconfig-library": "workspace:^",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.6",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "type": "module",

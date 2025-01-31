@@ -11,17 +11,17 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@babylonjs/core": "^7.42.0",
+    "@babylonjs/core": "^7.47.1",
     "animejs": "^3.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@babylonjs/core": "^7.42.0",
-    "@types/animejs": "^3.1.12",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
+    "@babylonjs/core": "^7.47.1",
+    "@types/animejs": "^3.1.13",
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "@wisdomstar94/react-add-event-listener": "workspace:^",
     "@wisdomstar94/react-request-animation-frame-manager": "workspace:^",
@@ -29,8 +29,8 @@
     "animejs": "^3.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.6"
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",

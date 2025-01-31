@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { UseApiCanceledData, UseApiFetchOptions, UseApiInfo, UseApiProps } from './use-api.interface';
+import { useDebounce } from '@wisdomstar94/react-debounce';
 
 export function useApi<T>(props: UseApiProps<T>) {
-  const { api, autoFetchDependencies } = props;
+  const { api, autoFetchDependencies, loadingEndedBounceTime = 0 } = props;
   const enabled = props.enabled ?? true;
   const enabledAutoFetch = props.enabledAutoFetch ?? true;
   const retryCountDefault = props.retryCount;
@@ -12,6 +13,12 @@ export function useApi<T>(props: UseApiProps<T>) {
   const isCancelRef = useRef(false);
   const [isFetched, setIsFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const setIsLoadingDebounce = useDebounce({
+    fn() {
+      setIsLoading(false);
+    },
+    debounceTime: loadingEndedBounceTime,
+  });
   const [error, setError] = useState<any>();
   const [result, setResult] = useState<T>();
   const [canceled, setCanceled] = useState<UseApiCanceledData>();
@@ -80,7 +87,17 @@ export function useApi<T>(props: UseApiProps<T>) {
 
   const setIsLoadingDispose = (v: boolean) => {
     isLoadingRef.current = v;
-    setIsLoading(v);
+    if (v) {
+      // true 는 즉시 반영
+      setIsLoading(v);
+    } else {
+      // false 이면 loadingEndedBounceTime 에 따라 디바운스 처리
+      if (loadingEndedBounceTime > 0) {
+        setIsLoadingDebounce.call();
+      } else {
+        setIsLoading(v);
+      }
+    }
   };
 
   useEffect(() => {
@@ -95,6 +112,7 @@ export function useApi<T>(props: UseApiProps<T>) {
   return {
     isFetched,
     isLoading,
+    isLoadingRef,
     isLoadingOrMounting,
     isMounted,
     error,

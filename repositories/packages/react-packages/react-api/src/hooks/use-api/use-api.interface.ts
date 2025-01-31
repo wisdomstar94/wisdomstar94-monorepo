@@ -29,6 +29,7 @@ export interface UseApiProps<T = unknown> {
 
   retryCount?: number;
   retryDelay?: number;
+  loadingEndedBounceTime?: number;
 }
 
 export type UseApiFetchOptions = {

@@ -3,7 +3,7 @@ name: react-api-ci-cd
 on:
   push:
     tags:
-      - "react-api-v[0-9]+.[0-9]+.[0-9]+"
+      - 'react-api-v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   publish-release-registry:
@@ -21,6 +21,7 @@ jobs:
       - run: corepack prepare yarn@stable --activate
       - run: yarn install
       - run: yarn monorepo-libraries:build
+      - run: yarn @wisdomstar94/react-debounce pack:build
       - run: yarn @wisdomstar94/react-api pack:build
       - run: yarn @wisdomstar94/react-api npm:publish
         env:

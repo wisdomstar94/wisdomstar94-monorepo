@@ -14,10 +14,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@babylonjs/core": "^7.42.0",
-    "@babylonjs/gui": "^7.42.0",
+    "@babylonjs/core": "^7.47.1",
+    "@babylonjs/gui": "^7.47.1",
     "@babylonjs/havok": "^1.3.10",
-    "@babylonjs/loaders": "^7.42.0",
+    "@babylonjs/loaders": "^7.47.1",
     "@wisdomstar94/react-add-event-listener": "workspace:^",
     "@wisdomstar94/react-babylon-utils": "workspace:^",
     "@wisdomstar94/react-body": "workspace:^",
@@ -31,23 +31,23 @@
     "@wisdomstar94/react-web-rtc-manager": "workspace:^",
     "animejs": "^3.2.2",
     "jsonwebtoken": "^9.0.2",
-    "next": "^15.1.3",
+    "next": "^15.1.6",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
-    "@types/animejs": "^3.1.12",
-    "@types/jsonwebtoken": "^9.0.7",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
+    "@types/animejs": "^3.1.13",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@types/uuid": "^10.0.0",
-    "babylonjs-gltf2interface": "^7.42.0",
-    "eslint": "^9.17.0",
-    "eslint-config-next": "15.1.3",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.2"
+    "babylonjs-gltf2interface": "^7.47.1",
+    "eslint": "^9.19.0",
+    "eslint-config-next": "15.1.6",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.7.3"
   }
 }

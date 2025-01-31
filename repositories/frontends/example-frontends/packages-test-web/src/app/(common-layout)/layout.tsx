@@ -17,6 +17,7 @@ export default function Layout({
     { name: 'test/date-test', href: '/test/date-test' },
     { name: 'test/react-api', href: '/test/react-api' },
     { name: 'test/react-api-2', href: '/test/react-api-2' },
+    { name: 'test/react-api-3', href: '/test/react-api-3' },
     { name: 'test/react-promise-interval', href: '/test/react-promise-interval' },
     { name: 'test/react-body', href: '/test/react-body' },
     { name: 'test/react-api-again-request-scheduler', href: '/test/react-api-again-request-scheduler' },
