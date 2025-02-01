@@ -1,9 +1,7 @@
 @use './fonts.scss';
 @use './layouts.scss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
