@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body className="tab-github">{children}</body>
     </html>
   );
 }

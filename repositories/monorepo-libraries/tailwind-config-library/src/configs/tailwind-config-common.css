@@ -7,6 +7,156 @@
   --color-my-color2: #ffffff;
 }
 
+@theme {
+  --font-paperlogy-100-thin: 'Paperlogy-Thin', 'sans-serif';
+  --font-paperlogy-200-extra-light: 'Paperlogy-ExtraLight', 'sans-serif';
+  --font-paperlogy-300-light: 'Paperlogy-Light', 'sans-serif';
+  --font-paperlogy-400-regular: 'Paperlogy-Regular', 'sans-serif';
+  --font-paperlogy-500-medium: 'Paperlogy-Medium', 'sans-serif';
+  --font-paperlogy-600-semi-bold: 'Paperlogy-SemiBold', 'sans-serif';
+  --font-paperlogy-700-bold: 'Paperlogy-Bold', 'sans-serif';
+  --font-paperlogy-800-extra-bold: 'Paperlogy-ExtraBold', 'sans-serif';
+  --font-paperlogy-900-black: 'Paperlogy-Black', 'sans-serif';
+}
+
+@theme {
+  --width-layout-sidebar-width: 320px;
+  --width-layout-sidebar-width-m: calc(100% - 48px);
+  --width-layout-topbar-width: calc(100% - var(--width-layout-sidebar-width));
+  --width-layout-topbar-width-m: 100%;
+  --width-layout-contentbar-width: calc(100% - var(--width-layout-sidebar-width));
+  --width-layout-contentbar-width-m: 100%;
+
+  --max-width-layout-sidebar-max-width: none;
+  --max-width-layout-sidebar-max-width-m: 320px;
+
+  --height-layout-sidebar-height: 100%;
+  --height-layout-sidebar-height-m: 100%;
+  --height-layout-topbar-height: 48px;
+  --height-layout-topbar-height-m: 48px;
+  --height-layout-contentbar-height: calc(100% - var(--height-layout-topbar-height));
+  --height-layout-contentbar-height-m: calc(100% - var(--height-layout-topbar-height-m));
+
+  --inset-layout-sidebar-top: 0px;
+  --inset-layout-sidebar-top-m: 0px;
+  --inset-layout-sidebar-left: 0px;
+  --inset-layout-sidebar-left-m: calc(var(--width-layout-sidebar-width-m) * -1);
+  --inset-layout-topbar-top: 0px;
+  --inset-layout-topbar-top-m: 0px;
+  --inset-layout-topbar-left: var(--width-layout-sidebar-width);
+  --inset-layout-topbar-left-m: 0px;
+  --inset-layout-contentbar-top: var(--height-layout-topbar-height);
+  --inset-layout-contentbar-top-m: var(--height-layout-topbar-height-m);
+  --inset-layout-contentbar-left: var(--width-layout-sidebar-width);
+  --inset-layout-contentbar-left-m: 0px;
+
+  --animate-appear: appear 0.3s ease-out both;
+  @keyframes appear {
+    0% {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+    1% {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+    100% {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  --animate-dissapear: dissapear 0.3s ease-out both;
+  @keyframes dissapear {
+    0% {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+    99% {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+    100% {
+      width: 0px;
+      height: 0px;
+      opacity: 0;
+    }
+  }
+}
+
+@theme {
+  --tab-size-2: 2;
+  --tab-size-4: 4;
+  --tab-size-github: 8;
+}
+@utility tab-* {
+  tab-size: --value(--tab-size- *);
+  tab-size: --value([integer]);
+}
+
+@font-face {
+  font-family: Paperlogy-Thin;
+  font-weight: 100;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-ExtraLight;
+  font-weight: 200;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-Light;
+  font-weight: 300;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-Regular;
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-Medium;
+  font-weight: 500;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-SemiBold;
+  font-weight: 600;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-Bold;
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-ExtraBold;
+  font-weight: 800;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: Paperlogy-Black;
+  font-weight: 900;
+  font-style: normal;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2') format('woff2');
+}
+
+@custom-variant sidebar-opend (.sidebar-opend &, .sidebar-opend&);
+@custom-variant sidebar-collapsed (.sidebar-collapsed &, .sidebar-collapsed&);
+
 @layer components {
   .my-btn {
     background-color: var(--color-my-color);
