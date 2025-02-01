@@ -1,1 +1,1 @@
-export * from './tailiwind-config.js';
+export * from './tailiwind-config.mjs';

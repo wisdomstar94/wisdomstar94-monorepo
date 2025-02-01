@@ -1,1 +1,1 @@
-# @wisdomstar94/example-frontend-library
+# @wisdomstar94/example-next-library

@@ -1,0 +1,15 @@
+@theme {
+  --breakpoint-3xl: 1920px;
+}
+
+@theme {
+  --color-my-color: #ff0000;
+  --color-my-color2: #ffffff;
+}
+
+@layer components {
+  .my-btn {
+    background-color: var(--color-my-color);
+    color: var(--color-my-color2);
+  }
+}

@@ -59,6 +59,7 @@
     "@types/react-dom": "^19.0.3",
     "@types/set-cookie-parser": "^2.4.10",
     "@types/uuid": "^10.0.0",
+    "@wisdomstar94/tailwind-config-library": "workspace:^",
     "eslint": "^9.19.0",
     "eslint-config-next": "15.1.6",
     "postcss": "^8.5.1",
