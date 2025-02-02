@@ -3,24 +3,44 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "tsc",
+    "build": "vite build && tsc",
     "watch": "tsc-watch",
     "ncu:update": "ncu -u --dep \"prod\",\"dev\",\"optional\",\"packageManager\",\"peer\""
   },
-  "type": "module",
+  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "types": "./dist/src/index.d.ts",
   "files": [
-    "./src/*"
+    "./dist/*",
+    "./src/configs/*"
   ],
-  "exports": {
-    "./configs/*": {
-      "default": "./src/configs/*"
-    }
-  },
   "peerDependencies": {
     "tailwindcss": "^4.0.2"
   },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.1"
+  },
   "devDependencies": {
+    "@wisdomstar94/vite-config-library": "workspace:^",
     "tailwindcss": "^4.0.2",
     "typescript": "^5.7.3"
+  },
+  "exports": {
+    "./configs/*": {
+      "default": "./src/configs/*"
+    },
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/index.mjs",
+      "import": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
   }
 }

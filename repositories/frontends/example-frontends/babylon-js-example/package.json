@@ -18,6 +18,7 @@
     "@babylonjs/gui": "^7.47.2",
     "@babylonjs/havok": "^1.3.10",
     "@babylonjs/loaders": "^7.47.2",
+    "@wisdomstar94/example-next-library": "workspace:^",
     "@wisdomstar94/react-add-event-listener": "workspace:^",
     "@wisdomstar94/react-babylon-utils": "workspace:^",
     "@wisdomstar94/react-body": "workspace:^",

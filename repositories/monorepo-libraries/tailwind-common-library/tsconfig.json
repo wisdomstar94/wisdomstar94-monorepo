@@ -5,12 +5,14 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["ESNext"],
-    "module": "NodeNext",
+    "module": "Preserve",
     "skipLibCheck": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "outDir": "./dist",
 
     /* Bundler mode */
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
 
@@ -22,6 +24,6 @@
 
     "baseUrl": "."
   },
-  "include": ["src/**/*.mts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["dist", "node_modules"]
 }

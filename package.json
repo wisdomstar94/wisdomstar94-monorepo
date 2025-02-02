@@ -30,6 +30,7 @@
     "--------------------------------------- monorepo-libraries ---------------------------------------": "",
     "@wisdomstar94/example-frontend-library": "yarn workspace @wisdomstar94/example-frontend-library",
     "@wisdomstar94/example-next-library": "yarn workspace @wisdomstar94/example-next-library",
+    "@wisdomstar94/tailwind-common-library": "yarn workspace @wisdomstar94/tailwind-common-library",
     "@wisdomstar94/tsconfig-library": "yarn workspace @wisdomstar94/tsconfig-library",
     "@wisdomstar94/vite-config-library": "yarn workspace @wisdomstar94/vite-config-library",
     "--------------------------------------- next-packages ---------------------------------------": "",

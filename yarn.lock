@@ -4286,6 +4286,7 @@ __metadata:
     "@types/react": "npm:^19.0.8"
     "@types/react-dom": "npm:^19.0.3"
     "@types/uuid": "npm:^10.0.0"
+    "@wisdomstar94/example-next-library": "workspace:^"
     "@wisdomstar94/react-add-event-listener": "workspace:^"
     "@wisdomstar94/react-babylon-utils": "workspace:^"
     "@wisdomstar94/react-body": "workspace:^"
@@ -4325,7 +4326,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@wisdomstar94/example-next-library@workspace:repositories/monorepo-libraries/example-next-library":
+"@wisdomstar94/example-next-library@workspace:^, @wisdomstar94/example-next-library@workspace:repositories/monorepo-libraries/example-next-library":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/example-next-library@workspace:repositories/monorepo-libraries/example-next-library"
   dependencies:
@@ -5213,6 +5214,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/tailwind-common-library@workspace:repositories/monorepo-libraries/tailwind-common-library"
   dependencies:
+    "@wisdomstar94/vite-config-library": "workspace:^"
+    clsx: "npm:^2.1.1"
+    tailwind-merge: "npm:^3.0.1"
     tailwindcss: "npm:^4.0.2"
     typescript: "npm:^5.7.3"
   peerDependencies:
