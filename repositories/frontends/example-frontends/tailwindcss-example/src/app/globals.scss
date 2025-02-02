@@ -1,7 +1,7 @@
 @use './variables';
 
 @import 'tailwindcss';
-@import '@wisdomstar94/tailwind-config-library/configs/tailwind-config-common.css';
+@import '@wisdomstar94/tailwind-common-library/configs/tailwind-config-common.css';
 
 @each $font-family, $file-name, $font-weight in variables.$paperlogy-fonts {
   @font-face {

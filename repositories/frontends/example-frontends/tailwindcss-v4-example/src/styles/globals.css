@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '@wisdomstar94/tailwind-config-library/configs/tailwind-config-common.css';
+@import '@wisdomstar94/tailwind-common-library/configs/tailwind-config-common.css';
 
 @theme {
   --breakpoint-3xl: 1920px;

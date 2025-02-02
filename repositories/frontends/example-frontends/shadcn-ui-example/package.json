@@ -41,7 +41,7 @@
     "@types/node": "^22.13.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
-    "@wisdomstar94/tailwind-config-library": "workspace:^",
+    "@wisdomstar94/tailwind-common-library": "workspace:^",
     "eslint": "^9.19.0",
     "eslint-config-next": "15.1.6",
     "postcss": "^8.5.1",
