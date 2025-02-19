@@ -31,8 +31,6 @@
       "default": "./src/configs/*"
     },
     ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./dist/index.mjs",
       "import": {
         "types": "./dist/src/index.d.ts",
         "default": "./dist/index.mjs"
