@@ -13,9 +13,11 @@ import '@wisdomstar94/react-scroll-controller/style.css';
 import { getTargetElementFromElementSelector, useScrollController } from '@wisdomstar94/react-scroll-controller';
 import { useListEdgeScrollController } from './use-dnd-manager.macro.hook';
 
-export function useDndManager<T extends string, K extends IUseDndManager.RequiredItemStateStructure, E extends HTMLElement>(
-  props: IUseDndManager.Props<T, K, E>
-) {
+export function useDndManager<
+  T extends string,
+  K extends IUseDndManager.RequiredItemStateStructure,
+  E extends HTMLElement,
+>(props: IUseDndManager.Props<T, K, E>) {
   const { dndGroupName, lists, onDragEnd, animationDuration } = props;
   const pointerDownedInfo = useRef<IUseDndManager.PointerDownedInfo<T, E, K> | undefined>(undefined);
   const dragDestinationInfo = useRef<IUseDndManager.DragDestinationInfo<T, E> | undefined>(undefined);
@@ -66,7 +68,9 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
     const pointerDownedInfoRef = pointerDownedInfo.current;
     if (pointerDownedInfoRef !== undefined) {
       scrollController.disableScroll({
-        element: getTargetElementFromElementSelector(pointerDownedInfo.current?.pointerDownedList.scrollContainerElementSelector),
+        element: getTargetElementFromElementSelector(
+          pointerDownedInfo.current?.pointerDownedList.scrollContainerElementSelector
+        ),
       });
       dragDestinationInfo.current = transformingAndReturnDestinationInfo(event, pointerDownedInfoRef);
     }
@@ -158,6 +162,12 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
       rollback();
     };
 
+    const optimisticUpdate = () => {
+      const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
+      const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
+      pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
+    };
+
     const drangEndInfo: IUseDndManager.DragEndInfo<T, K> = {
       fromListId,
       fromItemIndex,
@@ -167,6 +177,7 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
       toWillChangeItems: toItems,
       resolve,
       reject,
+      optimisticUpdate,
     };
 
     onDragEnd(drangEndInfo);
@@ -227,7 +238,11 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
 
   function renderList(
     id: T,
-    fn: (listProps: IUseDndManager.RequiredListProps<T>, listStyle: CSSProperties, listItems: IUseDndManager.RenderItem<K>[]) => ReactNode
+    fn: (
+      listProps: IUseDndManager.RequiredListProps<T>,
+      listStyle: CSSProperties,
+      listItems: IUseDndManager.RenderItem<K>[]
+    ) => ReactNode
   ) {
     const list = getList(id);
 
@@ -241,7 +256,8 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
     const style: CSSProperties = {
       width: list.listType.type === 'one-row' ? 'max-content' : undefined,
       display: list.listType.type === 'grid' ? 'grid' : 'flex',
-      gridTemplateColumns: list.listType.type === 'grid' ? `repeat(${list.listType.colCount}, minmax(0, 1fr))` : undefined,
+      gridTemplateColumns:
+        list.listType.type === 'grid' ? `repeat(${list.listType.colCount}, minmax(0, 1fr))` : undefined,
       flexDirection: (function () {
         if (list.listType.type === 'one-col') return 'column';
         if (list.listType.type === 'one-row') return 'row';
@@ -276,16 +292,28 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
   }
 
   // handleWindowPointerDown
-  useAddEventListener({ windowEventRequiredInfo: { eventName: 'mousedown', eventListener: (event) => handleWindowPointerDown(event) } });
-  useAddEventListener({ windowEventRequiredInfo: { eventName: 'touchstart', eventListener: (event) => handleWindowPointerDown(event) } });
+  useAddEventListener({
+    windowEventRequiredInfo: { eventName: 'mousedown', eventListener: (event) => handleWindowPointerDown(event) },
+  });
+  useAddEventListener({
+    windowEventRequiredInfo: { eventName: 'touchstart', eventListener: (event) => handleWindowPointerDown(event) },
+  });
 
   // handleWindowPointerMove
-  useAddEventListener({ windowEventRequiredInfo: { eventName: 'mousemove', eventListener: (event) => handleWindowPointerMove(event) } });
-  useAddEventListener({ windowEventRequiredInfo: { eventName: 'touchmove', eventListener: (event) => handleWindowPointerMove(event) } });
+  useAddEventListener({
+    windowEventRequiredInfo: { eventName: 'mousemove', eventListener: (event) => handleWindowPointerMove(event) },
+  });
+  useAddEventListener({
+    windowEventRequiredInfo: { eventName: 'touchmove', eventListener: (event) => handleWindowPointerMove(event) },
+  });
 
   // handleWindowPointerUp
-  useAddEventListener({ windowEventRequiredInfo: { eventName: 'mouseup', eventListener: (event) => handleWindowPointerUp(event) } });
-  useAddEventListener({ windowEventRequiredInfo: { eventName: 'touchend', eventListener: (event) => handleWindowPointerUp(event) } });
+  useAddEventListener({
+    windowEventRequiredInfo: { eventName: 'mouseup', eventListener: (event) => handleWindowPointerUp(event) },
+  });
+  useAddEventListener({
+    windowEventRequiredInfo: { eventName: 'touchend', eventListener: (event) => handleWindowPointerUp(event) },
+  });
 
   useLayoutEffect(() => {
     if (!isDnding) {
@@ -300,16 +328,21 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
           });
         });
 
-        const parentListItemElements = getTargetElementsParentCycle(pointerDownedInfoRef.pointerDownedListElement, (currentElement) => {
-          return currentElement.getAttribute('data-w-react-dnd-list-item') === 'true';
-        });
+        const parentListItemElements = getTargetElementsParentCycle(
+          pointerDownedInfoRef.pointerDownedListElement,
+          (currentElement) => {
+            return currentElement.getAttribute('data-w-react-dnd-list-item') === 'true';
+          }
+        );
         parentListItemElements.forEach((element) => {
           element.style.zIndex = '1';
         });
       }
 
       scrollController.enableScroll({
-        element: getTargetElementFromElementSelector(pointerDownedInfo.current?.pointerDownedList.scrollContainerElementSelector),
+        element: getTargetElementFromElementSelector(
+          pointerDownedInfo.current?.pointerDownedList.scrollContainerElementSelector
+        ),
       });
 
       listEdgeScrollController.disposeListEdgeScrollEnd();
@@ -325,9 +358,12 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
     }
 
     if (isDnding && condition) {
-      const parentListItemElements = getTargetElementsParentCycle(pointerDownedInfo.current?.pointerDownedListElement, (currentElement) => {
-        return currentElement.getAttribute('data-w-react-dnd-list-item') === 'true';
-      });
+      const parentListItemElements = getTargetElementsParentCycle(
+        pointerDownedInfo.current?.pointerDownedListElement,
+        (currentElement) => {
+          return currentElement.getAttribute('data-w-react-dnd-list-item') === 'true';
+        }
+      );
       parentListItemElements.forEach((element) => {
         element.style.zIndex = '2';
       });
@@ -379,5 +415,6 @@ export function useDndManager<T extends string, K extends IUseDndManager.Require
     renderList,
     getItems,
     isDraggingItem,
+    rollback,
   };
 }

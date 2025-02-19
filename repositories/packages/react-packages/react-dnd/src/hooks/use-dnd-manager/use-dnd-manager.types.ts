@@ -120,6 +120,7 @@ export declare namespace IUseDndManager {
     toWillChangeItems: Array<K>;
     reject: () => void;
     resolve: () => void;
+    optimisticUpdate: () => void;
   };
 
   export type ItemHandlerRequireProps = {

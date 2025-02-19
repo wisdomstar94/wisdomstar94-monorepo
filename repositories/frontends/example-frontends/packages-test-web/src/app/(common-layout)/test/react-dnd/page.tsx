@@ -88,9 +88,24 @@ export default function Page() {
         return;
       }
 
-      const { fromListId, fromItemIndex, fromWillChangeItems, toListId, toItemIndex, toWillChangeItems, resolve, reject } = info;
+      const {
+        fromListId,
+        fromItemIndex,
+        fromWillChangeItems,
+        toListId,
+        toItemIndex,
+        toWillChangeItems,
+        resolve,
+        reject,
+        optimisticUpdate,
+      } = info;
       // reject();
-      resolve();
+      // resolve();
+      optimisticUpdate();
+
+      setTimeout(() => {
+        dndManager.rollback();
+      }, 3000);
     },
     animationDuration: 300,
   });
@@ -240,7 +255,10 @@ export default function Page() {
                                     className="w-full flex relative flex-col gap-2 py-0.5"
                                   >
                                     <div className="bg-white relative w-full flex flex-col gap-2">
-                                      <div {...childItem.itemHandlerProps} className="cursor-pointer inline-flex absolute top-2 left-4">
+                                      <div
+                                        {...childItem.itemHandlerProps}
+                                        className="cursor-pointer inline-flex absolute top-2 left-4"
+                                      >
                                         :::
                                       </div>
                                       <div className="pt-10">{childItem.item.name}</div>
