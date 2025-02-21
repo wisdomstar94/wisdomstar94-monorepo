@@ -5,6 +5,6 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const menus: ICommonRootLayout.MenuItem[] = [{ name: 'test/logo-rotation', href: '/test/logo-rotation' }];
+  const menus: ICommonRootLayout.MenuItem[] = [{ name: 'test/glb-load-example', href: '/test/glb-load-example' }];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }

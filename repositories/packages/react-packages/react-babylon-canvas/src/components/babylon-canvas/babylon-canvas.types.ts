@@ -4,6 +4,7 @@ import { CSSProperties, ReactNode } from 'react';
 export type Props = {
   className?: string;
   style?: CSSProperties;
+  enableAxesViewer?: boolean;
   onLoaded: (params: ReadyParams) => void;
 };
 

@@ -3,10 +3,10 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { IBabylonCanvas } from './babylon-canvas.interface';
 import { useAddEventListener } from '@wisdomstar94/react-add-event-listener';
-import { Engine, Scene, WebGPUEngine } from '@babylonjs/core';
+import { AxesViewer, Engine, Scene, WebGPUEngine } from '@babylonjs/core';
 
 export function BabylonCanvas(props: IBabylonCanvas.Props): ReturnType<FC> {
-  const { className, style, onLoaded } = props;
+  const { className, style, enableAxesViewer = false, onLoaded } = props;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isWebGpuSupported, setIsWebGpuSupported] = useState<boolean | undefined>(undefined);
@@ -55,11 +55,6 @@ export function BabylonCanvas(props: IBabylonCanvas.Props): ReturnType<FC> {
     } else {
       setEngineInfo(obj);
     }
-
-    return () => {
-      obj.engine.dispose();
-      engineInfo?.engine.dispose();
-    };
   }, [isWebGpuSupported]);
 
   useEffect(() => {
@@ -68,6 +63,11 @@ export function BabylonCanvas(props: IBabylonCanvas.Props): ReturnType<FC> {
     if (canvas === null) throw new Error(`canvas 가 없습니다.`);
 
     const scene = new Scene(engineInfo.engine);
+
+    if (enableAxesViewer) {
+      new AxesViewer(scene, 10, undefined, undefined, undefined, undefined, 0.2);
+    }
+
     onLoaded({ engineInfo, canvas, scene });
 
     return () => {
