@@ -1,0 +1,80 @@
+'use client';
+
+import { FC, useEffect, useRef, useState } from 'react';
+import { IBabylonCanvas } from './babylon-canvas.interface';
+import { useAddEventListener } from '@wisdomstar94/react-add-event-listener';
+import { Engine, Scene, WebGPUEngine } from '@babylonjs/core';
+
+export function BabylonCanvas(props: IBabylonCanvas.Props): ReturnType<FC> {
+  const { className, style, onLoaded } = props;
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isWebGpuSupported, setIsWebGpuSupported] = useState<boolean | undefined>(undefined);
+  const [engineInfo, setEngineInfo] = useState<IBabylonCanvas.BabylonEngines | undefined>(undefined);
+
+  useAddEventListener({
+    windowEventRequiredInfo: {
+      eventName: 'resize',
+      eventListener() {
+        engineInfo?.engine.resize();
+      },
+    },
+  });
+
+  useEffect(() => {
+    WebGPUEngine.IsSupportedAsync.then((isSupported) => {
+      setIsWebGpuSupported(isSupported);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isWebGpuSupported === undefined) return;
+    const canvas = canvasRef.current;
+    if (canvas === null) throw new Error(`canvas 가 없습니다.`);
+
+    const obj: IBabylonCanvas.BabylonEngines = (function () {
+      if (isWebGpuSupported) {
+        const engine = new WebGPUEngine(canvas);
+        return {
+          engine,
+          webgpuEngine: engine,
+        };
+      } else {
+        const engine = new Engine(canvas);
+        return {
+          engine,
+          webglEngine: engine,
+        };
+      }
+    })();
+
+    if (obj.webgpuEngine !== undefined) {
+      obj.webgpuEngine.initAsync().then(() => {
+        setEngineInfo(obj);
+      });
+    } else {
+      setEngineInfo(obj);
+    }
+
+    return () => {
+      obj.engine.dispose();
+      engineInfo?.engine.dispose();
+    };
+  }, [isWebGpuSupported]);
+
+  useEffect(() => {
+    if (engineInfo === undefined) return;
+    const canvas = canvasRef.current;
+    if (canvas === null) throw new Error(`canvas 가 없습니다.`);
+
+    const scene = new Scene(engineInfo.engine);
+    onLoaded({ engineInfo, canvas, scene });
+
+    return () => {
+      engineInfo.engine.dispose();
+      scene.dispose();
+    };
+  }, [engineInfo]);
+
+  return <canvas ref={canvasRef} className={className} style={style}></canvas>;
+}

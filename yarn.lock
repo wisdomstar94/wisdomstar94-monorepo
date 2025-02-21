@@ -372,6 +372,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babylonjs/core@npm:^7.50.0":
+  version: 7.50.0
+  resolution: "@babylonjs/core@npm:7.50.0"
+  checksum: 10c0/e9ff556680f5788b44f3d55db83e767796f56c45a06a3ff401aa4786832452fb49d999638b86eeaa1a8b2b3bc51739751ff2a4c33d92a71ca8ff38b27cbaec1f
+  languageName: node
+  linkType: hard
+
 "@babylonjs/gui@npm:^7.49.0":
   version: 7.49.0
   resolution: "@babylonjs/gui@npm:7.49.0"
@@ -4846,6 +4853,29 @@ __metadata:
     typescript: "npm:^5.7.3"
     vite: "npm:^6.1.1"
   peerDependencies:
+    react: ^19.0.0
+    react-dom: ^19.0.0
+  languageName: unknown
+  linkType: soft
+
+"@wisdomstar94/react-babylon-canvas@workspace:repositories/packages/react-packages/react-babylon-canvas":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/react-babylon-canvas@workspace:repositories/packages/react-packages/react-babylon-canvas"
+  dependencies:
+    "@babylonjs/core": "npm:^7.50.0"
+    "@types/node": "npm:^22.13.4"
+    "@types/react": "npm:^19.0.10"
+    "@types/react-dom": "npm:^19.0.4"
+    "@vitejs/plugin-react": "npm:^4.3.4"
+    "@wisdomstar94/react-add-event-listener": "workspace:^"
+    "@wisdomstar94/react-request-animation-frame-manager": "workspace:^"
+    "@wisdomstar94/tsconfig-library": "workspace:^"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    typescript: "npm:^5.7.3"
+    vite: "npm:^6.1.1"
+  peerDependencies:
+    "@babylonjs/core": ^7.50.0
     react: ^19.0.0
     react-dom: ^19.0.0
   languageName: unknown
