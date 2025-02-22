@@ -71,8 +71,12 @@ export function BabylonCanvas(props: IBabylonCanvas.Props): ReturnType<FC> {
     onLoaded({ engineInfo, canvas, scene });
 
     return () => {
-      engineInfo.engine.dispose();
+      scene.meshes.forEach((item) => item.dispose());
+      scene.materials.forEach((item) => item.dispose());
+      scene.cameras.forEach((item) => item.dispose());
+      scene.lights.forEach((item) => item.dispose());
       scene.dispose();
+      engineInfo.engine.dispose();
     };
   }, [engineInfo]);
 
