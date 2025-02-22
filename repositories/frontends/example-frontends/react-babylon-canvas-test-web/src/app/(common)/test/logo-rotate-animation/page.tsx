@@ -2,10 +2,12 @@
 
 import {
   AnimationPropertiesOverride,
+  Color3,
   Color4,
   HemisphericLight,
   LoadAssetContainerAsync,
   MeshBuilder,
+  PointLight,
   UniversalCamera,
   Vector3,
 } from '@babylonjs/core';
@@ -39,6 +41,16 @@ export default function Page() {
           const light2 = new HemisphericLight('light1', new Vector3(0, 1, 0), scene);
           light2.intensity = 1;
 
+          // const light = new SpotLight('spotLight', new Vector3(0, -1, 0), new Vector3(1, 1, 1), Math.PI, 10, scene);
+          // light.diffuse = new Color3(1, 1, 1);
+          // // light.specular = new Color3(0, 1, 0);
+          // light.intensity = 1;
+
+          const light = new PointLight('Pointlight', new Vector3(1, 1, -1), scene);
+          light.diffuse = new Color3(1, 1, 1);
+          light.specular = new Color3(1, 1, 1);
+          light.intensity = 5;
+
           // glb 파일 로드 후 scene 에 추가하기
           const loadedAssetContainer = await LoadAssetContainerAsync('sample-logo.glb', scene, { rootUrl: '/' });
           loadedAssetContainer.addAllToScene();
@@ -55,6 +67,7 @@ export default function Page() {
           const importedMeshParent = MeshBuilder.CreateBox('box', { width: 0.1, height: 0.1, depth: 0.1 }, scene);
           importedMeshParent.visibility = 0;
           importedMesh.parent = importedMeshParent;
+          // importedMeshParent.rotation.y = -Math.PI / 2;
 
           // animation 적용
           anime({
