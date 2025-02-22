@@ -7,6 +7,7 @@ import {
   GlowLayer,
   HemisphericLight,
   MeshBuilder,
+  SpotLight,
   StandardMaterial,
   UniversalCamera,
   Vector3,
@@ -35,19 +36,31 @@ export default function Page() {
 
           // 전반적인 빛
           const light2 = new HemisphericLight('light1', new Vector3(0, 1, 0), scene);
-          light2.intensity = 0.7;
+          light2.intensity = 0.2;
+
+          const light = new SpotLight('SpotLight', new Vector3(0, 2, 0), new Vector3(0, -1, 0), Math.PI * 2, 5, scene);
+          light.range = 100;
+          light.diffuse = new Color3(1, 0, 0);
+          light.specular = new Color3(1, 0, 0);
+          light.intensity = 5;
 
           // create mesh
           const mesh = MeshBuilder.CreateBox('box', { width: 0.7, height: 0.7, depth: 0.7 }, scene);
           mesh.position.x = 0;
+          mesh.position.y = 0.4;
 
           const redMaterial = new StandardMaterial('m1', scene);
           redMaterial.emissiveColor = new Color3(255, 0, 0);
           mesh.material = redMaterial;
 
+          // floor
+          const floor = MeshBuilder.CreateBox('Floor', { width: 5, height: 0.2, depth: 5 }, scene);
+          floor.receiveShadows = true;
+
           // camera 설정
-          const camera = new UniversalCamera('camera2', new Vector3(2, 2, 2), scene);
+          const camera = new UniversalCamera('camera2', new Vector3(5, 5, 5), scene);
           camera.setTarget(new Vector3(0, 0, 0));
+          camera.attachControl(canvas, true);
 
           // bloom 설정
           // new BloomEffect(engineInfo.engine, 10, 5, 5);
@@ -55,6 +68,7 @@ export default function Page() {
             mainTextureFixedSize: 256,
             blurKernelSize: 68,
             mainTextureSamples: 4,
+            mainTextureRatio: 1270,
             ldrMerge: true,
             alphaBlendingMode: Constants.ALPHA_MAXIMIZED,
             camera,
