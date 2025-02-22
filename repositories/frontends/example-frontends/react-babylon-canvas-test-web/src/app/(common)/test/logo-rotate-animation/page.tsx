@@ -18,7 +18,7 @@ registerBuiltInLoaders();
 
 export default function Page() {
   return (
-    <div className="w-[220px] aspect-video flex items-center justify-center content-center relative overflow-hidden bg-slate-200">
+    <div className="w-[220px] aspect-video flex items-center justify-center content-center relative overflow-hidden border-slate-200 border">
       <BabylonCanvas
         className="w-[200%] aspect-video shrink-0 grow-0"
         // enableAxesViewer={true}
