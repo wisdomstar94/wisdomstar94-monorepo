@@ -9,6 +9,7 @@ export default function Layout({
     { name: 'test/glb-load-example', href: '/test/glb-load-example' },
     { name: 'test/create-mesh', href: '/test/create-mesh' },
     { name: 'test/rotate-animation', href: '/test/rotate-animation' },
+    { name: 'test/logo-rotate-animation', href: '/test/logo-rotate-animation' },
   ];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }
