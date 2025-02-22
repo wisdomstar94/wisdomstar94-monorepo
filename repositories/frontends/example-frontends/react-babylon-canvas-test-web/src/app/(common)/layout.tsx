@@ -10,6 +10,7 @@ export default function Layout({
     { name: 'test/create-mesh', href: '/test/create-mesh' },
     { name: 'test/rotate-animation', href: '/test/rotate-animation' },
     { name: 'test/logo-rotate-animation', href: '/test/logo-rotate-animation' },
+    { name: 'test/mesh-mouse-event', href: '/test/mesh-mouse-event' },
   ];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }
