@@ -4880,6 +4880,7 @@ __metadata:
     "@types/react-dom": "npm:^19"
     "@wisdomstar94/react-babylon-canvas": "workspace:^"
     "@wisdomstar94/tailwind-common-library": "workspace:^"
+    animejs: "npm:^3.2.2"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.1.7"
     next: "npm:15.1.7"

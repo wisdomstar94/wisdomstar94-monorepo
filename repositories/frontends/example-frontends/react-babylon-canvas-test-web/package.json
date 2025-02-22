@@ -25,6 +25,7 @@
     "@types/react-dom": "^19",
     "@wisdomstar94/react-babylon-canvas": "workspace:^",
     "@wisdomstar94/tailwind-common-library": "workspace:^",
+    "animejs": "^3.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "postcss": "^8",

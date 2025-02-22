@@ -4,11 +4,13 @@ import {
   AnimationPropertiesOverride,
   HemisphericLight,
   LoadAssetContainerAsync,
+  MeshBuilder,
   UniversalCamera,
   Vector3,
 } from '@babylonjs/core';
 import { BabylonCanvas } from '@wisdomstar94/react-babylon-canvas';
 import { registerBuiltInLoaders } from '@babylonjs/loaders/dynamic';
+import anime from 'animejs';
 registerBuiltInLoaders();
 
 export default function Page() {
@@ -42,8 +44,25 @@ export default function Page() {
           // cube mesh 찾고 property 일부 조정하기
           const importedMesh = scene.meshes.find((x) => x.id === 'Cube');
           if (importedMesh === undefined) throw new Error(`importedMesh not defined`);
-          importedMesh.scaling.scaleInPlace(0.5);
+          importedMesh.parent = null; // 이걸 해주지 않으면 x 축이 반대로 동작함.
           importedMesh.receiveShadows = true;
+          importedMesh.scaling.scaleInPlace(0.1);
+          console.log(importedMesh);
+
+          // cube mesh 의 부모 mesh 지정하기
+          const importedMeshParent = MeshBuilder.CreateBox('box', { width: 0.1, height: 0.1, depth: 0.1 }, scene);
+          importedMeshParent.visibility = 0;
+          importedMesh.parent = importedMeshParent;
+
+          // animation 적용
+          anime({
+            targets: [importedMeshParent.rotation],
+            y: Math.PI,
+            loop: true,
+            duration: 2000,
+            autoplay: true,
+            easing: 'linear',
+          });
 
           // camera 설정
           const camera = new UniversalCamera('camera2', new Vector3(2, 2, 2), scene);

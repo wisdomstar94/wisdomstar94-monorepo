@@ -1,15 +1,7 @@
 'use client';
 
-import {
-  AnimationPropertiesOverride,
-  HemisphericLight,
-  LoadAssetContainerAsync,
-  UniversalCamera,
-  Vector3,
-} from '@babylonjs/core';
+import { AnimationPropertiesOverride, HemisphericLight, MeshBuilder, UniversalCamera, Vector3 } from '@babylonjs/core';
 import { BabylonCanvas } from '@wisdomstar94/react-babylon-canvas';
-import { registerBuiltInLoaders } from '@babylonjs/loaders/dynamic';
-registerBuiltInLoaders();
 
 export default function Page() {
   return (
@@ -35,15 +27,10 @@ export default function Page() {
           const light2 = new HemisphericLight('light1', new Vector3(0, 1, 0), scene);
           light2.intensity = 1;
 
-          // glb 파일 로드 후 scene 에 추가하기
-          const loadedAssetContainer = await LoadAssetContainerAsync('test-box4.glb', scene, { rootUrl: '/' });
-          loadedAssetContainer.addAllToScene();
-
-          // cube mesh 찾고 property 일부 조정하기
-          const importedMesh = scene.meshes.find((x) => x.id === 'Cube');
-          if (importedMesh === undefined) throw new Error(`importedMesh not defined`);
-          importedMesh.scaling.scaleInPlace(0.5);
-          importedMesh.receiveShadows = true;
+          // create mesh
+          const mesh = MeshBuilder.CreateBox('box', { width: 0.1, height: 0.1, depth: 0.1 }, scene);
+          mesh.position.x = 1;
+          mesh.rotation.y = Math.PI / 4;
 
           // camera 설정
           const camera = new UniversalCamera('camera2', new Vector3(2, 2, 2), scene);
