@@ -14,6 +14,10 @@ export default function Layout({
     { name: 'test/glow-layer', href: '/test/glow-layer' },
     { name: 'test/havok-test', href: '/test/havok-test' },
     { name: 'test/havok-simple-controll-with-apply-force', href: '/test/havok-simple-controll-with-apply-force' },
+    {
+      name: 'test/havok-simple-controll-with-set-target-transform',
+      href: '/test/havok-simple-controll-with-set-target-transform',
+    },
   ];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }
