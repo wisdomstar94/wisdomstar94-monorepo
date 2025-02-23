@@ -22,6 +22,10 @@ export default function Layout({
       name: 'test/havok-character-controller-test',
       href: '/test/havok-character-controller-test',
     },
+    {
+      name: 'test/havok-character-controller-custom',
+      href: '/test/havok-character-controller-custom',
+    },
   ];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }

@@ -6,5 +6,5 @@
     "strings": true
   },
   "tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*Classes", ".*ClassName*", ".*classes*"],
-  "tailwindCSS.experimental.classRegex": [":(?:.|\n)*?[\"'`]([^\"'`]*).*?,"]
+  "tailwindCSS.experimental.classRegex": [["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]]
 }
