@@ -21,7 +21,12 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["@wisdomstar94/react-babylon-canvas", "@babylonjs/core"]
+    "types": [
+      "@wisdomstar94/react-babylon-canvas",
+      "@wisdomstar94/react-add-event-listener",
+      "@wisdomstar94/react-request-animation-frame-manager",
+      "@babylonjs/core"
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
