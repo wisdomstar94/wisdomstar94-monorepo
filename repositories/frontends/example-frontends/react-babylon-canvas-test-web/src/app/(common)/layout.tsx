@@ -18,6 +18,10 @@ export default function Layout({
       name: 'test/havok-simple-controll-with-set-target-transform',
       href: '/test/havok-simple-controll-with-set-target-transform',
     },
+    {
+      name: 'test/havok-character-controller-test',
+      href: '/test/havok-character-controller-test',
+    },
   ];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }
