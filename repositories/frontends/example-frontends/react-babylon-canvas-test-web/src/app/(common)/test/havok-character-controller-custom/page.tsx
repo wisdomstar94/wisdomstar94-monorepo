@@ -8,6 +8,7 @@ import {
   HavokPlugin,
   HemisphericLight,
   KeyboardEventTypes,
+  LoadAssetContainerAsync,
   MeshBuilder,
   PhysicsAggregate,
   PhysicsAggregateParameters,
@@ -54,8 +55,10 @@ export default function Page() {
           light2.intensity = 0.7;
 
           // glb 파일 로드 후 scene 에 추가하기
-          // const loadedAssetContainer = await LoadAssetContainerAsync('test-box4.glb', scene, { rootUrl: '/' });
-          // loadedAssetContainer.addAllToScene();
+          const loadedAssetContainer = await LoadAssetContainerAsync('casual-lowpoly-male.glb', scene, {
+            rootUrl: '/',
+          });
+          loadedAssetContainer.addAllToScene();
 
           // cube mesh 의 부모 mesh 지정하기
           const importedMeshParent = MeshBuilder.CreateBox('box', { width: 2, height: 2, depth: 2 }, scene);
@@ -105,21 +108,45 @@ export default function Page() {
           let wantJump = false;
           const inputDirection = new Vector3(0, 0, 0);
           const forwardLocalSpace = new Vector3(0, 0, 1);
-          const characterOrientation = Quaternion.Identity();
+          let characterOrientation = Quaternion.Identity();
           const characterGravity = new Vector3(0, -18, 0);
 
           // Physics shape for the character
           const h = 1.8;
           const r = 0.6;
           const displayCapsule = MeshBuilder.CreateCapsule('CharacterDisplay', { height: h, radius: r }, scene); // 사람들 눈에 보여지는 캐릭터 mesh 부분
+          displayCapsule.visibility = 0;
           console.log('#displayCapsule', displayCapsule);
-          const characterPosition = new Vector3(0, 0, 0);
+          console.log('#loadedAssetContainer', loadedAssetContainer);
+          loadedAssetContainer.meshes.forEach((item) => {
+            item.parent = displayCapsule;
+            item.receiveShadows = true;
+            item.visibility = 1;
+            item.scaling.scaleInPlace(0.01);
+            // item.rotation.y = Math.PI / 2;
+          });
+          loadedAssetContainer.animationGroups.find((k) => k.name === 'idle')?.play(true);
+
+          const characterPosition = new Vector3(0, 2, 0);
           const characterController = new PhysicsCharacterController(
             characterPosition,
             { capsuleHeight: h, capsuleRadius: r },
             scene
           );
           // camera.setTarget(characterPosition);
+
+          // 초기 캐릭터가 바라보는 방향 셋팅을 위한 로직
+          {
+            const { direction } = camera.getForwardRay();
+            const forward = new Vector3(direction.normalize().x, 0, direction.normalize().z);
+            const rot = Quaternion.FromLookDirectionLH(forward, Vector3.Up());
+            const euler = rot.toEulerAngles();
+            characterOrientation = euler.toQuaternion();
+            displayCapsule.rotationQuaternion = characterOrientation;
+            loadedAssetContainer.meshes.forEach((item) => {
+              item.rotationQuaternion = characterOrientation;
+            });
+          }
 
           // State handling
           // depending on character state and support, set the new state
@@ -253,6 +280,14 @@ export default function Page() {
             const support = characterController.checkSupport(dt, down);
 
             Quaternion.FromEulerAnglesToRef(0, camera.rotation.y, 0, characterOrientation);
+            // loadedAssetContainer.meshes.forEach((item) => {
+            //   Quaternion.SlerpToRef(
+            //     item.rotationQuaternion!,
+            //     characterController.checkSupport(),
+            //     0.1,
+            //     o.rotationQuaternion!
+            //   );
+            // });
             const desiredLinearVelocity = getDesiredVelocity(
               dt,
               support,
@@ -294,17 +329,56 @@ export default function Page() {
           scene.onKeyboardObservable.add((kbInfo) => {
             switch (kbInfo.type) {
               case KeyboardEventTypes.KEYDOWN:
-                if (kbInfo.event.key == 'w' || kbInfo.event.key == 'ArrowUp') {
+                const isUp = kbInfo.event.key == 'w' || kbInfo.event.key == 'ArrowUp';
+                const isDown = kbInfo.event.key == 's' || kbInfo.event.key == 'ArrowDown';
+                const isLeft = kbInfo.event.key == 'a' || kbInfo.event.key == 'ArrowLeft';
+                const isRight = kbInfo.event.key == 'd' || kbInfo.event.key == 'ArrowRight';
+                const isJump = kbInfo.event.key == ' ';
+
+                if (isUp) {
                   inputDirection.x = -1;
-                } else if (kbInfo.event.key == 's' || kbInfo.event.key == 'ArrowDown') {
+                } else if (isDown) {
                   inputDirection.x = 1;
-                } else if (kbInfo.event.key == 'a' || kbInfo.event.key == 'ArrowLeft') {
+                } else if (isLeft) {
                   inputDirection.z = -1;
-                } else if (kbInfo.event.key == 'd' || kbInfo.event.key == 'ArrowRight') {
+                } else if (isRight) {
                   inputDirection.z = 1;
-                } else if (kbInfo.event.key == ' ') {
+                } else if (isJump) {
                   wantJump = true;
                 }
+
+                const cameraDirection = camera.getForwardRay().direction;
+                const forward = new Vector3(cameraDirection.normalize().x, 0, cameraDirection.normalize().z);
+                const rot = Quaternion.FromLookDirectionLH(forward, Vector3.Up());
+                const euler = rot.toEulerAngles();
+                const angle180 = Math.PI;
+                const angle45 = angle180 / 4;
+                const angle90 = angle180 / 2;
+                const angle135 = angle45 + angle90;
+
+                if (isUp && isLeft) {
+                  euler.y = euler.y + angle135;
+                } else if (isUp && isRight) {
+                  euler.y = euler.y - angle135;
+                } else if (isDown && isLeft) {
+                  euler.y = euler.y + angle45;
+                } else if (isDown && isRight) {
+                  euler.y = euler.y - angle45;
+                } else if (isUp) {
+                  euler.y = euler.y + angle180;
+                } else if (isDown) {
+                  euler.y = euler.y;
+                } else if (isLeft) {
+                  euler.y = euler.y + angle90;
+                } else if (isRight) {
+                  euler.y = euler.y - angle90;
+                }
+
+                const quaternion = euler.toQuaternion().clone();
+                loadedAssetContainer.meshes.forEach((item) => {
+                  Quaternion.SlerpToRef(item.rotationQuaternion!, quaternion, 0.1, item.rotationQuaternion!);
+                });
+
                 break;
               case KeyboardEventTypes.KEYUP:
                 if (
