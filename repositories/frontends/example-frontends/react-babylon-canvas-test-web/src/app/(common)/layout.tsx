@@ -12,6 +12,7 @@ export default function Layout({
     { name: 'test/logo-rotate-animation', href: '/test/logo-rotate-animation' },
     { name: 'test/mesh-mouse-event', href: '/test/mesh-mouse-event' },
     { name: 'test/glow-layer', href: '/test/glow-layer' },
+    { name: 'test/havok-test', href: '/test/havok-test' },
   ];
   return <CommonRootLayout menus={menus}>{children}</CommonRootLayout>;
 }
