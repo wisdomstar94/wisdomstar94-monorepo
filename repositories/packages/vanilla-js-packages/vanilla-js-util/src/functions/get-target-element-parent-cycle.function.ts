@@ -1,11 +1,11 @@
-export function getTargetElementParentCycle<T extends HTMLElement>(
+export function getTargetElementParentCycle<T extends Element>(
   startElement: T | null | undefined,
-  condition: (currentElement: HTMLElement) => boolean,
+  condition: (currentElement: Element) => boolean,
   searchCycleMaxCount?: number
 ) {
   if (startElement === null || startElement === undefined) return null;
 
-  let currentElement: HTMLElement | null = startElement;
+  let currentElement: Element | null = startElement;
   let searchCycleCount = 0;
   while (currentElement !== null) {
     if (condition(currentElement)) {
@@ -24,16 +24,16 @@ export function getTargetElementParentCycle<T extends HTMLElement>(
   return currentElement;
 }
 
-export function getTargetElementsParentCycle<T extends HTMLElement>(
+export function getTargetElementsParentCycle<T extends Element>(
   startElement: T | null | undefined,
-  condition: (currentElement: HTMLElement) => boolean,
+  condition: (currentElement: Element) => boolean,
   searchCycleMaxCount?: number
-): HTMLElement[] {
+): Element[] {
   if (startElement === null || startElement === undefined) return [];
 
-  const matchedElements: HTMLElement[] = [];
+  const matchedElements: Element[] = [];
 
-  let currentElement: HTMLElement | null = startElement;
+  let currentElement: Element | null = startElement;
   let searchCycleCount = 0;
   while (currentElement !== null) {
     if (condition(currentElement)) {

@@ -1,5 +1,5 @@
 export declare namespace IUseScrollController {
-  export type ElementSelector<T extends HTMLElement> = {
+  export type ElementSelector<T extends Element> = {
     window?: boolean;
     element?: T | null | undefined;
     selector?: string;

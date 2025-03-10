@@ -1,4 +1,4 @@
-export function getMaxScrollValues<T extends HTMLElement>(element: T) {
+export function getMaxScrollValues<T extends Element>(element: T) {
   const rect = element.getBoundingClientRect();
 
   const maxScrollTop = Math.ceil(element.scrollHeight - rect.height);

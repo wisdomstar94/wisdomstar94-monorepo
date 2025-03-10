@@ -8,7 +8,7 @@ import {
 import { IUseDndManager } from './use-dnd-manager.interface';
 import { getTargetElementFromElementSelector } from '@wisdomstar94/react-scroll-controller';
 
-export function getDndElementsFromPointerDownElement(downTargetElement: HTMLElement, dndGroupName: string) {
+export function getDndElementsFromPointerDownElement(downTargetElement: Element, dndGroupName: string) {
   // 핸들러 요소를 클릭했는지 체크
   const dndHandlerElement = getTargetElementParentCycle(
     downTargetElement,
@@ -73,7 +73,7 @@ export function getListInfoFromPointerDownDndElements<T extends string>(
   };
 }
 
-export function generatePointerDownedInfo<T extends string, K, E extends HTMLElement>(
+export function generatePointerDownedInfo<T extends string, K, E extends Element>(
   dndElements: NonNullable<ReturnType<typeof getDndElementsFromPointerDownElement>>,
   event: TouchEvent | MouseEvent,
   lists: Array<IUseDndManager.ListInfo<T, K, E>>,
@@ -188,7 +188,7 @@ export function generatePointerDownedInfo<T extends string, K, E extends HTMLEle
   return result;
 }
 
-export function getCursoredTargetList<T extends string, E extends HTMLElement, K>(
+export function getCursoredTargetList<T extends string, E extends Element, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   coordinate: [number, number]
 ) {
@@ -204,7 +204,7 @@ export function getCursoredTargetList<T extends string, E extends HTMLElement, K
   });
 }
 
-export function transformingListItemsButExcludeTargetList<T extends string, E extends HTMLElement, K>(
+export function transformingListItemsButExcludeTargetList<T extends string, E extends Element, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E> | undefined
 ) {
@@ -245,14 +245,20 @@ export function transformingListItemsButExcludeTargetList<T extends string, E ex
         }
       }
 
-      if (transform !== item.itemElement.style.transform) {
+      if (isValidElementType(item.itemElement) && transform !== item.itemElement.style.transform) {
         item.itemElement.style.transform = transform;
       }
     });
   }
 }
 
-export function transformingCursoredTargetListItems<T extends string, E extends HTMLElement, K>(
+export function isValidElementType(element: unknown): element is HTMLElement | SVGElement {
+  if (element instanceof HTMLElement) return true;
+  if (element instanceof SVGElement) return true;
+  return false;
+}
+
+export function transformingCursoredTargetListItems<T extends string, E extends Element, K>(
   cursorPositionedInfo: IUseDndManager.CursorPositionedInfo,
   cursoredTargetListItems: IUseDndManager.PointerDownInfoListInfoItem[],
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E>,
@@ -294,7 +300,7 @@ export function transformingCursoredTargetListItems<T extends string, E extends 
           }
         }
 
-        if (transform !== item.itemElement.style.transform) {
+        if (isValidElementType(item.itemElement) && transform !== item.itemElement.style.transform) {
           item.itemElement.style.transform = transform;
         }
       } else {
@@ -328,7 +334,7 @@ export function transformingCursoredTargetListItems<T extends string, E extends 
           }
         }
 
-        if (transform !== item.itemElement.style.transform) {
+        if (isValidElementType(item.itemElement) && transform !== item.itemElement.style.transform) {
           item.itemElement.style.transform = transform;
         }
       }
@@ -364,13 +370,13 @@ export function transformingCursoredTargetListItems<T extends string, E extends 
       }
     }
 
-    if (transform !== item.itemElement.style.transform) {
+    if (isValidElementType(item.itemElement) && transform !== item.itemElement.style.transform) {
       item.itemElement.style.transform = transform;
     }
   });
 }
 
-export function getCursoredTargetListItems<T extends string, E extends HTMLElement, K>(
+export function getCursoredTargetListItems<T extends string, E extends Element, K>(
   isSelf: boolean,
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E>,
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>
@@ -384,7 +390,7 @@ export function getCursoredTargetListItems<T extends string, E extends HTMLEleme
   return cursoredTargetList.items;
 }
 
-export function getCursorPositionedInfo<T extends string, E extends HTMLElement, K>(
+export function getCursorPositionedInfo<T extends string, E extends Element, K>(
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E>,
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   isSelf: boolean,
@@ -551,7 +557,7 @@ export function getCursorPositionedInfo<T extends string, E extends HTMLElement,
   return info;
 }
 
-export function getScrolledInfo<T extends string, E extends HTMLElement, K>(
+export function getScrolledInfo<T extends string, E extends Element, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>
 ) {
   // const anythingPickList = pointerDownedInfoRef.lists[0];
@@ -587,7 +593,7 @@ export function getScrolledInfo<T extends string, E extends HTMLElement, K>(
   return { scrollX, scrollY };
 }
 
-export function transformingAndReturnDestinationInfo<T extends string, E extends HTMLElement, K>(
+export function transformingAndReturnDestinationInfo<T extends string, E extends Element, K>(
   event: MouseEvent | TouchEvent,
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>
 ): IUseDndManager.DragDestinationInfo<T, E> | undefined {
@@ -600,7 +606,9 @@ export function transformingAndReturnDestinationInfo<T extends string, E extends
   // 현재 커서 위치에 맞춰 드래그 되고 있는 아이템의 위치 조정
   const translateX = `translateX(${cursorX - pointerDownedInfoRef.pointerDownedCoordinate.x + scrollX}px)`;
   const translateY = `translateY(${cursorY - pointerDownedInfoRef.pointerDownedCoordinate.y + scrollY}px)`;
-  pointerDownedInfoRef.pointerDownedItemElement.style.transform = `${translateX} ${translateY}`;
+  if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
+    pointerDownedInfoRef.pointerDownedItemElement.style.transform = `${translateX} ${translateY}`;
+  }
 
   // 드래그중에 현재 초점이 가있는 리스트 찾기
   const cursoredTargetList = getCursoredTargetList(pointerDownedInfoRef, [cursorX, cursorY]);
@@ -648,7 +656,7 @@ export function transformingAndReturnDestinationInfo<T extends string, E extends
   }
 }
 
-export function getDragFinalInfo<T extends string, E extends HTMLElement, K>(
+export function getDragFinalInfo<T extends string, E extends Element, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   dragDestinationInfoRef: IUseDndManager.DragDestinationInfo<T, E>,
   getList: (id: T) => IUseDndManager.ListInfo<T, K, E>

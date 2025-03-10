@@ -4,7 +4,7 @@ import styles from './use-scroll-controller.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { subscribeElement } from '@wisdomstar94/vanilla-js-util';
 
-export function useScrollController<T extends HTMLElement>(props?: IUseScrollController.Props) {
+export function useScrollController<T extends Element>(props?: IUseScrollController.Props) {
   const { isRestoreUnmounted = false } = props ?? {};
 
   const bodyObserver = useRef<MutationObserver | undefined>(undefined);

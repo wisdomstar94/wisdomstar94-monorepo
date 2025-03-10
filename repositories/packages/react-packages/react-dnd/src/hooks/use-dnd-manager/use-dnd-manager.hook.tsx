@@ -8,6 +8,7 @@ import {
   generatePointerDownedInfo,
   getDndElementsFromPointerDownElement,
   getDragFinalInfo,
+  isValidElementType,
 } from './use-dnd-manager.macro';
 import { CSSProperties, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import '@wisdomstar94/react-scroll-controller/style.css';
@@ -44,7 +45,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     if (isDnding) return;
 
     const downTargetElement = event.target;
-    if (!(downTargetElement instanceof HTMLElement) && !(downTargetElement instanceof HTMLElement)) {
+    if (!(downTargetElement instanceof Element)) {
       throw new Error(`pointer down 된 요소가 HTMLElement 인스턴스가 아닙니다.`);
     }
 
@@ -115,7 +116,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     });
 
     const dragDestinationInfoRef = dragDestinationInfo.current;
-    pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
+    if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
+      pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
+    }
 
     if (dragDestinationInfoRef === undefined) {
       onDragEnd(undefined);
@@ -146,7 +149,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
 
     const dragDestinationInfoRef = dragDestinationInfo.current;
     if (dragDestinationInfoRef === undefined) return;
-    pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
+    if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
+      pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
+    }
 
     const finalDragInfo = getDragFinalInfo(pointerDownedInfoRef, dragDestinationInfoRef, getList);
 
@@ -158,7 +163,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     isTransactioning.current = true;
     const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
     const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
-    pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
+    if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
+      pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
+    }
 
     if (animationDuration === 0) {
       restore();
@@ -180,7 +187,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     isTransactioning.current = true;
     pointerDownedInfoRef.lists.forEach((list) => {
       list.items.forEach((item) => {
-        item.itemElement.style.transform = 'translate(0px, 0px)';
+        if (isValidElementType(item.itemElement)) {
+          item.itemElement.style.transform = 'translate(0px, 0px)';
+        }
       });
     });
 
@@ -203,7 +212,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     isTransactioning.current = true;
     const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
     const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
-    pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
+    if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
+      pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
+    }
   }
 
   function restore() {
@@ -325,9 +336,14 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
       const pointerDownedInfoRef = pointerDownedInfo.current;
       if (pointerDownedInfoRef !== undefined) {
         pointerDownedInfoRef.lists.forEach((list) => {
-          list.dndListElement.style.zIndex = '1';
+          if (isValidElementType(list.dndListElement)) {
+            list.dndListElement.style.zIndex = '1';
+          }
+
           list.items.forEach((item) => {
-            item.itemElement.style.zIndex = '1';
+            if (isValidElementType(item.itemElement)) {
+              item.itemElement.style.zIndex = '1';
+            }
           });
         });
 
@@ -338,7 +354,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
           }
         );
         parentListItemElements.forEach((element) => {
-          element.style.zIndex = '1';
+          if (isValidElementType(element)) {
+            element.style.zIndex = '1';
+          }
         });
       }
 
@@ -368,15 +386,15 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
         }
       );
       parentListItemElements.forEach((element) => {
-        element.style.zIndex = '2';
+        if (isValidElementType(element)) {
+          element.style.zIndex = '2';
+        }
       });
 
       // item 에 transition 속성 추가
       pointerDownedInfo.current?.lists.forEach((list) => {
-        if (list.id === pointerDownedInfo.current?.pointerDownedListId) {
-          list.dndListElement.style.zIndex = '2';
-        } else {
-          list.dndListElement.style.zIndex = '1';
+        if (isValidElementType(list.dndListElement)) {
+          list.dndListElement.style.zIndex = list.id === pointerDownedInfo.current?.pointerDownedListId ? '2' : '1';
         }
 
         if (isTouchDevice.current && list.scrollContainerElementSelector !== undefined) {
@@ -392,11 +410,14 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
         }
 
         list.items.forEach((item, index) => {
+          if (!isValidElementType(item.itemElement)) return;
+
           if (item.itemUniqueId === pointerDownedInfo.current?.pointerDownedItemId) {
             item.itemElement.style.transition = 'none';
             item.itemElement.style.zIndex = '2';
             return;
           }
+
           const transition = `${animationDuration}ms transform`;
           if (item.itemElement.style.transition !== transition) {
             item.itemElement.style.transition = transition;

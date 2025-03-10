@@ -7,7 +7,7 @@ export type Direction = 'top' | 'bottom' | 'left' | 'right';
 export type EdgeScrollTypeElement = {
   type: 'element';
   direction: Direction;
-  element: HTMLElement;
+  element: Element;
 };
 
 export type EdgeScrollTypeWindow = {
@@ -17,7 +17,7 @@ export type EdgeScrollTypeWindow = {
 
 export type EdgeScrollType = EdgeScrollTypeElement | EdgeScrollTypeWindow;
 
-export type ListInfo<T extends string, K, E extends HTMLElement> = {
+export type ListInfo<T extends string, K, E extends Element> = {
   id: T;
   items: Array<K>;
   setItems: Dispatch<SetStateAction<Array<K>>>;
@@ -44,13 +44,13 @@ export type RectInfo = {
 
 export type PointerDownInfoListInfoItem = {
   itemUniqueId: string;
-  itemElement: HTMLElement;
+  itemElement: Element;
   snapshotRectInfo: RectInfo;
 };
 
-export type PointerDownInfoListInfo<T extends string, E extends HTMLElement> = {
+export type PointerDownInfoListInfo<T extends string, E extends Element> = {
   id: T;
-  dndListElement: HTMLElement;
+  dndListElement: Element;
   snapshotRectInfo: RectInfo;
   // targetScrollContainerScrollState?: Coordinate;
   items: Array<PointerDownInfoListInfoItem>;
@@ -59,14 +59,14 @@ export type PointerDownInfoListInfo<T extends string, E extends HTMLElement> = {
   scrollContainerElementSnapshotRect?: DOMRect;
 };
 
-export type PointerDownedInfo<T extends string, E extends HTMLElement, K> = {
+export type PointerDownedInfo<T extends string, E extends Element, K> = {
   pointerDownedList: ListInfo<T, K, E>;
   pointerDownedCoordinate: Coordinate;
   pointerDownedListId: T;
-  pointerDownedListElement: HTMLElement;
+  pointerDownedListElement: Element;
   pointerDownedItemId: string;
   pointerDownedItemIndex: number;
-  pointerDownedItemElement: HTMLElement;
+  pointerDownedItemElement: Element;
   pointerDownedItemRectSnapshot: DOMRect;
   lists: Array<PointerDownInfoListInfo<T, E>>;
 };
@@ -100,7 +100,7 @@ export type ListTypeGrid = {
 
 export type ListType = ListTypeOneCol | ListTypeOneRow | ListTypeGrid;
 
-export type DragDestinationInfo<T extends string, E extends HTMLElement> = {
+export type DragDestinationInfo<T extends string, E extends Element> = {
   destinationList: PointerDownInfoListInfo<T, E>;
   destinationItemIndex: number;
   destinationItemRect: IsContainCoordinateTargetArea;
@@ -135,7 +135,7 @@ export type CursorPositionedInfo = {
   itemArea: IsContainCoordinateTargetArea;
 };
 
-export type Props<T extends string, K, E extends HTMLElement> = {
+export type Props<T extends string, K, E extends Element> = {
   dndGroupName: string;
   lists: Array<ListInfo<T, K, E>>;
   itemUniqueId: (item: K) => string;
