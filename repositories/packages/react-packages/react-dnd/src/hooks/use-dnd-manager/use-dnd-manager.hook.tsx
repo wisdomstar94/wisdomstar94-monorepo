@@ -1,6 +1,6 @@
 'use client';
 
-import { getTargetElementsParentCycle, unwrap } from '@wisdomstar94/vanilla-js-util';
+import { getTargetElementParentCycle, getTargetElementsParentCycle, unwrap } from '@wisdomstar94/vanilla-js-util';
 import { IUseDndManager } from './use-dnd-manager.interface';
 import { useAddEventListener } from '@wisdomstar94/react-add-event-listener';
 import {
@@ -402,17 +402,19 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     }
 
     if (isDnding && condition) {
-      const parentListItemElements = getTargetElementsParentCycle(
+      const parentListItemElement = getTargetElementParentCycle(
         pointerDownedInfo.current?.pointerDownedListElement,
         (currentElement) => {
           return currentElement.getAttribute('data-w-react-dnd-list-item') === 'true';
         }
       );
-      parentListItemElements.forEach((element) => {
-        if (isValidElementType(element)) {
-          element.style.zIndex = '2';
-        }
-      });
+      if (isValidElementType(parentListItemElement)) {
+        Array.from(parentListItemElement.parentElement?.children ?? []).forEach((element) => {
+          if (isValidElementType(element)) {
+            element.style.zIndex = parentListItemElement === element ? '3' : '2';
+          }
+        });
+      }
 
       // item 에 transition 속성 추가
       pointerDownedInfo.current?.lists.forEach((list) => {
