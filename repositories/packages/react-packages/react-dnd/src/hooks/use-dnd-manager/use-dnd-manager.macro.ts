@@ -1,12 +1,11 @@
 import {
-  getMaxScrollValues,
   getPointerDownedCoordinate,
   getTargetElementParentCycle,
   isContainCoordinate,
   IsContainCoordinateTargetArea,
   unwrap,
 } from '@wisdomstar94/vanilla-js-util';
-import { IUseDndManager } from './use-dnd-manager.types';
+import { IUseDndManager } from './use-dnd-manager.interface';
 import { getTargetElementFromElementSelector } from '@wisdomstar94/react-scroll-controller';
 
 export function getDndElementsFromPointerDownElement(downTargetElement: HTMLElement, dndGroupName: string) {
@@ -74,10 +73,11 @@ export function getListInfoFromPointerDownDndElements<T extends string>(
   };
 }
 
-export function generatePointerDownedInfo<T extends string, K extends IUseDndManager.RequiredItemStateStructure, E extends HTMLElement>(
+export function generatePointerDownedInfo<T extends string, K, E extends HTMLElement>(
   dndElements: NonNullable<ReturnType<typeof getDndElementsFromPointerDownElement>>,
   event: TouchEvent | MouseEvent,
-  lists: Array<IUseDndManager.ListInfo<T, K, E>>
+  lists: Array<IUseDndManager.ListInfo<T, K, E>>,
+  itemUniqueId: (item: K) => string
 ) {
   const { dndHandlerElement, dndItemElement, dndListElement } = dndElements;
 
@@ -112,8 +112,14 @@ export function generatePointerDownedInfo<T extends string, K extends IUseDndMan
         const dndListElementRect = dndListElement.getBoundingClientRect();
 
         const tl: IUseDndManager.Coordinate = { x: dndListElementRect.x, y: dndListElementRect.y };
-        const tr: IUseDndManager.Coordinate = { x: dndListElementRect.x + dndListElementRect.width, y: dndListElementRect.y };
-        const bl: IUseDndManager.Coordinate = { x: dndListElementRect.x, y: dndListElementRect.y + dndListElementRect.height };
+        const tr: IUseDndManager.Coordinate = {
+          x: dndListElementRect.x + dndListElementRect.width,
+          y: dndListElementRect.y,
+        };
+        const bl: IUseDndManager.Coordinate = {
+          x: dndListElementRect.x,
+          y: dndListElementRect.y + dndListElementRect.height,
+        };
         const br: IUseDndManager.Coordinate = {
           x: dndListElementRect.x + dndListElementRect.width,
           y: dndListElementRect.y + dndListElementRect.height,
@@ -139,21 +145,27 @@ export function generatePointerDownedInfo<T extends string, K extends IUseDndMan
           scrollContainerElementSnapshotRect: scrollContainerElement?.getBoundingClientRect(),
           items: list.items.map((item) => {
             const itemElement = unwrap(
-              dndListElement.querySelector<HTMLElement>(`[data-w-react-dnd-list-item-id='${item.id}']`),
-              `${item.id} 에 해당하는 아이템 요소가 없습니다.`
+              dndListElement.querySelector<HTMLElement>(`[data-w-react-dnd-list-item-id='${itemUniqueId(item)}']`),
+              `${itemUniqueId(item)} 에 해당하는 아이템 요소가 없습니다.`
             );
             const itemElementRect = itemElement.getBoundingClientRect();
 
             const tl: IUseDndManager.Coordinate = { x: itemElementRect.x, y: itemElementRect.y };
-            const tr: IUseDndManager.Coordinate = { x: itemElementRect.x + itemElementRect.width, y: itemElementRect.y };
-            const bl: IUseDndManager.Coordinate = { x: itemElementRect.x, y: itemElementRect.y + itemElementRect.height };
+            const tr: IUseDndManager.Coordinate = {
+              x: itemElementRect.x + itemElementRect.width,
+              y: itemElementRect.y,
+            };
+            const bl: IUseDndManager.Coordinate = {
+              x: itemElementRect.x,
+              y: itemElementRect.y + itemElementRect.height,
+            };
             const br: IUseDndManager.Coordinate = {
               x: itemElementRect.x + itemElementRect.width,
               y: itemElementRect.y + itemElementRect.height,
             };
 
             const result: IUseDndManager.PointerDownInfoListInfoItem = {
-              id: item.id,
+              itemUniqueId: itemUniqueId(item),
               itemElement,
               snapshotRectInfo: {
                 x: itemElementRect.x,
@@ -176,7 +188,7 @@ export function generatePointerDownedInfo<T extends string, K extends IUseDndMan
   return result;
 }
 
-export function getCursoredTargetList<T extends string, E extends HTMLElement, K extends IUseDndManager.RequiredItemStateStructure>(
+export function getCursoredTargetList<T extends string, E extends HTMLElement, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   coordinate: [number, number]
 ) {
@@ -192,11 +204,7 @@ export function getCursoredTargetList<T extends string, E extends HTMLElement, K
   });
 }
 
-export function transformingListItemsButExcludeTargetList<
-  T extends string,
-  E extends HTMLElement,
-  K extends IUseDndManager.RequiredItemStateStructure,
->(
+export function transformingListItemsButExcludeTargetList<T extends string, E extends HTMLElement, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E> | undefined
 ) {
@@ -204,7 +212,7 @@ export function transformingListItemsButExcludeTargetList<
     if (cursoredTargetList?.id === list.id) continue;
 
     list.items.forEach((item, index) => {
-      if (item.id === pointerDownedInfoRef.pointerDownedItemId) {
+      if (item.itemUniqueId === pointerDownedInfoRef.pointerDownedItemId) {
         return;
       }
 
@@ -244,11 +252,7 @@ export function transformingListItemsButExcludeTargetList<
   }
 }
 
-export function transformingCursoredTargetListItems<
-  T extends string,
-  E extends HTMLElement,
-  K extends IUseDndManager.RequiredItemStateStructure,
->(
+export function transformingCursoredTargetListItems<T extends string, E extends HTMLElement, K>(
   cursorPositionedInfo: IUseDndManager.CursorPositionedInfo,
   cursoredTargetListItems: IUseDndManager.PointerDownInfoListInfoItem[],
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E>,
@@ -366,7 +370,7 @@ export function transformingCursoredTargetListItems<
   });
 }
 
-export function getCursoredTargetListItems<T extends string, E extends HTMLElement, K extends IUseDndManager.RequiredItemStateStructure>(
+export function getCursoredTargetListItems<T extends string, E extends HTMLElement, K>(
   isSelf: boolean,
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E>,
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>
@@ -380,7 +384,7 @@ export function getCursoredTargetListItems<T extends string, E extends HTMLEleme
   return cursoredTargetList.items;
 }
 
-export function getCursorPositionedInfo<T extends string, E extends HTMLElement, K extends IUseDndManager.RequiredItemStateStructure>(
+export function getCursorPositionedInfo<T extends string, E extends HTMLElement, K>(
   cursoredTargetList: IUseDndManager.PointerDownInfoListInfo<T, E>,
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
   isSelf: boolean,
@@ -411,8 +415,10 @@ export function getCursorPositionedInfo<T extends string, E extends HTMLElement,
   for (const item of cursoredTargetList.items) {
     const calculate = () => {
       const nextItem = cursoredTargetList.items[isSelf ? foreachIndex + 1 : foreachIndex];
-      const nextItemWidth = nextItem?.itemElement.clientWidth ?? pointerDownedInfoRef.pointerDownedItemElement.clientWidth;
-      const nextItemHeight = nextItem?.itemElement.clientHeight ?? pointerDownedInfoRef.pointerDownedItemElement.clientHeight;
+      const nextItemWidth =
+        nextItem?.itemElement.clientWidth ?? pointerDownedInfoRef.pointerDownedItemElement.clientWidth;
+      const nextItemHeight =
+        nextItem?.itemElement.clientHeight ?? pointerDownedInfoRef.pointerDownedItemElement.clientHeight;
 
       if (appendRectClientX === 0) {
         appendRectClientX = item.snapshotRectInfo.x;
@@ -545,7 +551,7 @@ export function getCursorPositionedInfo<T extends string, E extends HTMLElement,
   return info;
 }
 
-export function getScrolledInfo<T extends string, E extends HTMLElement, K extends IUseDndManager.RequiredItemStateStructure>(
+export function getScrolledInfo<T extends string, E extends HTMLElement, K>(
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>
 ) {
   // const anythingPickList = pointerDownedInfoRef.lists[0];
@@ -581,11 +587,7 @@ export function getScrolledInfo<T extends string, E extends HTMLElement, K exten
   return { scrollX, scrollY };
 }
 
-export function transformingAndReturnDestinationInfo<
-  T extends string,
-  E extends HTMLElement,
-  K extends IUseDndManager.RequiredItemStateStructure,
->(
+export function transformingAndReturnDestinationInfo<T extends string, E extends HTMLElement, K>(
   event: MouseEvent | TouchEvent,
   pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>
 ): IUseDndManager.DragDestinationInfo<T, E> | undefined {
@@ -629,7 +631,13 @@ export function transformingAndReturnDestinationInfo<
 
   if (cursorPositionedInfo !== undefined) {
     // 드래그 되고 있는 리스트에 대한 아이템들의 위치 조정
-    transformingCursoredTargetListItems(cursorPositionedInfo, cursoredTargetListItems, cursoredTargetList, isSelf, pointerDownedInfoRef);
+    transformingCursoredTargetListItems(
+      cursorPositionedInfo,
+      cursoredTargetListItems,
+      cursoredTargetList,
+      isSelf,
+      pointerDownedInfoRef
+    );
     return {
       destinationList: cursoredTargetList,
       destinationItemIndex: cursorPositionedInfo.index,

@@ -83,6 +83,7 @@ export default function Page() {
         setItems: setHobbyItems,
       },
     ],
+    itemUniqueId: (item) => item.id,
     animationDuration: 300,
     onDragEnd(info) {
       console.log('info', info);
@@ -110,6 +111,7 @@ export default function Page() {
         },
       },
     ],
+    itemUniqueId: (item) => item.id,
     animationDuration: 300,
     onDragEnd(info) {
       console.log('info', info);
@@ -144,7 +146,12 @@ export default function Page() {
                   {listItems.map((listItem, itemIndex) => {
                     const { item, itemHandlerProps, itemProps, itemStyle } = listItem;
                     return (
-                      <li key={`${item.id}_${itemIndex}`} {...itemProps} style={{ ...itemStyle }} className="w-full py-0.5 relative">
+                      <li
+                        key={`${item.id}_${itemIndex}`}
+                        {...itemProps}
+                        style={{ ...itemStyle }}
+                        className="w-full py-0.5 relative"
+                      >
                         <div className="w-full bg-red-400">
                           <div {...itemHandlerProps}>:::</div>
                           <div>{item.title}</div>
@@ -156,7 +163,10 @@ export default function Page() {
               );
             })}
           </div>
-          <div className="w-full min-w-0 p-4 bg-purple-200 h-[200px] overflow-scroll" ref={characterListScrollContainerRef}>
+          <div
+            className="w-full min-w-0 p-4 bg-purple-200 h-[200px] overflow-scroll"
+            ref={characterListScrollContainerRef}
+          >
             {myCharacterDndManager.renderList('character-list', (listProps, listStyle, listItems) => {
               return (
                 <ul {...listProps} style={{ ...listStyle }} className="w-full relative">

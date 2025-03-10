@@ -1,7 +1,7 @@
 'use client';
 
 import { getTargetElementsParentCycle, unwrap } from '@wisdomstar94/vanilla-js-util';
-import { IUseDndManager } from './use-dnd-manager.types';
+import { IUseDndManager } from './use-dnd-manager.interface';
 import { useAddEventListener } from '@wisdomstar94/react-add-event-listener';
 import {
   transformingAndReturnDestinationInfo,
@@ -13,12 +13,8 @@ import '@wisdomstar94/react-scroll-controller/style.css';
 import { getTargetElementFromElementSelector, useScrollController } from '@wisdomstar94/react-scroll-controller';
 import { useListEdgeScrollController } from './use-dnd-manager.macro.hook';
 
-export function useDndManager<
-  T extends string,
-  K extends IUseDndManager.RequiredItemStateStructure,
-  E extends HTMLElement,
->(props: IUseDndManager.Props<T, K, E>) {
-  const { dndGroupName, lists, onDragEnd, animationDuration } = props;
+export function useDndManager<T extends string, K, E extends HTMLElement>(props: IUseDndManager.Props<T, K, E>) {
+  const { dndGroupName, lists, itemUniqueId, onDragEnd, animationDuration } = props;
   const pointerDownedInfo = useRef<IUseDndManager.PointerDownedInfo<T, E, K> | undefined>(undefined);
   const dragDestinationInfo = useRef<IUseDndManager.DragDestinationInfo<T, E> | undefined>(undefined);
   const isTransactioning = useRef(false);
@@ -47,7 +43,7 @@ export function useDndManager<
     if (isDnding) return;
 
     const downTargetElement = event.target;
-    if (!(downTargetElement instanceof HTMLElement)) {
+    if (!(downTargetElement instanceof HTMLElement) && !(downTargetElement instanceof HTMLElement)) {
       throw new Error(`pointer down 된 요소가 HTMLElement 인스턴스가 아닙니다.`);
     }
 
@@ -55,7 +51,7 @@ export function useDndManager<
     if (dndElements === undefined) return;
 
     isTouchDevice.current = !(event instanceof MouseEvent);
-    pointerDownedInfo.current = generatePointerDownedInfo(dndElements, event, lists);
+    pointerDownedInfo.current = generatePointerDownedInfo(dndElements, event, lists, itemUniqueId);
 
     scrollController.disableTextDrag({
       element: document.body,
@@ -233,7 +229,7 @@ export function useDndManager<
 
   function isDraggingItem(item: K) {
     if (!isDnding) return false;
-    return pointerDownedInfo.current?.pointerDownedItemId === item.id;
+    return pointerDownedInfo.current?.pointerDownedItemId === itemUniqueId(item);
   }
 
   function renderList(
@@ -268,7 +264,7 @@ export function useDndManager<
     const convertedItems: Array<IUseDndManager.RenderItem<K>> = list.items.map((item, index) => {
       const itemProps: IUseDndManager.RequiredItemProps = {
         'data-w-react-dnd-group-name': dndGroupName,
-        'data-w-react-dnd-list-item-id': item.id,
+        'data-w-react-dnd-list-item-id': itemUniqueId(item),
         'data-w-react-dnd-list-item-index': index.toString(),
         'data-w-react-dnd-list-item': 'true',
       };
@@ -389,7 +385,7 @@ export function useDndManager<
         }
 
         list.items.forEach((item, index) => {
-          if (item.id === pointerDownedInfo.current?.pointerDownedItemId) {
+          if (item.itemUniqueId === pointerDownedInfo.current?.pointerDownedItemId) {
             item.itemElement.style.transition = 'none';
             item.itemElement.style.zIndex = '2';
             return;

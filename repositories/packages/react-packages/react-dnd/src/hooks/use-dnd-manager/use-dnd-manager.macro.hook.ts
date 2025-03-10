@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { IUseDndManager } from './use-dnd-manager.types';
+import { IUseDndManager } from './use-dnd-manager.interface';
 import { getMaxScrollValues, getPointerDownedCoordinate, isContainCoordinate } from '@wisdomstar94/vanilla-js-util';
 import { getCursoredTargetList } from './use-dnd-manager.macro';
 import { getTargetElementFromElementSelector } from '@wisdomstar94/react-scroll-controller';
@@ -15,7 +15,7 @@ export function useListEdgeScrollController() {
     maxScrollLeft: 0,
   });
 
-  function disposeListEdgeScroll<T extends string, E extends HTMLElement, K extends IUseDndManager.RequiredItemStateStructure>(
+  function disposeListEdgeScroll<T extends string, E extends HTMLElement, K>(
     event: MouseEvent | TouchEvent,
     pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
     onScrolled?: () => void
