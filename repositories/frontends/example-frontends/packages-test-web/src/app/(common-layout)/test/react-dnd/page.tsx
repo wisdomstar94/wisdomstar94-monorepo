@@ -101,12 +101,11 @@ export default function Page() {
         optimisticUpdate,
       } = info;
       // reject();
-      // resolve();
-      optimisticUpdate();
-
-      setTimeout(() => {
-        dndManager.reject();
-      }, 3000);
+      resolve();
+      // optimisticUpdate();
+      // setTimeout(() => {
+      //   dndManager.reject();
+      // }, 3000);
     },
     animationDuration: 300,
   });

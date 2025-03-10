@@ -20,6 +20,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
   const pointerDownedInfo = useRef<IUseDndManager.PointerDownedInfo<T, E, K> | undefined>(undefined);
   const dragDestinationInfo = useRef<IUseDndManager.DragDestinationInfo<T, E> | undefined>(undefined);
   const isTransactioning = useRef(false);
+  const isResolvingOrRejecting = useRef(false);
   const [isDnding, setIsDnding] = useState(false);
   const [mounted, setMounted] = useState(false);
   const scrollController = useScrollController();
@@ -149,6 +150,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
 
     const dragDestinationInfoRef = dragDestinationInfo.current;
     if (dragDestinationInfoRef === undefined) return;
+
     if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
       pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
     }
@@ -161,6 +163,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     }
 
     isTransactioning.current = true;
+    isResolvingOrRejecting.current = true;
     const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
     const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
     if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
@@ -179,12 +182,14 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
   function reject() {
     const pointerDownedInfoRef = pointerDownedInfo.current;
     if (pointerDownedInfoRef === undefined) {
-      console.error(`pointerDownedInfoRef 가 undefined 입니다.`);
-      restore();
       return;
     }
 
     isTransactioning.current = true;
+    isResolvingOrRejecting.current = true;
+    if (isValidElementType(pointerDownedInfoRef.pointerDownedItemElement)) {
+      pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
+    }
     pointerDownedInfoRef.lists.forEach((list) => {
       list.items.forEach((item) => {
         if (isValidElementType(item.itemElement)) {
@@ -235,6 +240,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     });
 
     isTransactioning.current = false;
+    isResolvingOrRejecting.current = false;
     pointerDownedInfo.current = undefined;
     dragDestinationInfo.current = undefined;
     setIsDnding(false);
@@ -327,6 +333,23 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
   });
   useAddEventListener({
     windowEventRequiredInfo: { eventName: 'touchend', eventListener: (event) => handleWindowPointerUp(event) },
+  });
+
+  // drag cancel handler
+  useAddEventListener({
+    windowEventRequiredInfo: {
+      eventName: 'keydown',
+      eventListener(event) {
+        const key = event.key;
+        if (isResolvingOrRejecting.current) {
+          return;
+        }
+
+        if (key.toLowerCase() === 'escape') {
+          reject();
+        }
+      },
+    },
   });
 
   useLayoutEffect(() => {
