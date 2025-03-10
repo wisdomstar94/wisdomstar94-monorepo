@@ -647,3 +647,34 @@ export function transformingAndReturnDestinationInfo<T extends string, E extends
     return undefined;
   }
 }
+
+export function getDragFinalInfo<T extends string, E extends HTMLElement, K>(
+  pointerDownedInfoRef: IUseDndManager.PointerDownedInfo<T, E, K>,
+  dragDestinationInfoRef: IUseDndManager.DragDestinationInfo<T, E>,
+  getList: (id: T) => IUseDndManager.ListInfo<T, K, E>
+) {
+  const fromListId = pointerDownedInfoRef.pointerDownedListId;
+  const fromItemIndex = pointerDownedInfoRef.pointerDownedItemIndex;
+  const fromList = getList(fromListId);
+  const fromItems = [...fromList.items];
+
+  const targetItems = fromItems.splice(fromItemIndex, 1);
+
+  const toListId = dragDestinationInfoRef.destinationList.id;
+  const toItemIndex = dragDestinationInfoRef.destinationItemIndex;
+  const toList = getList(toListId);
+  const toItems = fromListId !== toListId ? [...toList.items] : [...fromItems];
+  toItems.splice(toItemIndex, 0, ...targetItems);
+
+  return {
+    fromListId,
+    fromItemIndex,
+    fromList,
+    fromItems,
+
+    toListId,
+    toItemIndex,
+    toList,
+    toItems,
+  };
+}

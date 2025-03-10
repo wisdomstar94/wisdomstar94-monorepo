@@ -7,6 +7,7 @@ import {
   transformingAndReturnDestinationInfo,
   generatePointerDownedInfo,
   getDndElementsFromPointerDownElement,
+  getDragFinalInfo,
 } from './use-dnd-manager.macro';
 import { CSSProperties, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import '@wisdomstar94/react-scroll-controller/style.css';
@@ -118,59 +119,19 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
 
     if (dragDestinationInfoRef === undefined) {
       onDragEnd(undefined);
-      rollback();
+      reject();
       return;
     }
 
-    const fromListId = pointerDownedInfoRef.pointerDownedListId;
-    const fromItemIndex = pointerDownedInfoRef.pointerDownedItemIndex;
-    const fromList = getList(fromListId);
-    const fromItems = [...fromList.items];
-
-    const targetItems = fromItems.splice(fromItemIndex, 1);
-
-    const toListId = dragDestinationInfoRef.destinationList.id;
-    const toItemIndex = dragDestinationInfoRef.destinationItemIndex;
-    const toList = getList(toListId);
-    const toItems = fromListId !== toListId ? [...toList.items] : [...fromItems];
-    toItems.splice(toItemIndex, 0, ...targetItems);
-
-    const resolve = () => {
-      toList.setItems(toItems);
-      if (fromListId !== toListId) {
-        fromList.setItems(fromItems);
-      }
-
-      const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
-      const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
-      pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
-
-      if (animationDuration === 0) {
-        restore();
-      } else {
-        setTimeout(() => {
-          restore();
-        }, animationDuration);
-      }
-    };
-
-    const reject = () => {
-      rollback();
-    };
-
-    const optimisticUpdate = () => {
-      const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
-      const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
-      pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
-    };
+    const finalDragInfo = getDragFinalInfo(pointerDownedInfoRef, dragDestinationInfoRef, getList);
 
     const drangEndInfo: IUseDndManager.DragEndInfo<T, K> = {
-      fromListId,
-      fromItemIndex,
-      fromWillChangeItems: fromItems,
-      toListId,
-      toItemIndex,
-      toWillChangeItems: toItems,
+      fromListId: finalDragInfo.fromListId,
+      fromItemIndex: finalDragInfo.fromItemIndex,
+      fromWillChangeItems: finalDragInfo.fromItems,
+      toListId: finalDragInfo.toListId,
+      toItemIndex: finalDragInfo.toItemIndex,
+      toWillChangeItems: finalDragInfo.toItems,
       resolve,
       reject,
       optimisticUpdate,
@@ -179,7 +140,36 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     onDragEnd(drangEndInfo);
   }
 
-  function rollback() {
+  function resolve() {
+    const pointerDownedInfoRef = pointerDownedInfo.current;
+    if (pointerDownedInfoRef === undefined) return;
+
+    const dragDestinationInfoRef = dragDestinationInfo.current;
+    if (dragDestinationInfoRef === undefined) return;
+    pointerDownedInfoRef.pointerDownedItemElement.style.transition = `${animationDuration}ms transform`;
+
+    const finalDragInfo = getDragFinalInfo(pointerDownedInfoRef, dragDestinationInfoRef, getList);
+
+    finalDragInfo.toList.setItems(finalDragInfo.toItems);
+    if (finalDragInfo.fromListId !== finalDragInfo.toListId) {
+      finalDragInfo.fromList.setItems(finalDragInfo.fromItems);
+    }
+
+    isTransactioning.current = true;
+    const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
+    const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
+    pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
+
+    if (animationDuration === 0) {
+      restore();
+    } else {
+      setTimeout(() => {
+        restore();
+      }, animationDuration);
+    }
+  }
+
+  function reject() {
     const pointerDownedInfoRef = pointerDownedInfo.current;
     if (pointerDownedInfoRef === undefined) {
       console.error(`pointerDownedInfoRef 가 undefined 입니다.`);
@@ -187,6 +177,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
       return;
     }
 
+    isTransactioning.current = true;
     pointerDownedInfoRef.lists.forEach((list) => {
       list.items.forEach((item) => {
         item.itemElement.style.transform = 'translate(0px, 0px)';
@@ -200,6 +191,19 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
         restore();
       }, animationDuration);
     }
+  }
+
+  function optimisticUpdate() {
+    const dragDestinationInfoRef = dragDestinationInfo.current;
+    if (dragDestinationInfoRef === undefined) return;
+
+    const pointerDownedInfoRef = pointerDownedInfo.current;
+    if (pointerDownedInfoRef === undefined) return;
+
+    isTransactioning.current = true;
+    const translateX = `${dragDestinationInfoRef.destinationItemRect.x - pointerDownedInfoRef.pointerDownedItemRectSnapshot.x}px`;
+    const translateY = `${dragDestinationInfoRef.destinationItemRect.y - pointerDownedInfoRef.pointerDownedItemRectSnapshot.y}px`;
+    pointerDownedInfoRef.pointerDownedItemElement.style.transform = `translate(${translateX}, ${translateY})`;
   }
 
   function restore() {
@@ -219,6 +223,9 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
       }
     });
 
+    isTransactioning.current = false;
+    pointerDownedInfo.current = undefined;
+    dragDestinationInfo.current = undefined;
     setIsDnding(false);
   }
 
@@ -411,6 +418,8 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     renderList,
     getItems,
     isDraggingItem,
-    rollback,
+    resolve,
+    reject,
+    optimisticUpdate,
   };
 }

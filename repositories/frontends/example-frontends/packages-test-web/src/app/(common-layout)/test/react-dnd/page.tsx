@@ -105,7 +105,7 @@ export default function Page() {
       optimisticUpdate();
 
       setTimeout(() => {
-        dndManager.rollback();
+        dndManager.reject();
       }, 3000);
     },
     animationDuration: 300,
