@@ -16,7 +16,7 @@ import { getTargetElementFromElementSelector, useScrollController } from '@wisdo
 import { useListEdgeScrollController } from './use-dnd-manager.macro.hook';
 
 export function useDndManager<T extends string, K, E extends HTMLElement>(props: IUseDndManager.Props<T, K, E>) {
-  const { dndGroupName, lists, itemUniqueId, onDragEnd, animationDuration } = props;
+  const { dndGroupName, lists, getItemUniqueId, onDragEnd, animationDuration } = props;
   const pointerDownedInfo = useRef<IUseDndManager.PointerDownedInfo<T, E, K> | undefined>(undefined);
   const dragDestinationInfo = useRef<IUseDndManager.DragDestinationInfo<T, E> | undefined>(undefined);
   const isTransactioning = useRef(false);
@@ -54,7 +54,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     if (dndElements === undefined) return;
 
     isTouchDevice.current = !(event instanceof MouseEvent);
-    pointerDownedInfo.current = generatePointerDownedInfo(dndElements, event, lists, itemUniqueId);
+    pointerDownedInfo.current = generatePointerDownedInfo(dndElements, event, lists, getItemUniqueId);
 
     scrollController.disableTextDrag({
       element: document.body,
@@ -253,7 +253,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
 
   function isDraggingItem(item: K) {
     if (!isDnding) return false;
-    return pointerDownedInfo.current?.pointerDownedItemId === itemUniqueId(item);
+    return pointerDownedInfo.current?.pointerDownedItemId === getItemUniqueId(item);
   }
 
   function renderList(
@@ -288,7 +288,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     const convertedItems: Array<IUseDndManager.RenderItem<K>> = list.items.map((item, index) => {
       const itemProps: IUseDndManager.RequiredItemProps = {
         'data-w-react-dnd-group-name': dndGroupName,
-        'data-w-react-dnd-list-item-id': itemUniqueId(item),
+        'data-w-react-dnd-list-item-id': getItemUniqueId(item),
         'data-w-react-dnd-list-item-index': index.toString(),
         'data-w-react-dnd-list-item': 'true',
       };

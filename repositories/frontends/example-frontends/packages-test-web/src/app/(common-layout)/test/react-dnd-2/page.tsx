@@ -83,7 +83,7 @@ export default function Page() {
         setItems: setHobbyItems,
       },
     ],
-    itemUniqueId: (item) => item.id,
+    getItemUniqueId: (item) => item.id,
     animationDuration: 300,
     onDragEnd(info) {
       console.log('info', info);
@@ -111,7 +111,7 @@ export default function Page() {
         },
       },
     ],
-    itemUniqueId: (item) => item.id,
+    getItemUniqueId: (item) => item.id,
     animationDuration: 300,
     onDragEnd(info) {
       console.log('info', info);

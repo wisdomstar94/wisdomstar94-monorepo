@@ -82,7 +82,7 @@ export default function Page() {
         },
       },
     ],
-    itemUniqueId: (item) => item.id,
+    getItemUniqueId: (item) => item.id,
     onDragEnd: (info) => {
       console.log('@onDragEnd', info);
       if (info === undefined) {
@@ -200,7 +200,7 @@ export default function Page() {
         },
       },
     ],
-    itemUniqueId: (item) => item.id,
+    getItemUniqueId: (item) => item.id,
     onDragEnd(info) {
       console.log('@@@info', info);
 

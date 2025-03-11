@@ -20,10 +20,9 @@ export type EdgeScrollType = EdgeScrollTypeElement | EdgeScrollTypeWindow;
 export type ListInfo<T extends string, K, E extends Element> = {
   id: T;
   items: Array<K>;
-  setItems: Dispatch<SetStateAction<Array<K>>>;
+  setItems: (newItems: Array<K>) => void;
   listType: ListType;
   scrollContainerElementSelector?: IUseScrollController.ElementSelector<E> | null;
-  // targetScrollContainerSelector?: string;
 };
 
 export type Coordinate = {
@@ -138,7 +137,7 @@ export type CursorPositionedInfo = {
 export type Props<T extends string, K, E extends Element> = {
   dndGroupName: string;
   lists: Array<ListInfo<T, K, E>>;
-  itemUniqueId: (item: K) => string;
+  getItemUniqueId: (item: K) => string;
   onDragEnd: (info: DragEndInfo<T, K> | undefined) => void;
   animationDuration: number;
 };
