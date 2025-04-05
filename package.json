@@ -61,6 +61,7 @@
     "@wisdomstar94/wisdomstar94-libraries-docs": "yarn workspace @wisdomstar94/wisdomstar94-libraries-docs",
     "@wisdomstar94/tailwindcss-v4-example": "yarn workspace @wisdomstar94/tailwindcss-v4-example",
     "@wisdomstar94/react-babylon-canvas-test-web": "yarn workspace @wisdomstar94/react-babylon-canvas-test-web",
+    "@wisdomstar94/next-js-react-test": "yarn workspace @wisdomstar94/next-js-react-test",
     "--------------------------------------- backends ---------------------------------------": "",
     "@wisdomstar94/test-socket": "yarn workspace @wisdomstar94/test-socket",
     "@wisdomstar94/babylon-js-example-socket": "yarn workspace @wisdomstar94/babylon-js-example-socket",
