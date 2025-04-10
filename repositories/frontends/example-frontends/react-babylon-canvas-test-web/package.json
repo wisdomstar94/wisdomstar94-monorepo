@@ -12,13 +12,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@babylonjs/core": "^7.50.0",
+    "@babylonjs/core": "^8.1.1",
     "@babylonjs/havok": "^1.3.10",
-    "@babylonjs/loaders": "^7.50.0",
-    "animejs": "^3.2.2",
-    "next": "15.1.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@babylonjs/loaders": "^8.1.1",
+    "animejs": "^4.0.1",
+    "next": "15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -30,9 +30,9 @@
     "@wisdomstar94/react-request-animation-frame-manager": "workspace:^",
     "@wisdomstar94/tailwind-common-library": "workspace:^",
     "eslint": "^9",
-    "eslint-config-next": "15.1.7",
+    "eslint-config-next": "15.3.0",
     "postcss": "^8",
-    "tailwindcss": "^4.0.7",
+    "tailwindcss": "^4.1.3",
     "typescript": "^5"
   }
 }

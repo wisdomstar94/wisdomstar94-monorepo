@@ -11,10 +11,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^22.13.4",
+    "@types/node": "^22.14.0",
     "@wisdomstar94/tsconfig-library": "workspace:^",
-    "typescript": "^5.7.3",
-    "vite": "^6.1.1"
+    "typescript": "^5.8.3",
+    "vite": "^6.2.5"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
