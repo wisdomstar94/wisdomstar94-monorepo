@@ -5,7 +5,7 @@ import { IBabylonCanvas } from './babylon-canvas.interface';
 import { useAddEventListener } from '@wisdomstar94/react-add-event-listener';
 import { AxesViewer, Engine, Scene, WebGPUEngine } from '@babylonjs/core';
 
-export function BabylonCanvas(props: IBabylonCanvas.Props): ReturnType<FC> {
+export function BabylonCanvas(props: IBabylonCanvas.Props) {
   const { className, style, enableAxesViewer = false, onLoaded } = props;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);

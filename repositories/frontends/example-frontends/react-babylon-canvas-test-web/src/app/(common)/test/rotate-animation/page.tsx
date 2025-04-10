@@ -10,7 +10,7 @@ import {
 } from '@babylonjs/core';
 import { BabylonCanvas } from '@wisdomstar94/react-babylon-canvas';
 import { registerBuiltInLoaders } from '@babylonjs/loaders/dynamic';
-import anime from 'animejs';
+import { animate } from 'animejs';
 registerBuiltInLoaders();
 
 export default function Page() {
@@ -55,8 +55,7 @@ export default function Page() {
           importedMesh.parent = importedMeshParent;
 
           // animation 적용
-          anime({
-            targets: [importedMeshParent.rotation],
+          animate(importedMeshParent.rotation, {
             y: Math.PI,
             loop: true,
             duration: 2000,
