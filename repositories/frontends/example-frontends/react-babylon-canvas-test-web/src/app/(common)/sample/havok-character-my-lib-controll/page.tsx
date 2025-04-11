@@ -41,76 +41,35 @@ export default function TestHavokCharacterMyLibControllPage() {
     debugOptions: {
       isShowCharacterParentBoxMesh: false,
     },
-    // onAdded(characterItem, scene) {
-
-    // },
   });
 
   useKeyboardManager({
-    onChangeKeyMapStatus(keyMap) {
-      const isUpPress = keyMap.get('ArrowUp');
-      const isDownPress = keyMap.get('ArrowDown');
-      const isLeftPress = keyMap.get('ArrowLeft');
-      const isRightPress = keyMap.get('ArrowRight');
-      const isShiftPress = keyMap.get('Shift');
-      const isJumpPress = keyMap.get(' ');
-      if (isUpPress && !isDownPress && !isLeftPress && !isRightPress) {
-        disposeMoving({ direction: 'Up', isRunning: isShiftPress ?? false });
-      }
-      if (!isUpPress && isDownPress && !isLeftPress && !isRightPress) {
-        disposeMoving({ direction: 'Down', isRunning: isShiftPress ?? false });
-      }
-      if (!isUpPress && !isDownPress && isLeftPress && !isRightPress) {
-        disposeMoving({ direction: 'Left', isRunning: isShiftPress ?? false });
-      }
-      if (!isUpPress && !isDownPress && !isLeftPress && isRightPress) {
-        disposeMoving({ direction: 'Right', isRunning: isShiftPress ?? false });
-      }
-      if (isUpPress && !isDownPress && isLeftPress && !isRightPress) {
-        disposeMoving({ direction: 'Up+Left', isRunning: isShiftPress ?? false });
-      }
-      if (isUpPress && !isDownPress && !isLeftPress && isRightPress) {
-        disposeMoving({ direction: 'Up+Right', isRunning: isShiftPress ?? false });
-      }
-      if (!isUpPress && isDownPress && isLeftPress && !isRightPress) {
-        disposeMoving({ direction: 'Down+Left', isRunning: isShiftPress ?? false });
-      }
-      if (!isUpPress && isDownPress && !isLeftPress && isRightPress) {
-        disposeMoving({ direction: 'Down+Right', isRunning: isShiftPress ?? false });
-      }
-      if (!isUpPress && !isDownPress && !isLeftPress && !isRightPress) {
-        disposeMoving({ direction: undefined, isRunning: isShiftPress ?? false });
-      }
-      if (isJumpPress) {
-        disposeJumping();
-      }
-    },
+    onUp: (keyMap) => disposeMoving({ direction: 'Up', isRunning: keyMap.get('Shift') ?? false }),
+    onDown: (keyMap) => disposeMoving({ direction: 'Down', isRunning: keyMap.get('Shift') ?? false }),
+    onLeft: (keyMap) => disposeMoving({ direction: 'Left', isRunning: keyMap.get('Shift') ?? false }),
+    onRight: (keyMap) => disposeMoving({ direction: 'Right', isRunning: keyMap.get('Shift') ?? false }),
+    onUpLeft: (keyMap) => disposeMoving({ direction: 'Up+Left', isRunning: keyMap.get('Shift') ?? false }),
+    onUpRight: (keyMap) => disposeMoving({ direction: 'Up+Right', isRunning: keyMap.get('Shift') ?? false }),
+    onDownLeft: (keyMap) => disposeMoving({ direction: 'Down+Left', isRunning: keyMap.get('Shift') ?? false }),
+    onDownRight: (keyMap) => disposeMoving({ direction: 'Down+Right', isRunning: keyMap.get('Shift') ?? false }),
+    onRelease: (keyMap) => disposeMoving({ direction: undefined, isRunning: keyMap.get('Shift') ?? false }),
+    onJump: () => disposeJumping(),
   });
 
   function disposeMoving(params: {
     direction: IUseBabylonCharacterController.CharacterGoDirection | undefined;
     isRunning: boolean;
-    // cameraDirection?: Vector3;
   }) {
-    const {
-      direction,
-      isRunning,
-      // cameraDirection,
-    } = params;
-
+    const { direction, isRunning } = params;
     const c = babylonCharacterController.getCharacter(characterId);
     if (c === undefined) return;
-
     babylonCharacterController.setCharacterMoving({ characterId, direction, isRunning });
   }
 
   function disposeJumping() {
     const c = babylonCharacterController.getCharacter(characterId);
     if (c === undefined) return;
-
-    if (c !== undefined && c.isJumpPossible !== false) {
-      babylonCharacterController.setCharacterJumping(characterId);
-    }
+    if (c !== undefined && c.isJumpPossible !== false) babylonCharacterController.setCharacterJumping(characterId);
   }
 
   return (
