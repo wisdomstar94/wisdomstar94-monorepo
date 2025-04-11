@@ -3,12 +3,12 @@ import { IUseBabylonCharacterController } from './use-babylon-character-controll
 import {
   AnimationGroup,
   AnimationPropertiesOverride,
+  LoadAssetContainerAsync,
   MeshBuilder,
   PhysicsBody,
   PhysicsMotionType,
   PhysicsShapeBox,
   Quaternion,
-  SceneLoader,
   Vector3,
 } from '@babylonjs/core';
 import { useRequestAnimationFrameManager } from '@wisdomstar94/react-request-animation-frame-manager';
@@ -26,7 +26,8 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
   const charactersAddingRef = useRef<Set<string>>(new Set());
   const [isThisClientCharacterControlling, setIsThisClientCharacterControlling] = useState(false);
   const [isThisClientCharacterLoaded, setIsThisClientCharacterLoaded] = useState(false);
-  const [isExistThisClientCharacterNearOtherCharacters, setIsExistThisClientCharacterNearOtherCharacters] = useState(false);
+  const [isExistThisClientCharacterNearOtherCharacters, setIsExistThisClientCharacterNearOtherCharacters] =
+    useState(false);
 
   function setThisClientCharacterId(characterId: string) {
     thisClientCharacterIdRef.current = characterId;
@@ -115,155 +116,149 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     }
 
     // model import!!!
-    const result = SceneLoader.ImportMeshAsync(undefined, glbFileUrl.baseUrl, glbFileUrl.filename, scene)
-      .then((result) => {
-        const characterLoaderResult = result;
-        const characterMeshes = characterLoaderResult.meshes;
-        const characterAnimationGroups = new Map<string, AnimationGroup>();
+    const result = await LoadAssetContainerAsync(glbFileUrl.filename, scene, { rootUrl: glbFileUrl.baseUrl });
+    result.addAllToScene();
 
-        // animation group 간에 부드럽게 전환되는 효과를 위해서는 아래와 같이 작성해주어야 함.
-        if (scene.animationPropertiesOverride === null) {
-          scene.animationPropertiesOverride = new AnimationPropertiesOverride();
-          scene.animationPropertiesOverride.enableBlending = true;
-          scene.animationPropertiesOverride.blendingSpeed = 0.05;
-        }
+    const characterLoaderResult = result;
+    const characterMeshes = characterLoaderResult.meshes;
+    const characterAnimationGroups = new Map<string, AnimationGroup>();
 
-        // 초기 캐릭터가 바라보는 방향 셋팅을 위한 로직
-        let quaternion: Quaternion | undefined = undefined;
-        if (camera !== undefined) {
-          const { direction } = camera.getForwardRay();
-          const forward = new Vector3(direction.normalize().x, 0, direction.normalize().z);
-          const rot = Quaternion.FromLookDirectionLH(forward, Vector3.Up());
-          const euler = rot.toEulerAngles();
-          quaternion = euler.toQuaternion();
-          firstQuaternionWithCameraRef.current = quaternion;
-        }
+    // animation group 간에 부드럽게 전환되는 효과를 위해서는 아래와 같이 작성해주어야 함.
+    if (scene.animationPropertiesOverride === null) {
+      scene.animationPropertiesOverride = new AnimationPropertiesOverride();
+      scene.animationPropertiesOverride.enableBlending = true;
+      scene.animationPropertiesOverride.blendingSpeed = 0.05;
+    }
 
-        characterMeshes.forEach((mesh) => {
-          if (characterBox !== undefined) {
-            mesh.parent = characterBox;
-          }
+    // 초기 캐릭터가 바라보는 방향 셋팅을 위한 로직
+    let quaternion: Quaternion | undefined = undefined;
+    if (camera !== undefined) {
+      const { direction } = camera.getForwardRay();
+      const forward = new Vector3(direction.normalize().x, 0, direction.normalize().z);
+      const rot = Quaternion.FromLookDirectionLH(forward, Vector3.Up());
+      const euler = rot.toEulerAngles();
+      quaternion = euler.toQuaternion();
+      firstQuaternionWithCameraRef.current = quaternion;
+    }
 
-          console.log(`mesh.getPivotPoint()`, mesh.getPivotPoint());
-          mesh.setPivotPoint(new Vector3(0, -characterSize.y / 2, 0));
+    characterMeshes.forEach((mesh) => {
+      if (characterBox !== undefined) {
+        mesh.parent = characterBox;
+      }
 
-          mesh.scaling.scaleInPlace(0.01);
-          if (characterInitRotation !== undefined) {
-            const newQ = Quaternion.Identity();
-            newQ.x = characterInitRotation.x;
-            newQ.y = characterInitRotation.y;
-            newQ.z = characterInitRotation.z;
-            newQ.w = characterInitRotation.w;
-            mesh.rotationQuaternion = newQ;
-          } else if (quaternion !== undefined) {
-            mesh.rotationQuaternion = quaternion;
-          } else if (firstQuaternionWithCameraRef.current !== undefined) {
-            mesh.rotationQuaternion = firstQuaternionWithCameraRef.current.clone();
-          } else {
-            mesh.rotationQuaternion = Quaternion.Identity();
-          }
+      console.log(`mesh.getPivotPoint()`, mesh.getPivotPoint());
+      mesh.setPivotPoint(new Vector3(0, -characterSize.y / 2, 0));
 
-          if (typeof characterVisibilityDelay === 'number') {
-            mesh.visibility = 0;
-          }
-        });
+      mesh.scaling.scaleInPlace(0.01);
+      if (characterInitRotation !== undefined) {
+        const newQ = Quaternion.Identity();
+        newQ.x = characterInitRotation.x;
+        newQ.y = characterInitRotation.y;
+        newQ.z = characterInitRotation.z;
+        newQ.w = characterInitRotation.w;
+        mesh.rotationQuaternion = newQ;
+      } else if (quaternion !== undefined) {
+        mesh.rotationQuaternion = quaternion;
+      } else if (firstQuaternionWithCameraRef.current !== undefined) {
+        mesh.rotationQuaternion = firstQuaternionWithCameraRef.current.clone();
+      } else {
+        mesh.rotationQuaternion = Quaternion.Identity();
+      }
 
-        setTimeout(() => {
-          characterMeshes.forEach((mesh) => (mesh.visibility = 1));
-          characterBoxPhysicsBody.setMassProperties({
-            mass: 1,
-            inertia: new Vector3(0, 0, 0),
-          });
-        }, characterVisibilityDelay);
+      if (typeof characterVisibilityDelay === 'number') {
+        mesh.visibility = 0;
+      }
+    });
 
-        characterLoaderResult.animationGroups.forEach((anim) => {
-          characterAnimationGroups.set(anim.name, anim);
-        });
-
-        const characterItem: IUseBabylonCharacterController.CharacterItem = {
-          characterId,
-          characterNickName,
-          camera,
-          scene,
-          characterLoaderResult,
-          characterMeshes,
-          characterAnimationGroups,
-          characterAnimationGroupNames,
-          characterBox,
-          characterBoxPhysicsBody,
-          characterSize,
-          glbFileUrl,
-          direction: undefined,
-          jumpingOptions: characterJumpingOptions,
-          saveJumpingOptions: characterJumpingOptions,
-          isJumping: false,
-          isRunning: false,
-          jumpingInterval: undefined,
-          addRequireInfo: params,
-          add: async (params2) => {
-            const { groupName, babylonLogic, isAutoDeleteTimeout } = params2;
-            const isOriginalDeleteWhenDuplicated = params2.isOriginalDeleteWhenDuplicated ?? true;
-
-            const deleteGroup = () => {
-              const original = characterItem.addedGroups.get(groupName);
-              clearTimeout(original?.autoDeleteTimeouter);
-              if (original !== undefined) {
-                const babylonLogicResult = original.babylonLogicResult;
-                babylonLogicResult.meshes.forEach((mesh) => {
-                  mesh.dispose();
-                });
-                (babylonLogicResult.others ?? []).forEach((other) => {
-                  if (typeof other.dispose === 'function') {
-                    other.dispose();
-                  }
-                });
-              }
-              characterItem.addedGroups.delete(groupName);
-            };
-
-            if (isOriginalDeleteWhenDuplicated === true) {
-              deleteGroup();
-            }
-
-            let autoDeleteTimeouter: NodeJS.Timeout | undefined = undefined;
-            if (typeof isAutoDeleteTimeout === 'number') {
-              autoDeleteTimeouter = setTimeout(() => {
-                deleteGroup();
-              }, isAutoDeleteTimeout);
-            }
-
-            const result = await babylonLogic();
-            characterItem.addedGroups.set(groupName, {
-              groupName,
-              babylonLogicResult: result,
-              autoDeleteTimeouter,
-            });
-          },
-          addedGroups: new Map(),
-          snapshotDumpings: {
-            linearDamping,
-            angularDamping,
-          },
-        };
-        charactersRef.current.set(characterId, characterItem);
-        charactersAddingRef.current.delete(characterId);
-        if (typeof onAdded === 'function') {
-          onAdded(characterItem, scene);
-        }
-
-        if (thisClientCharacterIdRef.current === characterId) {
-          setIsThisClientCharacterLoaded(true);
-        }
-
-        checkNearUser();
-
-        return characterItem;
-      })
-      .catch((error) => {
-        console.error('에러 발생', error);
-        return undefined;
+    setTimeout(() => {
+      characterMeshes.forEach((mesh) => (mesh.visibility = 1));
+      characterBoxPhysicsBody.setMassProperties({
+        mass: 1,
+        inertia: new Vector3(0, 0, 0),
       });
-    return result;
+    }, characterVisibilityDelay);
+
+    characterLoaderResult.animationGroups.forEach((anim) => {
+      characterAnimationGroups.set(anim.name, anim);
+    });
+
+    const characterItem: IUseBabylonCharacterController.CharacterItem = {
+      characterId,
+      characterNickName,
+      camera,
+      scene,
+      characterLoaderResult,
+      characterMeshes,
+      characterAnimationGroups,
+      characterAnimationGroupNames,
+      characterBox,
+      characterBoxPhysicsBody,
+      characterSize,
+      glbFileUrl,
+      direction: undefined,
+      jumpingOptions: characterJumpingOptions,
+      saveJumpingOptions: characterJumpingOptions,
+      isJumping: false,
+      isRunning: false,
+      jumpingInterval: undefined,
+      addRequireInfo: params,
+      add: async (params2) => {
+        const { groupName, babylonLogic, isAutoDeleteTimeout } = params2;
+        const isOriginalDeleteWhenDuplicated = params2.isOriginalDeleteWhenDuplicated ?? true;
+
+        const deleteGroup = () => {
+          const original = characterItem.addedGroups.get(groupName);
+          clearTimeout(original?.autoDeleteTimeouter);
+          if (original !== undefined) {
+            const babylonLogicResult = original.babylonLogicResult;
+            babylonLogicResult.meshes.forEach((mesh) => {
+              mesh.dispose();
+            });
+            (babylonLogicResult.others ?? []).forEach((other) => {
+              if (typeof other.dispose === 'function') {
+                other.dispose();
+              }
+            });
+          }
+          characterItem.addedGroups.delete(groupName);
+        };
+
+        if (isOriginalDeleteWhenDuplicated === true) {
+          deleteGroup();
+        }
+
+        let autoDeleteTimeouter: NodeJS.Timeout | undefined = undefined;
+        if (typeof isAutoDeleteTimeout === 'number') {
+          autoDeleteTimeouter = setTimeout(() => {
+            deleteGroup();
+          }, isAutoDeleteTimeout);
+        }
+
+        const result = await babylonLogic();
+        characterItem.addedGroups.set(groupName, {
+          groupName,
+          babylonLogicResult: result,
+          autoDeleteTimeouter,
+        });
+      },
+      addedGroups: new Map(),
+      snapshotDumpings: {
+        linearDamping,
+        angularDamping,
+      },
+    };
+    charactersRef.current.set(characterId, characterItem);
+    charactersAddingRef.current.delete(characterId);
+    if (typeof onAdded === 'function') {
+      onAdded(characterItem, scene);
+    }
+
+    if (thisClientCharacterIdRef.current === characterId) {
+      setIsThisClientCharacterLoaded(true);
+    }
+
+    checkNearUser();
+    return characterItem;
   }
 
   function remove(characterId: string) {
@@ -281,7 +276,9 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     charactersRef.current.delete(characterId);
   }
 
-  async function setCharacterPositionAndRotation(options: IUseBabylonCharacterController.CharacterPositionAndRotationOptions) {
+  async function setCharacterPositionAndRotation(
+    options: IUseBabylonCharacterController.CharacterPositionAndRotationOptions
+  ) {
     const {
       characterId,
       position,
@@ -347,7 +344,10 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     // targetCharacter.characterBoxPhysicsBody.setMotionType(PhysicsMotionType.DYNAMIC);
     // targetCharacter.characterBoxPhysicsBody.setPrestepType(PhysicsPrestepType.ACTION);
 
-    targetCharacter.characterBoxPhysicsBody.setTargetTransform(new Vector3(position.x, position.y, position.z), Quaternion.Identity());
+    targetCharacter.characterBoxPhysicsBody.setTargetTransform(
+      new Vector3(position.x, position.y, position.z),
+      Quaternion.Identity()
+    );
 
     // if (isNotApplyPositionWhenNotBigDiffrence === true) {
     //   if (distance >= bigDifferenceDistance) {
@@ -404,7 +404,10 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     targetCharacter.isRunning = isRunning ?? false;
   }
 
-  function setCharacterJumping(characterId: string, jumpingOptions?: IUseBabylonCharacterController.CharacterJumpingOptions) {
+  function setCharacterJumping(
+    characterId: string,
+    jumpingOptions?: IUseBabylonCharacterController.CharacterJumpingOptions
+  ) {
     const targetCharacter = charactersRef.current.get(characterId);
     if (targetCharacter === undefined) {
       console.error('해당 id 로 등록된 캐릭터가 없습니다.');

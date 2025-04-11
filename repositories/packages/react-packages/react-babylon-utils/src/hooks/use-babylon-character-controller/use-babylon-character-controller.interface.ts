@@ -1,16 +1,24 @@
-import { AbstractMesh, AnimationGroup, ArcRotateCamera, ISceneLoaderAsyncResult, Mesh, PhysicsBody, Scene } from "@babylonjs/core";
+import {
+  AbstractMesh,
+  AnimationGroup,
+  ArcRotateCamera,
+  AssetContainer,
+  ISceneLoaderAsyncResult,
+  Mesh,
+  PhysicsBody,
+  Scene,
+} from '@babylonjs/core';
 
 export declare namespace IUseBabylonCharacterController {
-  export type CharacterGoDirection = 
-    'Up' | 
-    'Down' | 
-    'Left' | 
-    'Right' | 
-    'Up+Left' | 
-    'Up+Right' | 
-    'Down+Left' |
-    'Down+Right'
-  ;
+  export type CharacterGoDirection =
+    | 'Up'
+    | 'Down'
+    | 'Left'
+    | 'Right'
+    | 'Up+Left'
+    | 'Up+Right'
+    | 'Down+Left'
+    | 'Down+Right';
 
   export type GroupName = string;
 
@@ -107,7 +115,7 @@ export declare namespace IUseBabylonCharacterController {
     characterNickName?: string;
     camera?: ArcRotateCamera;
     scene: Scene;
-    characterLoaderResult: ISceneLoaderAsyncResult;
+    characterLoaderResult: AssetContainer;
     characterMeshes: AbstractMesh[];
     characterAnimationGroups: Map<string, AnimationGroup>;
     characterAnimationGroupNames: AnimationGroupNames;
@@ -131,7 +139,7 @@ export declare namespace IUseBabylonCharacterController {
 
   export interface CharacterMovingOptions {
     characterId: string;
-    direction: IUseBabylonCharacterController.CharacterGoDirection | undefined; 
+    direction: IUseBabylonCharacterController.CharacterGoDirection | undefined;
     cameraDirection?: VectorThree;
     isRunning?: boolean;
   }
@@ -149,7 +157,7 @@ export declare namespace IUseBabylonCharacterController {
     /** 기본값: 300 (ms) */
     duration: number;
   }
-  
+
   export interface CharacterPositionAndRotationOptions {
     characterId: string;
     position: IUseBabylonCharacterController.VectorThree;
