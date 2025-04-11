@@ -12,6 +12,7 @@ import {
   PhysicsBody,
   PhysicsMotionType,
   PhysicsShapeBox,
+  PhysicsShapeCapsule,
   Quaternion,
   ShadowGenerator,
   StandardMaterial,
@@ -170,6 +171,26 @@ export default function TestHavokCharacterMyLibControllPage() {
               },
             });
 
+            babylonMeshPhysicsManager.injectObject({
+              manageName: 'center-box2',
+              mesh: (params) => {
+                const { manageName } = params;
+                const mesh = MeshBuilder.CreateBox(manageName, { width: 2, height: 2, depth: 2 }, scene); // width == x, height == y, depth == z
+                mesh.position.y = 1.2;
+                mesh.position.x = 0;
+                mesh.position.z = 4;
+                settingShadow(mesh);
+                return mesh;
+              },
+              physicsBody: (params) => {
+                const { mesh } = params;
+                const body = new PhysicsBody(mesh, PhysicsMotionType.STATIC, false, scene);
+                body.shape = new PhysicsShapeCapsule(new Vector3(0, -0.5, 0), new Vector3(0, 0.5, 0), 1, scene);
+                body.setMassProperties({ mass: 0.1 });
+                return body;
+              },
+            });
+
             // 캐릭터 셋팅
             const addedInfo = await babylonCharacterController.add({
               camera,
@@ -193,10 +214,10 @@ export default function TestHavokCharacterMyLibControllPage() {
                 baseUrl: '/',
                 filename: 'casual-lowpoly-male.glb',
               },
-              characterPhysicsBodyOptions: {
-                angularDamping: 100,
-                linearDamping: 10,
-              },
+              // characterPhysicsBodyOptions: {
+              //   angularDamping: 100,
+              //   linearDamping: 10,
+              // },
             });
 
             addedInfo?.characterMeshes.forEach((mesh) => {

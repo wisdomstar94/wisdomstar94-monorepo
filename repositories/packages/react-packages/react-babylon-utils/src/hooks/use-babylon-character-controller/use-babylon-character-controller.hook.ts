@@ -8,8 +8,6 @@ import {
   PhysicsBody,
   PhysicsMotionType,
   PhysicsShapeBox,
-  PhysicsShapeCapsule,
-  PhysicsShapeCylinder,
   Quaternion,
   Vector3,
 } from '@babylonjs/core';
@@ -17,7 +15,7 @@ import { useRequestAnimationFrameManager } from '@wisdomstar94/react-request-ani
 import { calculateDistance3D } from '@/libs/utils';
 
 const defaultAngularDamping = 100;
-const defaultLinearDamping = 10000;
+const defaultLinearDamping = 10;
 
 export function useBabylonCharacterController(props: IUseBabylonCharacterController.Props) {
   const { debugOptions, onAdded, thisClientCharacterOptions } = props;
@@ -432,7 +430,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     targetCharacter.isJumping = true;
     if (thisClientCharacterIdRef.current !== characterId) {
       targetCharacter.characterBoxPhysicsBody.setGravityFactor(0);
-      targetCharacter.characterBoxPhysicsBody.setLinearDamping(10000);
+      targetCharacter.characterBoxPhysicsBody.setLinearDamping(targetCharacter.snapshotDumpings.linearDamping);
     }
     if (jumpingOptions !== undefined) {
       targetCharacter.jumpingOptions = jumpingOptions;
