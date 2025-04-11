@@ -429,7 +429,6 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     if (targetCharacter.isJumping) return;
     targetCharacter.isJumping = true;
     if (thisClientCharacterIdRef.current !== characterId) {
-      targetCharacter.characterBoxPhysicsBody.setGravityFactor(0);
       targetCharacter.characterBoxPhysicsBody.setLinearDamping(targetCharacter.snapshotDumpings.linearDamping);
     }
     if (jumpingOptions !== undefined) {
@@ -629,7 +628,6 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
               if (characterItem.characterBoxPhysicsBody.getMotionType() !== PhysicsMotionType.DYNAMIC) {
                 characterItem.characterBoxPhysicsBody.setMotionType(PhysicsMotionType.DYNAMIC);
               }
-              characterItem.characterBoxPhysicsBody.setGravityFactor(1);
               characterItem.characterBoxPhysicsBody.setLinearDamping(characterItem.snapshotDumpings.linearDamping);
             }, characterItem.jumpingOptions.jumpingTotalDuration);
           }
