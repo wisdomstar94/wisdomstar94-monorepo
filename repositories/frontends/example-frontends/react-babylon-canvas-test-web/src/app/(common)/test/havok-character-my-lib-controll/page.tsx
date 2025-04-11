@@ -19,7 +19,12 @@ import {
 } from '@babylonjs/core';
 import HavokPhysics from '@babylonjs/havok';
 import { BabylonCanvas } from '@wisdomstar94/react-babylon-canvas';
-import { useBabylonCharacterController, useBabylonMeshPhysicsManager } from '@wisdomstar94/react-babylon-utils';
+import {
+  IUseBabylonCharacterController,
+  useBabylonCharacterController,
+  useBabylonMeshPhysicsManager,
+} from '@wisdomstar94/react-babylon-utils';
+import { useKeyboardManager } from '@wisdomstar94/react-keyboard-manager';
 import { registerBuiltInLoaders } from '@babylonjs/loaders/dynamic';
 registerBuiltInLoaders();
 
@@ -40,6 +45,73 @@ export default function TestHavokCharacterMyLibControllPage() {
 
     // },
   });
+
+  useKeyboardManager({
+    onChangeKeyMapStatus(keyMap) {
+      const isUpPress = keyMap.get('ArrowUp');
+      const isDownPress = keyMap.get('ArrowDown');
+      const isLeftPress = keyMap.get('ArrowLeft');
+      const isRightPress = keyMap.get('ArrowRight');
+      const isShiftPress = keyMap.get('Shift');
+      const isJumpPress = keyMap.get(' ');
+      if (isUpPress && !isDownPress && !isLeftPress && !isRightPress) {
+        disposeMoving({ direction: 'Up', isRunning: isShiftPress ?? false });
+      }
+      if (!isUpPress && isDownPress && !isLeftPress && !isRightPress) {
+        disposeMoving({ direction: 'Down', isRunning: isShiftPress ?? false });
+      }
+      if (!isUpPress && !isDownPress && isLeftPress && !isRightPress) {
+        disposeMoving({ direction: 'Left', isRunning: isShiftPress ?? false });
+      }
+      if (!isUpPress && !isDownPress && !isLeftPress && isRightPress) {
+        disposeMoving({ direction: 'Right', isRunning: isShiftPress ?? false });
+      }
+      if (isUpPress && !isDownPress && isLeftPress && !isRightPress) {
+        disposeMoving({ direction: 'Up+Left', isRunning: isShiftPress ?? false });
+      }
+      if (isUpPress && !isDownPress && !isLeftPress && isRightPress) {
+        disposeMoving({ direction: 'Up+Right', isRunning: isShiftPress ?? false });
+      }
+      if (!isUpPress && isDownPress && isLeftPress && !isRightPress) {
+        disposeMoving({ direction: 'Down+Left', isRunning: isShiftPress ?? false });
+      }
+      if (!isUpPress && isDownPress && !isLeftPress && isRightPress) {
+        disposeMoving({ direction: 'Down+Right', isRunning: isShiftPress ?? false });
+      }
+      if (!isUpPress && !isDownPress && !isLeftPress && !isRightPress) {
+        disposeMoving({ direction: undefined, isRunning: isShiftPress ?? false });
+      }
+      if (isJumpPress) {
+        disposeJumping();
+      }
+    },
+  });
+
+  function disposeMoving(params: {
+    direction: IUseBabylonCharacterController.CharacterGoDirection | undefined;
+    isRunning: boolean;
+    // cameraDirection?: Vector3;
+  }) {
+    const {
+      direction,
+      isRunning,
+      // cameraDirection,
+    } = params;
+
+    const c = babylonCharacterController.getCharacter(characterId);
+    if (c === undefined) return;
+
+    babylonCharacterController.setCharacterMoving({ characterId, direction, isRunning });
+  }
+
+  function disposeJumping() {
+    const c = babylonCharacterController.getCharacter(characterId);
+    if (c === undefined) return;
+
+    if (c !== undefined && c.isJumpPossible !== false) {
+      babylonCharacterController.setCharacterJumping(characterId);
+    }
+  }
 
   return (
     <>

@@ -26,6 +26,7 @@
       "@wisdomstar94/react-babylon-utils",
       "@wisdomstar94/react-add-event-listener",
       "@wisdomstar94/react-request-animation-frame-manager",
+      "@wisdomstar94/react-keyboard-manager",
       "@babylonjs/core"
     ]
   },
