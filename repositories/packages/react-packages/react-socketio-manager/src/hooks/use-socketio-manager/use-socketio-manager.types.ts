@@ -11,7 +11,6 @@ export type InitializeAutoConnects<T extends string = string> = {
 
 export type Props<T extends string = string> = {
   baseUrl: string;
-  managerOptions?: Partial<ManagerOptions>;
   initializeAutoConnects?: InitializeAutoConnects<T>;
   onConnected?: (namespace: SocketNamespace<T>, socket: Socket) => void;
   onDisconnected?: (namespace: SocketNamespace<T>, socket: Socket, reason: Socket.DisconnectReason) => void;

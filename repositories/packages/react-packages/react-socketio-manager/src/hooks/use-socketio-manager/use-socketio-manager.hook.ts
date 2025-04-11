@@ -1,7 +1,7 @@
 'use client';
 
-import { io } from 'socket.io-client';
 import { useEffect, useRef, useState } from 'react';
+import { io } from 'socket.io-client';
 import type { IUseSocketioManager } from './use-socketio-manager.interface';
 
 export function useSocketioManager<T extends string = string>(props: IUseSocketioManager.Props<T>) {
@@ -31,7 +31,10 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
       return;
     }
 
-    const socket = io(`${props.baseUrl}${connectOptions.namespace}`, connectOptions.options);
+    const socket = io(`${props.baseUrl}${connectOptions.namespace}`, {
+      ...connectOptions.options,
+      transports: ['websocket'],
+    });
 
     socket.on('connect', () => {
       if (typeof props.onConnected === 'function') {
@@ -43,6 +46,12 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
       if (typeof props.onDisconnected === 'function') {
         props.onDisconnected(connectOptions.namespace, socket, reason);
       }
+      // if (reason === 'io server disconnect') {
+      //   disconnect({
+      //     namespace: connectOptions.namespace,
+      //     removeInConnectItems: true,
+      //   });
+      // }
     });
 
     const keys = Array.from(getSocketCallbackItemsMap().keys());
@@ -117,7 +126,7 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
   }
 
   function allConnectConnectItems() {
-    getSocketItemsMap().forEach((socketItem, namespace) => {
+    getSocketItemsMap().forEach((socketItem) => {
       if (socketItem.socket.disconnected) {
         socketItem.socket.connect();
       }
@@ -168,19 +177,11 @@ export function useSocketioManager<T extends string = string>(props: IUseSocketi
     });
 
     return () => {
-      getSocketItemsMap().forEach((item, key) => {
+      getSocketItemsMap().forEach((item) => {
         item.socket.disconnect();
       });
     };
   }, [initializeAutoConnects]);
-
-  useEffect(() => {
-    if (props.managerOptions?.autoConnect === true) {
-      console.warn(
-        `[경고!!] managerOptions.autoConnect 를 true 로 할 경우 웹소켓 관련 네트워크 통신이 과도하게 이뤄지는 현상이 발생할 수 있습니다. 해당 옵션을 true 로 설정하지 않아도 본 훅 내부에서 자동으로 커넥션을 맺도록 하는 로직이 구현 되어 있으므로 false 로 설정 하시는 것을 강력히 권고 드립니다.`
-      );
-    }
-  }, [props.managerOptions?.autoConnect]);
 
   return {
     connect,
