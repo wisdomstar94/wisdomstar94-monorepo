@@ -8,6 +8,8 @@ import {
   PhysicsBody,
   PhysicsMotionType,
   PhysicsShapeBox,
+  PhysicsShapeCapsule,
+  PhysicsShapeCylinder,
   Quaternion,
   Vector3,
 } from '@babylonjs/core';
@@ -47,13 +49,13 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
       characterInitRotation,
       characterJumpingOptions,
       characterAnimationGroupNames,
-      chracterPhysicsBodyOptions,
+      characterPhysicsBodyOptions,
     } = params;
 
     const characterNickName = params.characterNickName ?? 'no named';
 
-    const angularDamping = chracterPhysicsBodyOptions?.angularDamping ?? defaultAngularDamping;
-    const linearDamping = chracterPhysicsBodyOptions?.linearDamping ?? defaultLinearDamping;
+    const angularDamping = characterPhysicsBodyOptions?.angularDamping ?? defaultAngularDamping;
+    const linearDamping = characterPhysicsBodyOptions?.linearDamping ?? defaultLinearDamping;
 
     const t = charactersRef.current.get(characterId);
     if (charactersAddingRef.current.has(characterId) || t !== undefined) {
@@ -90,6 +92,20 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
 
     // 캐릭터와 맵핑할 메쉬 :: 눈에 안보이는 물리적 세계에 존재하는 부분
     const characterBoxPhysicsBody = new PhysicsBody(characterBox, PhysicsMotionType.DYNAMIC, false, scene);
+    // characterBoxPhysicsBody.shape = new PhysicsShapeCylinder(
+    //   new Vector3(0, -1, 0),
+    //   new Vector3(0, 1, 0),
+    //   // new Vector3(characterSize.x, characterSize.y, characterSize.z),
+    //   0.5,
+    //   scene
+    // );
+    // characterBoxPhysicsBody.shape = new PhysicsShapeCapsule(
+    //   new Vector3(0, -1, 0),
+    //   new Vector3(0, 1, 0),
+    //   // new Vector3(characterSize.x, characterSize.y, characterSize.z),
+    //   0.5,
+    //   scene
+    // );
     characterBoxPhysicsBody.shape = new PhysicsShapeBox(
       new Vector3(0, 0, 0),
       Quaternion.Identity(),
@@ -98,7 +114,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     );
     characterBoxPhysicsBody.setMassProperties({
       // mass: typeof characterVisibilityDelay === 'number' ? 0 : 1,
-      mass: 0.7,
+      mass: 0.1,
       // inertia: new Vector3(0, 0, 0),
     });
     characterBoxPhysicsBody.setAngularDamping(angularDamping);
@@ -146,10 +162,8 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
         mesh.parent = characterBox;
       }
 
-      console.log(`mesh.getPivotPoint()`, mesh.getPivotPoint());
       mesh.setPivotPoint(new Vector3(0, -characterSize.y / 2, 0));
-
-      mesh.scaling.scaleInPlace(0.01);
+      // mesh.scaling.scaleInPlace(0.01);
       if (characterInitRotation !== undefined) {
         const newQ = Quaternion.Identity();
         newQ.x = characterInitRotation.x;
@@ -173,7 +187,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     setTimeout(() => {
       characterMeshes.forEach((mesh) => (mesh.visibility = 1));
       characterBoxPhysicsBody.setMassProperties({
-        mass: 1,
+        mass: 0.1,
         inertia: new Vector3(0, 0, 0),
       });
     }, characterVisibilityDelay);
@@ -474,6 +488,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
   useRequestAnimationFrameManager({
     isAutoStart: true,
     callback(startedTimestamp, currentTimestamp, step) {
+      // console.log('step', step);
       charactersRef.current.forEach((characterItem, characterId) => {
         let cameraDirection: Vector3 | undefined = undefined;
         if (characterItem.camera !== undefined) {
@@ -575,9 +590,9 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
           }
 
           const currentVelocity = characterItem.characterBoxPhysicsBody.getLinearVelocity();
-          let muliply = 3;
+          let muliply = 4;
           if (characterItem.isRunning) {
-            muliply = 6;
+            muliply = 8;
           }
           characterItem.characterBoxPhysicsBody.setLinearVelocity(
             new Vector3(moveDirection.x * muliply, currentVelocity.y, moveDirection.z * muliply)

@@ -40,7 +40,7 @@ export declare namespace IUseBabylonCharacterController {
     w: number;
   }
 
-  export interface ChracterPhysicsBodyOptions {
+  export interface characterPhysicsBodyOptions {
     angularDamping?: number;
     linearDamping?: number;
   }
@@ -63,7 +63,7 @@ export declare namespace IUseBabylonCharacterController {
     characterInitRotation?: VectorFour;
     characterJumpingOptions: CharacterJumpingOptions;
     characterAnimationGroupNames: AnimationGroupNames;
-    chracterPhysicsBodyOptions?: ChracterPhysicsBodyOptions;
+    characterPhysicsBodyOptions?: characterPhysicsBodyOptions;
   }
 
   export type AddRequireInfoWithoutScene = Omit<AddRequireInfo, 'scene'>;

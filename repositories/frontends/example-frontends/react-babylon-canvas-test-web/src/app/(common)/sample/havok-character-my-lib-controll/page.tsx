@@ -139,7 +139,7 @@ export default function TestHavokCharacterMyLibControllPage() {
                   new Vector3(40, 2, 40),
                   scene
                 );
-                body.setMassProperties({ mass: 0 });
+                body.setMassProperties({ mass: 0.1 });
                 return body;
               },
             });
@@ -165,7 +165,7 @@ export default function TestHavokCharacterMyLibControllPage() {
                   new Vector3(2, 2, 2),
                   scene
                 );
-                body.setMassProperties({ mass: 0 });
+                body.setMassProperties({ mass: 0.1 });
                 return body;
               },
             });
@@ -193,12 +193,14 @@ export default function TestHavokCharacterMyLibControllPage() {
                 baseUrl: '/',
                 filename: 'casual-lowpoly-male.glb',
               },
-              chracterPhysicsBodyOptions: {
+              characterPhysicsBodyOptions: {
                 angularDamping: 100,
                 linearDamping: 10,
               },
             });
+
             addedInfo?.characterMeshes.forEach((mesh) => {
+              mesh.scaling.scaleInPlace(0.01);
               settingShadow(mesh);
             });
 

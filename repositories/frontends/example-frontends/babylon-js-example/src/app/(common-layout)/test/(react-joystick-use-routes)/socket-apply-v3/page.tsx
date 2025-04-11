@@ -347,7 +347,7 @@ export default function Page() {
                       ...obj.data,
                       characterVisibilityDelay: 300,
                       scene: sceneRef.current!,
-                      chracterPhysicsBodyOptions: {
+                      characterPhysicsBodyOptions: {
                         angularDamping: 100,
                         linearDamping: 10,
                       },
@@ -995,7 +995,7 @@ export default function Page() {
           baseUrl: '/models/',
           filename: 'casual-lowpoly-male.glb',
         },
-        chracterPhysicsBodyOptions: {
+        characterPhysicsBodyOptions: {
           angularDamping: 100,
           linearDamping: 10,
         },
