@@ -23,6 +23,7 @@
     },
     "types": [
       "@wisdomstar94/react-babylon-canvas",
+      "@wisdomstar94/react-babylon-utils",
       "@wisdomstar94/react-add-event-listener",
       "@wisdomstar94/react-request-animation-frame-manager",
       "@babylonjs/core"
