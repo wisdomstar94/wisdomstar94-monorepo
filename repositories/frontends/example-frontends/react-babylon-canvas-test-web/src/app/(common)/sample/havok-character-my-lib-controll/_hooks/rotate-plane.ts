@@ -45,6 +45,50 @@ export function useRotatePlane() {
         return body;
       },
     });
+
+    babylonMeshPhysicsManager.injectObject({
+      manageName: 'rotate-plane',
+      mesh: (params) => {
+        const { manageName } = params;
+        const mesh = MeshBuilder.CreateBox(manageName, { width: 10, height: 0.1, depth: 2 }, scene); // width == x, height == y, depth == z
+        mesh.position.y = 1.2;
+        mesh.position.x = 10;
+        mesh.position.z = 7;
+        mesh.rotation.z = Math.PI / 6;
+        settingShadow({ mesh, shadowGenerator });
+        return mesh;
+      },
+      physicsBody: (params) => {
+        const { mesh } = params;
+        const body = new PhysicsBody(mesh, PhysicsMotionType.STATIC, false, scene);
+        body.shape = new PhysicsShapeBox(new Vector3(0, 0, 0), Quaternion.Identity(), new Vector3(10, 0.1, 2), scene);
+        body.setMassProperties({ mass: 0.1 });
+        body.transformNode.rotation.z = Math.PI / 6;
+        return body;
+      },
+    });
+
+    babylonMeshPhysicsManager.injectObject({
+      manageName: 'rotate-plane',
+      mesh: (params) => {
+        const { manageName } = params;
+        const mesh = MeshBuilder.CreateBox(manageName, { width: 10, height: 0.1, depth: 2 }, scene); // width == x, height == y, depth == z
+        mesh.position.y = 1.2;
+        mesh.position.x = 10;
+        mesh.position.z = 10;
+        mesh.rotation.z = Math.PI / 4;
+        settingShadow({ mesh, shadowGenerator });
+        return mesh;
+      },
+      physicsBody: (params) => {
+        const { mesh } = params;
+        const body = new PhysicsBody(mesh, PhysicsMotionType.STATIC, false, scene);
+        body.shape = new PhysicsShapeBox(new Vector3(0, 0, 0), Quaternion.Identity(), new Vector3(10, 0.1, 2), scene);
+        body.setMassProperties({ mass: 0.1 });
+        body.transformNode.rotation.z = Math.PI / 4;
+        return body;
+      },
+    });
   }
 
   return {

@@ -87,7 +87,7 @@ export default function TestHavokCharacterMyLibControllPage() {
 
             scene.actionManager = new ActionManager(scene);
 
-            const gravityVector = new Vector3(0, -19.81, 0);
+            const gravityVector = new Vector3(0, -10.81, 0);
             const havokInstance = await HavokPhysics();
             const physicsPlugin = new HavokPlugin(undefined, havokInstance);
             scene.enablePhysics(gravityVector, physicsPlugin);
@@ -210,8 +210,8 @@ export default function TestHavokCharacterMyLibControllPage() {
                 filename: 'casual-lowpoly-male.glb',
               },
               // characterPhysicsBodyOptions: {
-              //   angularDamping: 100,
-              //   linearDamping: 10,
+              //   // angularDamping: 100,
+              //   // linearDamping: 10,
               // },
             });
 
