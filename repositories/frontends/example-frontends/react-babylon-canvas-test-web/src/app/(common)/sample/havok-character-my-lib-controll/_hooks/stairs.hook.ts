@@ -24,10 +24,9 @@ export function useStairs() {
   function addStairs(params: { scene: Scene; shadowGenerator: ShadowGenerator }) {
     const { scene, shadowGenerator } = params;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Array.from({ length: 10 }).forEach((_, index) => {
       babylonMeshPhysicsManager.injectObject({
-        manageName: 'center-box',
+        manageName: `stairs-${index}`,
         mesh: (params) => {
           const { manageName } = params;
           const mesh = MeshBuilder.CreateBox(manageName, { width: 2, height: 0.1, depth: 2 }, scene); // width == x, height == y, depth == z

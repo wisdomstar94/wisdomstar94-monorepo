@@ -27,11 +27,13 @@ import {
 import { useKeyboardManager } from '@wisdomstar94/react-keyboard-manager';
 import { registerBuiltInLoaders } from '@babylonjs/loaders/dynamic';
 import { useStairs } from './_hooks/stairs.hook';
+import { useRotatePlane } from './_hooks/rotate-plane';
 registerBuiltInLoaders();
 
 export default function TestHavokCharacterMyLibControllPage() {
   const characterId = '1';
   const { addStairs } = useStairs();
+  const { addRotatePlane } = useRotatePlane();
 
   const babylonMeshPhysicsManager = useBabylonMeshPhysicsManager();
 
@@ -174,6 +176,12 @@ export default function TestHavokCharacterMyLibControllPage() {
 
             // 계단 셋팅
             addStairs({
+              scene,
+              shadowGenerator,
+            });
+
+            // 기울어진 바닥 셋팅
+            addRotatePlane({
               scene,
               shadowGenerator,
             });
