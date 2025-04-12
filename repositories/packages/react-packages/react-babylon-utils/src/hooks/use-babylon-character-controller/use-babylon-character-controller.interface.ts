@@ -49,6 +49,7 @@ export declare namespace IUseBabylonCharacterController {
     jumpingAnimationStartDelay: number;
     jumpingAnimationDuration: number;
     jumpingTotalDuration: number;
+    jumpPower?: number;
   }
 
   export interface AddRequireInfo {
@@ -64,6 +65,9 @@ export declare namespace IUseBabylonCharacterController {
     characterJumpingOptions: CharacterJumpingOptions;
     characterAnimationGroupNames: AnimationGroupNames;
     characterPhysicsBodyOptions?: characterPhysicsBodyOptions;
+    characterWalkSpeed?: number;
+    characterRunSpeed?: number;
+    characterGravityPower?: number;
   }
 
   export type AddRequireInfoWithoutScene = Omit<AddRequireInfo, 'scene'>;
@@ -105,9 +109,13 @@ export declare namespace IUseBabylonCharacterController {
     babylonLogicResult: AddInCharacterParamsBabylonLogicReturnParams;
   }
 
-  export interface SnapshotDumpings {
+  export interface SnapshotInfo {
     linearDamping: number;
     angularDamping: number;
+    jumpPower: number;
+    walkSpeed: number;
+    runSpeed: number;
+    characterGravityPower: number;
   }
 
   export interface CharacterItem {
@@ -134,7 +142,7 @@ export declare namespace IUseBabylonCharacterController {
     addRequireInfo: AddRequireInfo;
     add: (params: AddInCharacterParams) => Promise<any>;
     addedGroups: Map<GroupName, AddedGroupInfo>;
-    snapshotDumpings: SnapshotDumpings;
+    snapshotInfo: SnapshotInfo;
   }
 
   export interface CharacterMovingOptions {

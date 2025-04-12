@@ -17,6 +17,11 @@ import { calculateDistance3D } from '@/libs/utils';
 const defaultAngularDamping = 100;
 const defaultLinearDamping = 10;
 
+const defaultJumpPower = 46;
+const defaultWalkSpeed = 3;
+const defaultRunSpeed = 6;
+const defaultCharacterGravityPower = 3;
+
 export function useBabylonCharacterController(props: IUseBabylonCharacterController.Props) {
   const { debugOptions, onAdded, thisClientCharacterOptions } = props;
 
@@ -54,6 +59,12 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
 
     const angularDamping = characterPhysicsBodyOptions?.angularDamping ?? defaultAngularDamping;
     const linearDamping = characterPhysicsBodyOptions?.linearDamping ?? defaultLinearDamping;
+
+    const jumpPower = characterJumpingOptions?.jumpPower ?? defaultJumpPower;
+    const walkSpeed = params?.characterWalkSpeed ?? defaultWalkSpeed;
+    const runSpeed = params?.characterRunSpeed ?? defaultRunSpeed;
+
+    const characterGravityPower = params?.characterGravityPower ?? defaultCharacterGravityPower;
 
     const t = charactersRef.current.get(characterId);
     if (charactersAddingRef.current.has(characterId) || t !== undefined) {
@@ -254,9 +265,13 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
         });
       },
       addedGroups: new Map(),
-      snapshotDumpings: {
+      snapshotInfo: {
         linearDamping,
         angularDamping,
+        jumpPower,
+        walkSpeed,
+        runSpeed,
+        characterGravityPower,
       },
     };
     charactersRef.current.set(characterId, characterItem);
@@ -429,7 +444,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     if (targetCharacter.isJumping) return;
     targetCharacter.isJumping = true;
     if (thisClientCharacterIdRef.current !== characterId) {
-      targetCharacter.characterBoxPhysicsBody.setLinearDamping(targetCharacter.snapshotDumpings.linearDamping);
+      targetCharacter.characterBoxPhysicsBody.setLinearDamping(targetCharacter.snapshotInfo.linearDamping);
     }
     if (jumpingOptions !== undefined) {
       targetCharacter.jumpingOptions = jumpingOptions;
@@ -487,6 +502,8 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
     callback(startedTimestamp, currentTimestamp, step) {
       // console.log('step', step);
       charactersRef.current.forEach((characterItem, characterId) => {
+        const { snapshotInfo } = characterItem;
+
         let cameraDirection: Vector3 | undefined = undefined;
         if (characterItem.camera !== undefined) {
           cameraDirection = characterItem.camera.getForwardRay().direction;
@@ -587,17 +604,23 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
           }
 
           const currentVelocity = characterItem.characterBoxPhysicsBody.getLinearVelocity();
-          let muliply = 4;
+          let muliply = snapshotInfo.walkSpeed;
           if (characterItem.isRunning) {
-            muliply = 8;
+            muliply = snapshotInfo.runSpeed;
           }
           characterItem.characterBoxPhysicsBody.setLinearVelocity(
-            new Vector3(moveDirection.x * muliply, currentVelocity.y, moveDirection.z * muliply)
+            new Vector3(
+              moveDirection.x * muliply,
+              currentVelocity.y - snapshotInfo.characterGravityPower,
+              moveDirection.z * muliply
+            )
           );
         } else {
           // x축과 z축 속도를 0으로 설정, y축 속도는 유지
           const currentVelocity = characterItem.characterBoxPhysicsBody.getLinearVelocity();
-          characterItem.characterBoxPhysicsBody.setLinearVelocity(new Vector3(0, currentVelocity.y, 0));
+          characterItem.characterBoxPhysicsBody.setLinearVelocity(
+            new Vector3(0, currentVelocity.y - snapshotInfo.characterGravityPower, 0)
+          );
         }
         setIsThisClientCharacterControllingWrapper(characterItem.direction !== undefined, characterId);
         if (characterItem.isJumping) {
@@ -611,7 +634,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
             const currentVelocity = characterItem.characterBoxPhysicsBody.getLinearVelocity();
             characterItem.jumpingInterval = setTimeout(() => {
               characterItem.characterBoxPhysicsBody.setLinearVelocity(
-                new Vector3(moveDirection.x * 3, currentVelocity.y + 14, moveDirection.z * 3)
+                new Vector3(moveDirection.x * 3, currentVelocity.y + snapshotInfo.jumpPower, moveDirection.z * 3)
               );
               setTimeout(() => {
                 characterItem.isJumping = false;
@@ -628,7 +651,7 @@ export function useBabylonCharacterController(props: IUseBabylonCharacterControl
               if (characterItem.characterBoxPhysicsBody.getMotionType() !== PhysicsMotionType.DYNAMIC) {
                 characterItem.characterBoxPhysicsBody.setMotionType(PhysicsMotionType.DYNAMIC);
               }
-              characterItem.characterBoxPhysicsBody.setLinearDamping(characterItem.snapshotDumpings.linearDamping);
+              characterItem.characterBoxPhysicsBody.setLinearDamping(characterItem.snapshotInfo.linearDamping);
             }, characterItem.jumpingOptions.jumpingTotalDuration);
           }
         }
