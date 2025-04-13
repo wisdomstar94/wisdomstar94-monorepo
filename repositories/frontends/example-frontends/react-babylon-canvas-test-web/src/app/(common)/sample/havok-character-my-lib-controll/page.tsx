@@ -1,42 +1,30 @@
 'use client';
 
-import {
-  AbstractMesh,
-  ActionManager,
-  ArcRotateCamera,
-  Color3,
-  DirectionalLight,
-  HavokPlugin,
-  HemisphericLight,
-  MeshBuilder,
-  PhysicsBody,
-  PhysicsMotionType,
-  PhysicsShapeBox,
-  Quaternion,
-  ShadowGenerator,
-  StandardMaterial,
-  Vector3,
-} from '@babylonjs/core';
-import HavokPhysics from '@babylonjs/havok';
 import { BabylonCanvas } from '@wisdomstar94/react-babylon-canvas';
-import {
-  IUseBabylonCharacterController,
-  useBabylonCharacterController,
-  useBabylonMeshPhysicsManager,
-} from '@wisdomstar94/react-babylon-utils';
+import { IUseBabylonCharacterController, useBabylonCharacterController } from '@wisdomstar94/react-babylon-utils';
 import { useKeyboardManager } from '@wisdomstar94/react-keyboard-manager';
 import { registerBuiltInLoaders } from '@babylonjs/loaders/dynamic';
 import { useStairs } from './_hooks/stairs.hook';
 import { useRotatePlane } from './_hooks/rotate-plane';
+import { useLight } from './_hooks/light';
+import { useGravity } from './_hooks/gravity';
+import { useCamera } from './_hooks/camera';
+import { useShadow } from './_hooks/shadow';
+import { useGround } from './_hooks/ground';
+import { useCenterBox } from './_hooks/center-box';
+import { useCharacter } from './_hooks/character';
 registerBuiltInLoaders();
 
 export default function TestHavokCharacterMyLibControllPage() {
   const characterId = '1';
   const { addStairs } = useStairs();
   const { addRotatePlane } = useRotatePlane();
-
-  const babylonMeshPhysicsManager = useBabylonMeshPhysicsManager();
-
+  const { addLight } = useLight();
+  const { setGravity } = useGravity();
+  const { addCamera } = useCamera();
+  const { generateShadow } = useShadow();
+  const { addGround } = useGround();
+  const { addCenterBox } = useCenterBox();
   const babylonCharacterController = useBabylonCharacterController({
     thisClientCharacterOptions: {
       characterId,
@@ -46,6 +34,7 @@ export default function TestHavokCharacterMyLibControllPage() {
       isShowCharacterParentBoxMesh: false,
     },
   });
+  const { addCharacter } = useCharacter({ babylonCharacterController });
 
   useKeyboardManager({
     onUp: (keyMap) => disposeMoving({ direction: 'Up', isRunning: keyMap.get('Shift') ?? false }),
@@ -84,146 +73,16 @@ export default function TestHavokCharacterMyLibControllPage() {
           enableAxesViewer={true}
           onLoaded={async (params) => {
             const { engineInfo, scene } = params;
-
-            scene.actionManager = new ActionManager(scene);
-
-            const gravityVector = new Vector3(0, -19.81, 0);
-            const havokInstance = await HavokPhysics();
-            const physicsPlugin = new HavokPlugin(undefined, havokInstance);
-            scene.enablePhysics(gravityVector, physicsPlugin);
-            scene.shadowsEnabled = true;
-
-            const light2 = new HemisphericLight('light1', new Vector3(0, 1, 0), scene);
-            light2.intensity = 0.2;
-
-            const light = new DirectionalLight('dirLight', new Vector3(0, -1, 1), scene);
-            light.position.z = -22;
-            light.position.x = 22;
-            light.position.y = 20;
-            light.intensity = 0.7;
-            light.shadowMinZ = 10;
-            light.shadowMaxZ = 450;
-            light.setDirectionToTarget(new Vector3(-1, 0, 1));
-
-            const camera = new ArcRotateCamera('camera1', Math.PI / 2, -Math.PI / 2.5, 10, Vector3.Zero(), scene);
-
-            const shadowGenerator = new ShadowGenerator(4096, light, undefined, camera);
-            shadowGenerator.bias = 0.0003;
-
-            const settingShadow = (mesh: AbstractMesh) => {
-              mesh.receiveShadows = true;
-              const shadowMap = shadowGenerator.getShadowMap();
-              shadowMap?.renderList?.push(mesh);
-            };
-
-            // 바닥 셋팅
-            babylonMeshPhysicsManager.injectObject({
-              manageName: 'ground',
-              mesh: (params) => {
-                const { manageName } = params;
-                const mesh = MeshBuilder.CreateBox(manageName, { width: 40, height: 2, depth: 40 }, scene);
-                mesh.position.y = -1;
-
-                const groundMaterial = new StandardMaterial('ground', scene);
-                // groundMaterial.ambientColor = new Color3(1, 1, 1);
-                groundMaterial.specularColor = new Color3(0, 0, 0);
-                groundMaterial.emissiveColor = new Color3(0.2, 0.2, 0.2);
-                groundMaterial.useLightmapAsShadowmap = true;
-                mesh.material = groundMaterial;
-
-                settingShadow(mesh);
-                return mesh;
-              },
-              physicsBody: (params) => {
-                const { mesh } = params;
-                const body = new PhysicsBody(mesh, PhysicsMotionType.STATIC, false, scene);
-                body.shape = new PhysicsShapeBox(
-                  new Vector3(0, 0, 0),
-                  Quaternion.Identity(),
-                  new Vector3(40, 2, 40),
-                  scene
-                );
-                body.setMassProperties({ mass: 0.1 });
-                return body;
-              },
-            });
-
-            // 가운데 고정 박스 셋팅
-            babylonMeshPhysicsManager.injectObject({
-              manageName: 'center-box',
-              mesh: (params) => {
-                const { manageName } = params;
-                const mesh = MeshBuilder.CreateBox(manageName, { width: 2, height: 2, depth: 2 }, scene); // width == x, height == y, depth == z
-                mesh.position.y = 1.2;
-                mesh.position.x = 0;
-                mesh.position.z = 0;
-                settingShadow(mesh);
-                return mesh;
-              },
-              physicsBody: (params) => {
-                const { mesh } = params;
-                const body = new PhysicsBody(mesh, PhysicsMotionType.STATIC, false, scene);
-                body.shape = new PhysicsShapeBox(
-                  new Vector3(0, 0, 0),
-                  Quaternion.Identity(),
-                  new Vector3(2, 2, 2),
-                  scene
-                );
-                body.setMassProperties({ mass: 0.1 });
-                return body;
-              },
-            });
-
-            // 계단 셋팅
-            addStairs({
-              scene,
-              shadowGenerator,
-            });
-
-            // 기울어진 바닥 셋팅
-            addRotatePlane({
-              scene,
-              shadowGenerator,
-            });
-
-            // 캐릭터 셋팅
-            const addedInfo = await babylonCharacterController.add({
-              camera,
-              scene,
-              characterInitPosition: { x: 5, y: 1, z: 0 },
-              characterSize: { x: 1, y: 2, z: 1 },
-              characterId,
-              characterNickName: '..',
-              characterAnimationGroupNames: {
-                idleAnimationGroupName: 'idle',
-                walkingAnimationGroupName: 'walking',
-                jumpingAnimationGroupName: 'jumping',
-                runningAnimationGroupName: 'running',
-              },
-              characterJumpingOptions: {
-                jumpingAnimationStartDelay: 450,
-                jumpingAnimationDuration: 200,
-                jumpingTotalDuration: 1000,
-              },
-              glbFileUrl: {
-                baseUrl: '/',
-                filename: 'casual-lowpoly-male.glb',
-              },
-              // characterPhysicsBodyOptions: {
-              //   // angularDamping: 100,
-              //   // linearDamping: 10,
-              // },
-            });
-
-            addedInfo?.characterMeshes.forEach((mesh) => {
-              mesh.scaling.scaleInPlace(0.01);
-              settingShadow(mesh);
-            });
-
-            // render
-            engineInfo.engine.runRenderLoop(() => {
-              scene.render();
-            });
+            await setGravity({ scene });
+            const { directionalLight } = addLight({ scene });
+            const { camera } = addCamera({ scene });
+            const { shadowGenerator } = generateShadow({ directionalLight, camera });
+            addGround({ scene, shadowGenerator }); // 바닥 셋팅
+            addCenterBox({ scene, shadowGenerator }); // 가운데 고정 박스 셋팅
+            addStairs({ scene, shadowGenerator }); // 계단 셋팅
+            addRotatePlane({ scene, shadowGenerator }); // 기울어진 바닥 셋팅
+            addCharacter({ scene, shadowGenerator, camera, characterId }); // 캐릭터 셋팅
+            engineInfo.engine.runRenderLoop(() => scene.render()); // render
           }}
         />
       </div>
