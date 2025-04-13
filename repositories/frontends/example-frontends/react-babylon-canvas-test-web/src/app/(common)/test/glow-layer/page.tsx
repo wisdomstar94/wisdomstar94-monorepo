@@ -3,11 +3,10 @@
 import {
   AnimationPropertiesOverride,
   Color3,
-  Constants,
+  DefaultRenderingPipeline,
   GlowLayer,
   HemisphericLight,
   MeshBuilder,
-  SpotLight,
   StandardMaterial,
   UniversalCamera,
   Vector3,
@@ -36,13 +35,13 @@ export default function Page() {
 
           // 전반적인 빛
           const light2 = new HemisphericLight('light1', new Vector3(0, 1, 0), scene);
-          light2.intensity = 0.2;
+          light2.intensity = 0.5;
 
-          const light = new SpotLight('SpotLight', new Vector3(0, 2, 0), new Vector3(0, -1, 0), Math.PI * 2, 5, scene);
-          light.range = 100;
-          light.diffuse = new Color3(1, 0, 0);
-          light.specular = new Color3(1, 0, 0);
-          light.intensity = 5;
+          // const light = new SpotLight('SpotLight', new Vector3(0, 2, 0), new Vector3(0, -1, 0), Math.PI * 2, 5, scene);
+          // light.range = 100;
+          // light.diffuse = new Color3(1, 0, 0);
+          // light.specular = new Color3(1, 0, 0);
+          // light.intensity = 5;
 
           // create mesh
           const mesh = MeshBuilder.CreateBox('box', { width: 0.7, height: 0.7, depth: 0.7 }, scene);
@@ -58,7 +57,7 @@ export default function Page() {
           floor.receiveShadows = true;
 
           // camera 설정
-          const camera = new UniversalCamera('camera2', new Vector3(5, 5, 5), scene);
+          const camera = new UniversalCamera('camera2', new Vector3(3, 5, 5), scene);
           camera.setTarget(new Vector3(0, 0, 0));
           camera.attachControl(canvas, true);
 
@@ -66,21 +65,28 @@ export default function Page() {
           // new BloomEffect(engineInfo.engine, 10, 5, 5);
           const gl = new GlowLayer('glow', scene, {
             mainTextureFixedSize: 256,
-            blurKernelSize: 68,
-            mainTextureSamples: 4,
-            mainTextureRatio: 1270,
-            ldrMerge: true,
-            alphaBlendingMode: Constants.ALPHA_MAXIMIZED,
+            blurKernelSize: 128,
             camera,
           });
           // 특정 메시에만 bloom 적용하고 싶을 때
           gl.customEmissiveColorSelector = function (mesh, subMesh, material, result) {
-            if (mesh.name === 'box') {
+            // console.log(`customEmissiveColorSelector`, { mesh });
+            const targetNames = ['box'];
+            if (targetNames.includes(mesh.name)) {
               result.set(1, 0, 0, 1); // bloom 색상 및 투명도 지정
             } else {
-              result.set(0, 0, 0, 0); // bloom 색상 및 투명도 지정
+              result.set(0, 0, 0, 0);
             }
           };
+
+          const defaultPipeline = new DefaultRenderingPipeline('default', true, scene, [camera]);
+          defaultPipeline.bloomEnabled = true;
+          defaultPipeline.bloomKernel = 420;
+          defaultPipeline.bloomWeight = 4;
+          defaultPipeline.glowLayerEnabled = true;
+
+          const helper = scene.createDefaultEnvironment();
+          helper?.setMainColor(Color3.Gray());
 
           // render
           engineInfo.engine.runRenderLoop(() => {
