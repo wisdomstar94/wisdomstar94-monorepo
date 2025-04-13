@@ -17,10 +17,10 @@ import { calculateDistance3D } from '@/libs/utils';
 const defaultAngularDamping = 100;
 const defaultLinearDamping = 10;
 
-const defaultJumpPower = 46;
+const defaultJumpPower = 16;
 const defaultWalkSpeed = 3;
 const defaultRunSpeed = 6;
-const defaultCharacterGravityPower = 3;
+const defaultCharacterGravityPower = 0;
 
 export function useBabylonCharacterController(props: IUseBabylonCharacterController.Props) {
   const { debugOptions, onAdded, thisClientCharacterOptions } = props;

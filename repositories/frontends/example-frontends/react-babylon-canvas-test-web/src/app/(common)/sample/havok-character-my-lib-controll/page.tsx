@@ -87,7 +87,7 @@ export default function TestHavokCharacterMyLibControllPage() {
 
             scene.actionManager = new ActionManager(scene);
 
-            const gravityVector = new Vector3(0, -10.81, 0);
+            const gravityVector = new Vector3(0, -19.81, 0);
             const havokInstance = await HavokPhysics();
             const physicsPlugin = new HavokPlugin(undefined, havokInstance);
             scene.enablePhysics(gravityVector, physicsPlugin);
