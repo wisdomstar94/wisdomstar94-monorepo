@@ -27,6 +27,11 @@ export default function Layout({
       href: '/test/havok-character-controller-custom',
     },
     {
+      name: 'test/curve-equation-animation-test-1',
+      href: '/test/curve-equation-animation-test-1',
+    },
+
+    {
       name: 'sample/havok-character-my-lib-controll',
       href: '/sample/havok-character-my-lib-controll',
     },

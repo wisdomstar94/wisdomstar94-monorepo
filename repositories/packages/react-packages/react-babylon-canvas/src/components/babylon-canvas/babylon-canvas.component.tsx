@@ -65,7 +65,7 @@ export function BabylonCanvas(props: IBabylonCanvas.Props) {
     const scene = new Scene(engineInfo.engine);
 
     if (enableAxesViewer) {
-      new AxesViewer(scene, 10, undefined, undefined, undefined, undefined, 0.2);
+      new AxesViewer(scene, 10, undefined, undefined, undefined, undefined, 0.1);
     }
 
     onLoaded({ engineInfo, canvas, scene });
