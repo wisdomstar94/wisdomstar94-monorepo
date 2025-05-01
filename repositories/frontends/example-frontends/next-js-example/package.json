@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
+    "@wisdomstar94/next-utils": "workspace:^",
     "@wisdomstar94/react-add-event-listener": "workspace:^",
     "@wisdomstar94/react-api": "workspace:^",
     "@wisdomstar94/vanilla-js-util": "workspace:^",

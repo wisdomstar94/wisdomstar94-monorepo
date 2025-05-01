@@ -15,7 +15,9 @@ export default function Layout({
     { name: 'test/use-sync-external-store', href: '/test/use-sync-external-store' },
     { name: 'test/use-reducer/basic', href: '/test/use-reducer/basic' },
     { name: 'test/use-optimistic', href: '/test/use-optimistic' },
+
     { name: 'test/server-action/basic', href: '/test/server-action/basic' },
+    { name: 'test/server-action/server-function-wrapper', href: '/test/server-action/server-function-wrapper' },
     { name: 'test/api-call/basic', href: '/test/api-call/basic' },
     { name: 'test/parallel-routes-and-intercepting-routes', href: '/test/parallel-routes-and-intercepting-routes' },
     { name: 'test/image-response', href: '/test/image-response' },
