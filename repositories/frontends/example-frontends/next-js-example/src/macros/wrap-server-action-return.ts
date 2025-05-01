@@ -1,9 +1,13 @@
-export async function wrapServerActionReturn<T extends (...args: never[]) => ReturnType<T>>(fn: T) {
+export type WrapServerActionResultReturnType<T extends (...args: never[]) => ReturnType<T>> =
+  ReturnType<T> extends Promise<infer U> ? U : ReturnType<T>;
+
+export function wrapServerActionReturn<T extends (...args: never[]) => ReturnType<T>>(fn: T) {
   async function call(...args: Parameters<T>) {
     try {
       const res = fn(...args);
+      const result = res instanceof Promise ? await res : res;
       return {
-        result: res instanceof Promise ? await res : res,
+        result: result as WrapServerActionResultReturnType<T>,
       };
     } catch (e) {
       if (isPublicPossibleError(e)) {

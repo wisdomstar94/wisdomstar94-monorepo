@@ -1,0 +1,8 @@
+'use server';
+
+import { wrapServerActionReturn } from '@/macros';
+import { testListApiServer } from './test-list-api.server';
+
+export async function testListApiServerAction(...args: Parameters<typeof testListApiServer>) {
+  return wrapServerActionReturn(testListApiServer)(...args);
+}

@@ -18,7 +18,10 @@ export default function Layout({
 
     { name: 'test/server-action/basic', href: '/test/server-action/basic' },
     { name: 'test/server-action/server-function-wrapper', href: '/test/server-action/server-function-wrapper' },
+
     { name: 'test/api-call/basic', href: '/test/api-call/basic' },
+    { name: 'test/api-call/async-caller', href: '/test/api-call/async-caller' },
+
     { name: 'test/parallel-routes-and-intercepting-routes', href: '/test/parallel-routes-and-intercepting-routes' },
     { name: 'test/image-response', href: '/test/image-response' },
     { name: 'test/route-segment-config-test/page1', href: '/test/route-segment-config-test/page1' },
