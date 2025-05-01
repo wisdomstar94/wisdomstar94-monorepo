@@ -11,6 +11,5 @@ export function getTestInfo(params: Params, isThrowError?: boolean) {
   return {
     name: params.name,
     age: params.age,
-    timestamp: Date.now(),
   };
 }
