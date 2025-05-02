@@ -1,7 +1,9 @@
+'use server';
+
 export type WrapServerActionResultReturnType<T extends (...args: never[]) => ReturnType<T>> =
   ReturnType<T> extends Promise<infer U> ? U : ReturnType<T>;
 
-export function wrapServerActionReturn<T extends (...args: never[]) => ReturnType<T>>(fn: T) {
+export async function wrapServerActionReturn<T extends (...args: never[]) => ReturnType<T>>(fn: T) {
   async function call(...args: Parameters<T>) {
     try {
       const res = fn(...args);
@@ -29,5 +31,5 @@ export function wrapServerActionReturn<T extends (...args: never[]) => ReturnTyp
 }
 
 function isPublicPossibleError(e: unknown): e is Error {
-  return e instanceof Error;
+  return true;
 }

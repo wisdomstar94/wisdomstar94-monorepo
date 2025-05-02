@@ -1,8 +1,8 @@
 'use client';
 
 import { toJsonString, toQueryString } from '@wisdomstar94/vanilla-js-util';
-import { fetchClient } from '../fetch-wrapper';
 import { ApiFetcherProps, ApiFetcherResultCommon, ApiPayloadRequired } from '../types';
+import { fetchClient } from './fetch.client';
 
 export async function apiFetcherClient<T extends ApiPayloadRequired, R>(
   props: Omit<ApiFetcherProps<T>, 'nextOptions'>
@@ -28,14 +28,11 @@ export async function apiFetcherClient<T extends ApiPayloadRequired, R>(
     };
     const resClone = res.clone();
     try {
-      const responsePayload = await res.json();
-      result.error = responsePayload;
-      throw result;
+      result.responsePayload = await res.json();
     } catch (e) {
-      const text = await resClone.text();
-      result.error = text;
-      throw result;
+      result.responseText = await resClone.text();
     }
+    throw result;
   }
 
   let responsePayload: R | null = null;

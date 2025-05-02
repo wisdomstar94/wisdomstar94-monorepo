@@ -1,3 +1,5 @@
+'use client';
+
 import { useAsyncCaller } from '@wisdomstar94/react-api';
 import { isApiFetcherResultCommon } from '../types';
 type OnSuccessErrorCaseFn = Parameters<typeof useAsyncCaller>[0]['onSuccessErrorCase'];
@@ -12,17 +14,27 @@ export const asyncCallerOnSuccessErrorCase: NonNullable<OnSuccessErrorCaseFn> = 
 
   if (isServerActionResult(res)) {
     if (isApiFetcherResultCommon(res.result)) {
-      const { responsePayload } = res.result;
-      if (isErrorResponsePayload(responsePayload)) {
+      const { error } = res.result;
+      if (error !== undefined) {
         return {
           isError: true,
           error: res.result,
         };
       }
     }
+  } else if (isServerActionError(res)) {
+    if (isApiFetcherResultCommon(res.error)) {
+      const { error } = res.error;
+      if (error !== undefined) {
+        return {
+          isError: true,
+          error: res.error,
+        };
+      }
+    }
   } else if (isApiFetcherResultCommon(res)) {
-    const { responsePayload } = res;
-    if (isErrorResponsePayload(responsePayload)) {
+    const { error } = res;
+    if (error !== undefined) {
       return {
         isError: true,
         error: res,
@@ -47,6 +59,15 @@ function isServerActionResult(v: unknown): v is { result: unknown } {
   return isResultExist;
 }
 
+function isServerActionError(v: unknown): v is { error: unknown } {
+  if (typeof v !== 'object' || v === null) return false;
+
+  const keys = Object.keys(v);
+  const isErrorExist = keys.includes('error');
+
+  return isErrorExist && keys.length === 1;
+}
+
 function isErrorResponsePayload(v: unknown) {
-  return true;
+  return false;
 }

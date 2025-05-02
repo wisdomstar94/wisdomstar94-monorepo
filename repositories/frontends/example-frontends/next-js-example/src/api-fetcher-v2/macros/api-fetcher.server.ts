@@ -1,8 +1,8 @@
 'use server';
 
 import { toJsonString, toQueryString } from '@wisdomstar94/vanilla-js-util';
-import { fetchServer } from '../fetch-wrapper';
 import { ApiFetcherProps, ApiFetcherResultCommon, ApiPayloadRequired } from '../types';
+import { fetchServer } from './fetch.server';
 
 export async function apiFetcherServer<T extends ApiPayloadRequired, R>(
   props: ApiFetcherProps<T>
@@ -36,14 +36,11 @@ export async function apiFetcherServer<T extends ApiPayloadRequired, R>(
     };
     const resClone = res.clone();
     try {
-      const responsePayload = await res.json();
-      result.error = responsePayload;
-      throw result;
+      result.error = await res.json();
     } catch (e) {
-      const text = await resClone.text();
-      result.error = text;
-      throw result;
+      result.responseText = await resClone.text();
     }
+    throw result;
   }
 
   let responsePayload: R | null = null;

@@ -73,8 +73,12 @@ router.get('/count-error', async (req, res) => {
   console.log('req.originalUrl', req.originalUrl);
   count++;
 
-  if (count < 5) {
-    res.status(500).json({});
+  if (count % 2 === 0) {
+    res.status(403).json({
+      name: 'count-error',
+      message: 'count is less than 5',
+      count,
+    });
     return;
   }
 
