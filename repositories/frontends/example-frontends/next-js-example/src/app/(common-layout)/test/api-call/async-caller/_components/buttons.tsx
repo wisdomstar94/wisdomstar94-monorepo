@@ -30,6 +30,7 @@ export function Buttons() {
             });
 
             console.log('@inlineRes', inlineRes);
+            // console.log('@inlineRes?.responsePayload', inlineRes?.responsePayload);
             console.log('@inlineRes?.result?.responsePayload', inlineRes?.result?.responsePayload);
           }}
         >

@@ -15,9 +15,9 @@ export type ErrorCaseResult = { isError: false; error?: void } | { isError: true
 export type Props<T extends (...args: never[]) => Promise<Awaited<ReturnType<T>>>> = {
   asyncFn: T;
   defaultValues?: DefaultValues;
-  errorCase: (res: Awaited<ReturnType<T>>) => ErrorCaseResult;
   noRetryCase?: (error: unknown) => boolean;
 
+  onSuccessErrorCase?: (res: Awaited<ReturnType<T>>) => ErrorCaseResult;
   onSuccess?: (res: Awaited<ReturnType<T>>) => void;
   onError?: (error: unknown) => void;
 };

@@ -1,14 +1,13 @@
 'use client';
 
-import { apiFetcherClient } from '@/api-fetcher-v2/macros';
-import { TestListApiReqPayload } from './test-list-api.types';
-import { testListApi } from './test-list-api';
+import { testListApiOverview, TestListApiFetcherFn } from './test-list-api.overview';
+import { apiFetcherClient } from '@/api-fetcher-v2';
 
-export async function testListApiClient({ payload }: { payload: TestListApiReqPayload }) {
-  const { url, method } = testListApi({ payload });
+export const testListApiClient: TestListApiFetcherFn = async ({ payload }) => {
+  const { url, method } = testListApiOverview({ payload });
   return await apiFetcherClient({
     url,
     method,
     payload,
   });
-}
+};

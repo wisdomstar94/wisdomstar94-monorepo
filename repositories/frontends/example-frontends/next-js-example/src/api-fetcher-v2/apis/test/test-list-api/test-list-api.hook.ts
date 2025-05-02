@@ -2,9 +2,11 @@
 
 import { useAsyncCallerErrorHandler } from '@/hooks/use-async-caller-error-handler.hook';
 import { useAsyncCaller } from '@wisdomstar94/react-api';
+
 import { testListApiServerAction } from './test-list-api.server-action';
 // import { testListApiClient } from './test-list-api.client';
-import { asyncCallerErrorCase } from '@/api-fetcher-v2';
+
+import { asyncCallerOnSuccessErrorCase } from '@/api-fetcher-v2';
 
 type AsyncFnType = typeof testListApiServerAction;
 // type AsyncFnType = typeof testListApiClient;
@@ -19,7 +21,8 @@ export function useTestListApi(params?: Params): ReturnType<typeof useAsyncCalle
   return useAsyncCaller({
     asyncFn: testListApiServerAction,
     // asyncFn: testListApiClient,
-    errorCase: asyncCallerErrorCase,
+
+    onSuccessErrorCase: (res) => asyncCallerOnSuccessErrorCase(res),
     onError(error) {
       onError(error);
       if (typeof params?.onError === 'function') {

@@ -1,14 +1,19 @@
 'use server';
 
-import { apiFetcherServer } from '@/api-fetcher-v2/macros';
-import { TestListApiReqPayload } from './test-list-api.types';
-import { testListApi } from './test-list-api';
+import { testListApiOverview, TestListApiFetcherFn } from './test-list-api.overview';
+import { apiFetcherServer } from '@/api-fetcher-v2';
 
-export async function testListApiServer({ payload }: { payload: TestListApiReqPayload }) {
-  const { url, method } = testListApi({ payload });
+export const testListApiServer: TestListApiFetcherFn = async ({ payload }) => {
+  const { url, method } = testListApiOverview({ payload });
   return await apiFetcherServer({
     url,
     method,
     payload,
+    // nextOptions: {
+    //   cache: 'force-cache',
+    //   next: {
+    //     tags: ['...']
+    //   }
+    // }
   });
-}
+};

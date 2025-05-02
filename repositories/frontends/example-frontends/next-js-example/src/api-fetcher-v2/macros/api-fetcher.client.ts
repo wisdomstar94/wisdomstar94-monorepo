@@ -26,12 +26,13 @@ export async function apiFetcherClient<T extends ApiPayloadRequired, R>(
       statusCode: res.status,
       responsePayload: null,
     };
+    const resClone = res.clone();
     try {
       const responsePayload = await res.json();
       result.error = responsePayload;
       throw result;
     } catch (e) {
-      const text = await res.text();
+      const text = await resClone.text();
       result.error = text;
       throw result;
     }
@@ -39,6 +40,7 @@ export async function apiFetcherClient<T extends ApiPayloadRequired, R>(
 
   let responsePayload: R | null = null;
   let responseText: string | undefined = undefined;
+
   if (res.status !== 204) {
     const resClone = res.clone();
     try {
@@ -48,9 +50,14 @@ export async function apiFetcherClient<T extends ApiPayloadRequired, R>(
     }
   }
 
-  return {
+  const returnResult: ApiFetcherResultCommon<R> = {
     statusCode: res.status,
     responsePayload,
-    responseText,
   };
+
+  if (responseText !== undefined) {
+    returnResult.responseText = responseText;
+  }
+
+  return returnResult;
 }

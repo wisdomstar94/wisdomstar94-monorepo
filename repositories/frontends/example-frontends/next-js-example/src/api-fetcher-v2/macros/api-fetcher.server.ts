@@ -34,12 +34,13 @@ export async function apiFetcherServer<T extends ApiPayloadRequired, R>(
       statusCode: res.status,
       responsePayload: null,
     };
+    const resClone = res.clone();
     try {
       const responsePayload = await res.json();
       result.error = responsePayload;
       throw result;
     } catch (e) {
-      const text = await res.text();
+      const text = await resClone.text();
       result.error = text;
       throw result;
     }

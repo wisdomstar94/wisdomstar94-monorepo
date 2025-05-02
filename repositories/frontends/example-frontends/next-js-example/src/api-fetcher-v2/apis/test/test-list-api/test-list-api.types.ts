@@ -12,3 +12,17 @@ export type TestListApiReqPayload = ReqPayload<
   // 요청 headers
   void
 >;
+
+export type TestListItem = {
+  id: number;
+  name: string;
+  company: string;
+  username: string;
+  email: string;
+  address: string;
+  zip: string;
+  state: string;
+  country: string;
+  phone: string;
+  photo: string;
+};

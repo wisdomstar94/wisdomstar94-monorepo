@@ -12,7 +12,7 @@ const defaultValuesStatic: Required<IUseAsyncCaller.DefaultValues> = {
 export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<ReturnType<T>>>>(
   props: IUseAsyncCaller.Props<T>
 ) {
-  const { asyncFn, defaultValues, errorCase, noRetryCase, onSuccess, onError } = props;
+  const { asyncFn, defaultValues, noRetryCase, onSuccessErrorCase, onSuccess, onError } = props;
 
   const defaultRetryCount = useMemo(() => {
     return defaultValues?.retryCount ?? defaultValuesStatic.retryCount;
@@ -67,8 +67,8 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
       async function _call() {
         try {
           const res = await asyncFn(...args);
-          if (typeof errorCase === 'function') {
-            const { isError, error } = errorCase(res);
+          if (typeof onSuccessErrorCase === 'function') {
+            const { isError, error } = onSuccessErrorCase(res);
             if (isError) {
               throw error;
             }
