@@ -71,6 +71,7 @@ router.get('/test4', async (req, res) => {
 // /api/test/count-error
 router.get('/count-error', async (req, res) => {
   console.log('req.originalUrl', req.originalUrl);
+  console.log('req.headers', req.headers);
   count++;
 
   if (count % 2 === 0) {

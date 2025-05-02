@@ -8,7 +8,9 @@ export type CountErrorApiReqPayload = ReqPayload<
   // 요청 params
   void,
   // 요청 headers
-  void
+  {
+    'My-Header-Key'?: string;
+  }
 >;
 
 export type CountErrorResPayload = {

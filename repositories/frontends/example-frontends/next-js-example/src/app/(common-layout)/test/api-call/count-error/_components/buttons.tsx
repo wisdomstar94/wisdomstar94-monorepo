@@ -24,7 +24,11 @@ export function Buttons() {
             if (countErrorApi.isLoadingRef.current) return;
 
             const inlineRes = await countErrorApi.getCaller().call({
-              payload: {},
+              payload: {
+                headers: {
+                  'My-Header-Key': 'from client...',
+                },
+              },
             });
 
             console.log('@inlineRes', inlineRes);

@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 
 async function ServerInfo() {
   try {
-    const result = await countErrorApiServer({ payload: {} });
+    const result = await countErrorApiServer({ payload: { headers: { 'My-Header-Key': 'from server...' } } });
 
     console.log(`#result`, result);
 
