@@ -20,4 +20,5 @@ export type Props<T extends (...args: never[]) => Promise<Awaited<ReturnType<T>>
   onSuccessErrorCase?: (res: Awaited<ReturnType<T>>) => ErrorCaseResult;
   onSuccess?: (res: Awaited<ReturnType<T>>) => void;
   onError?: (error: unknown) => void;
+  notUseState?: boolean; // 내부에서 자동으로 관리되는 상태 관리 없이 사용할 것인지 여부
 };

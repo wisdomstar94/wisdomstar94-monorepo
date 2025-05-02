@@ -12,7 +12,7 @@ const defaultValuesStatic: Required<IUseAsyncCaller.DefaultValues> = {
 export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<ReturnType<T>>>>(
   props: IUseAsyncCaller.Props<T>
 ) {
-  const { asyncFn, defaultValues, noRetryCase, onSuccessErrorCase, onSuccess, onError } = props;
+  const { asyncFn, defaultValues, noRetryCase, onSuccessErrorCase, onSuccess, onError, notUseState = false } = props;
 
   const defaultRetryCount = useMemo(() => {
     return defaultValues?.retryCount ?? defaultValuesStatic.retryCount;
@@ -36,6 +36,8 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
   const [error, setError] = useState<unknown | undefined>(undefined);
 
   function _changeIsLoading(v: boolean, loadingEndedBounceTime: number) {
+    if (notUseState) return;
+
     if (v) {
       isLoadingRef.current = v;
       setIsLoading(v);
@@ -50,6 +52,26 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
         }, loadingEndedBounceTime);
       }
     }
+  }
+
+  function _setResult(v: Awaited<ReturnType<T>> | undefined) {
+    if (notUseState) return;
+    setResult(v);
+  }
+
+  function _setError(v: unknown | undefined) {
+    if (notUseState) return;
+    setError(v);
+  }
+
+  function _setIsResolved(v: boolean) {
+    if (notUseState) return;
+    setIsResolved(v);
+  }
+
+  function _setIsMounted(v: boolean) {
+    if (notUseState) return;
+    setIsMounted(v);
   }
 
   function getCaller(callerOptions?: IUseAsyncCaller.CallOptions) {
@@ -73,8 +95,8 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
               throw error;
             }
           }
-          setResult(res);
-          setIsResolved(true);
+          _setResult(res);
+          _setIsResolved(true);
           if (typeof onSuccess === 'function') {
             onSuccess(res);
           }
@@ -82,7 +104,7 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
           return res;
         } catch (e) {
           if (retryCount === 0) {
-            setError(e);
+            _setError(e);
             _changeIsLoading(false, loadingEndedBounceTime);
             if (typeof onError === 'function') {
               onError(e);
@@ -92,7 +114,7 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
             }
           }
           if (typeof noRetryCase === 'function' && noRetryCase(e)) {
-            setError(e);
+            _setError(e);
             _changeIsLoading(false, loadingEndedBounceTime);
             if (typeof onError === 'function') {
               onError(e);
@@ -106,7 +128,7 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
             await new Promise((resolve) => setTimeout(() => resolve(1), retryDelay));
             return _call();
           } else {
-            setError(e);
+            _setError(e);
             _changeIsLoading(false, loadingEndedBounceTime);
             if (typeof onError === 'function') {
               onError(e);
@@ -125,7 +147,7 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
   }
 
   useEffect(() => {
-    setIsMounted(true);
+    _setIsMounted(true);
   }, []);
 
   return {
