@@ -23,17 +23,25 @@ export function Buttons() {
           onClick={async () => {
             if (countErrorApi.isLoadingRef.current) return;
 
-            const inlineRes = await countErrorApi.getCaller().call({
-              payload: {
-                headers: {
-                  'My-Header-Key': 'from client...',
-                },
-              },
-            });
+            try {
+              const inlineRes = await countErrorApi
+                .getCaller({
+                  // alwaysThrowError: true
+                })
+                .call({
+                  payload: {
+                    headers: {
+                      'My-Header-Key': 'from client...',
+                    },
+                  },
+                });
 
-            console.log('@inlineRes', inlineRes);
-            // console.log('@inlineRes?.responsePayload', inlineRes?.responsePayload);
-            console.log('@inlineRes?.result?.responsePayload', inlineRes?.result?.responsePayload);
+              console.log('@inlineRes', inlineRes);
+              // console.log('@inlineRes?.responsePayload', inlineRes?.responsePayload);
+              console.log('@inlineRes?.result?.responsePayload', inlineRes?.result?.responsePayload);
+            } catch (e) {
+              console.log('@e', e);
+            }
           }}
         >
           countErrorApi call!

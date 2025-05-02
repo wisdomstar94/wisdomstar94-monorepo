@@ -2,12 +2,14 @@ export type DefaultValues = {
   retryCount?: number;
   retryDelay?: number;
   loadingEndedBounceTime?: number;
+  alwaysThrowError?: boolean;
 };
 
 export type CallOptions = {
   retryCount?: number;
   retryDelay?: number;
   loadingEndedBounceTime?: number;
+  alwaysThrowError?: boolean;
 };
 
 export type ErrorCaseResult = { isError: false; error?: void } | { isError: true; error: unknown };

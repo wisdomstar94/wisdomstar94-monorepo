@@ -7,6 +7,7 @@ const defaultValuesStatic: Required<IUseAsyncCaller.DefaultValues> = {
   retryCount: 0,
   retryDelay: 1500,
   loadingEndedBounceTime: 400,
+  alwaysThrowError: false,
 };
 
 export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<ReturnType<T>>>>(
@@ -25,6 +26,10 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
   const defaultLoadingEndedBounceTime = useMemo(() => {
     return defaultValues?.loadingEndedBounceTime ?? defaultValuesStatic.loadingEndedBounceTime;
   }, [defaultValues?.loadingEndedBounceTime]);
+
+  const defaultAlwaysThrowError = useMemo(() => {
+    return defaultValues?.alwaysThrowError ?? defaultValuesStatic.alwaysThrowError;
+  }, [defaultValues?.alwaysThrowError]);
 
   const [isResolved, setIsResolved] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -85,6 +90,7 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
       const retryCount = callerOptions?.retryCount ?? defaultRetryCount;
       const retryDelay = callerOptions?.retryDelay ?? defaultRetryDelay;
       const loadingEndedBounceTime = callerOptions?.loadingEndedBounceTime ?? defaultLoadingEndedBounceTime;
+      const alwaysThrowError = callerOptions?.alwaysThrowError ?? defaultAlwaysThrowError;
 
       async function _call() {
         try {
@@ -108,6 +114,9 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
             _changeIsLoading(false, loadingEndedBounceTime);
             if (typeof onError === 'function') {
               onError(e);
+              if (alwaysThrowError) {
+                throw e;
+              }
               return;
             } else {
               throw e;
@@ -118,6 +127,9 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
             _changeIsLoading(false, loadingEndedBounceTime);
             if (typeof onError === 'function') {
               onError(e);
+              if (alwaysThrowError) {
+                throw e;
+              }
               return;
             } else {
               throw e;
@@ -132,6 +144,9 @@ export function useAsyncCaller<T extends (...args: never[]) => Promise<Awaited<R
             _changeIsLoading(false, loadingEndedBounceTime);
             if (typeof onError === 'function') {
               onError(e);
+              if (alwaysThrowError) {
+                throw e;
+              }
               return;
             } else {
               throw e;
