@@ -26,6 +26,7 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
   const scrollController = useScrollController();
   const isTouchDevice = useRef(false);
   const listEdgeScrollController = useListEdgeScrollController();
+  const latestMouseOrTouchEvent = useRef<MouseEvent | TouchEvent | undefined>(undefined);
 
   // 드래그가 끝났을 때 애니메이션이 끝난 후에 갱신된 데이터를 렌더해야 하므로, 갱신되기 전 데이터를 저장하기 위해 필요.
   const listsSnapshot = useRef(lists);
@@ -78,6 +79,8 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
     setTimeout(() => {
       setIsDnding(true);
     }, 50); // setTimeout 을 사용해서 아쉬운 부분 ㅠㅠ 다르게 할 방법이 없을까..?
+
+    latestMouseOrTouchEvent.current = event;
   }
 
   function handleWindowPointerMove(event: MouseEvent | TouchEvent) {
@@ -98,6 +101,8 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
 
     // 커서 위치에 따른 아이템 요소들 transform 적용 및 드래그 목적지 정보 할당
     dragDestinationInfo.current = transformingAndReturnDestinationInfo(event, pointerDownedInfoRef);
+
+    latestMouseOrTouchEvent.current = event;
   }
 
   function handleWindowPointerUp(event: MouseEvent | TouchEvent) {
@@ -333,6 +338,55 @@ export function useDndManager<T extends string, K, E extends HTMLElement>(props:
   });
   useAddEventListener({
     windowEventRequiredInfo: { eventName: 'touchend', eventListener: (event) => handleWindowPointerUp(event) },
+  });
+
+  function handleKeyPress(event: KeyboardEvent) {
+    if (!isDnding) return;
+
+    const key = event.key;
+    const keyLower = key.toLowerCase();
+
+    if (keyLower === 'pageup' || keyLower === 'home') {
+      window.scrollTo({
+        top: window.scrollY - 20,
+      });
+      if (latestMouseOrTouchEvent.current !== undefined) {
+        handleWindowPointerMove(latestMouseOrTouchEvent.current);
+      }
+    } else if (keyLower === 'pagedown' || keyLower === 'end') {
+      window.scrollTo({
+        top: window.scrollY + 20,
+      });
+      if (latestMouseOrTouchEvent.current !== undefined) {
+        handleWindowPointerMove(latestMouseOrTouchEvent.current);
+      }
+    }
+  }
+
+  function handleWheel(event: WheelEvent) {
+    if (!isDnding) return;
+    window.scrollTo({
+      top: window.scrollY + event.deltaY / 4,
+    });
+    if (latestMouseOrTouchEvent.current !== undefined) {
+      handleWindowPointerMove(latestMouseOrTouchEvent.current);
+    }
+  }
+
+  // wheel event
+  useAddEventListener({
+    windowEventRequiredInfo: {
+      eventName: 'wheel',
+      eventListener: (event) => handleWheel(event),
+    },
+  });
+
+  // keydown event
+  useAddEventListener({
+    windowEventRequiredInfo: {
+      eventName: 'keydown',
+      eventListener: (event) => handleKeyPress(event),
+    },
   });
 
   // drag cancel handler
