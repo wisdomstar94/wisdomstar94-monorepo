@@ -40,8 +40,15 @@ export type ReqHeaders<H = void> = H extends void ? { headers?: undefined } : { 
 
 export type ReqPayload<B, Q, P, H> = ReqBody<B> & ReqQuery<Q> & ReqParams<P> & ReqHeaders<H>;
 
-export type ApiFetcherIndivisualFn<T extends ApiPayloadRequired, R> = (props: {
+export type ApiFetcherIndivisualServerFn<T extends ApiPayloadRequired, R> = (props: {
   payload: T;
+  controller?: AbortController;
+  nextOptions?: NextOptions;
+}) => Promise<ApiFetcherResultCommon<R>>;
+
+export type ApiFetcherIndivisualClientFn<T extends ApiPayloadRequired, R> = (props: {
+  payload: T;
+  controller?: AbortController;
 }) => Promise<ApiFetcherResultCommon<R>>;
 
 export type ApiFetcherOverviewFn<T extends ApiPayloadRequired> = (props: { payload: T }) => {

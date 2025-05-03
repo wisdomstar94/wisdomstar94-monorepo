@@ -1,2 +1,2 @@
-export * from './request-init.types';
+export * from './fetch.types';
 export * from './api-fetcher.types';

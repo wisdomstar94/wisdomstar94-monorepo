@@ -13,7 +13,9 @@ export const viewListAndInfoServer = async (props: { id: number; size: number; t
   const list = listResult.responsePayload;
 
   const infoResult = await countErrorApiServer({
-    payload: {},
+    payload: {
+      headers: {},
+    },
   });
   const info = infoResult.responsePayload;
 
