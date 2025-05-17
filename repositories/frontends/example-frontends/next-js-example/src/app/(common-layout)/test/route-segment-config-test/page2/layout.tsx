@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-export const dynamic: NextRouteSegmentConfigDynamic = 'auto';
-export const dynamicParams: NextRouteSegmentConfigDynamicParams = true;
-export const revalidate: NextRouteSegmentConfigRevalidate = false;
-export const fetchCache: NextRouteSegmentConfigFetchCache = 'force-no-store';
-export const runtime: NextRouteSegmentConfigRuntime = 'nodejs';
-export const preferredRegion: NextRouteSegmentConfigPreferredRegion = 'auto';
-export const maxDuration: NextRouteSegmentConfigMaxDuration = 5;
+// export const dynamic: NextRouteSegmentConfigDynamic = 'auto';
+// export const dynamicParams: NextRouteSegmentConfigDynamicParams = true;
+// export const revalidate: NextRouteSegmentConfigRevalidate = false;
+// export const fetchCache: NextRouteSegmentConfigFetchCache = 'force-no-store';
+// export const runtime: NextRouteSegmentConfigRuntime = 'nodejs';
+// export const preferredRegion: NextRouteSegmentConfigPreferredRegion = 'auto';
+// export const maxDuration: NextRouteSegmentConfigMaxDuration = 5;
 
 export default async function Layout(props: { children: ReactNode }) {
   // console.log('[page2 layout] fetch start');

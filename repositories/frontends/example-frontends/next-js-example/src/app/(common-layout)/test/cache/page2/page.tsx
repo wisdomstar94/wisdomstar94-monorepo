@@ -1,8 +1,8 @@
-import { CacheTestServer } from "@/components/test/cache-test-server/cache-test-server.component";
-import { Suspense } from "react";
+import { CacheTestServer } from '@/components/test/cache-test-server/cache-test-server.component';
+import { Suspense } from 'react';
 
-export const dynamic: NextRouteSegmentConfigDynamic = 'force-dynamic';
-export const revalidate: NextRouteSegmentConfigRevalidate = 0;
+// export const dynamic: NextRouteSegmentConfigDynamic = 'force-dynamic';
+// export const revalidate: NextRouteSegmentConfigRevalidate = 0;
 
 export default function Page() {
   return (

@@ -2,7 +2,8 @@
 
 import { useAsyncCaller } from '@wisdomstar94/react-api';
 import { getTestInfoServerAction } from './get-test-info.server-action';
-import { useAsyncCallerErrorHandler } from '@/hooks/use-async-caller-error-handler.hook';
+import { useAsyncCallerGlobalErrorHandler } from '@/api-fetcher-v2';
+
 type ServerActionType = typeof getTestInfoServerAction;
 type Params = {
   onSuccess?: Parameters<typeof useAsyncCaller<ServerActionType>>[0]['onSuccess'];
@@ -10,10 +11,10 @@ type Params = {
 };
 
 export function useGetTestInfoServerAction(params?: Params): ReturnType<typeof useAsyncCaller<ServerActionType>> {
-  const { onError } = useAsyncCallerErrorHandler();
+  const { onError } = useAsyncCallerGlobalErrorHandler();
   return useAsyncCaller({
     asyncFn: getTestInfoServerAction,
-    errorCase: (res) => {
+    onSuccessErrorCase: (res) => {
       if (res.error !== undefined) {
         return {
           isError: true,

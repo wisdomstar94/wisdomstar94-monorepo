@@ -45,6 +45,8 @@ export default function Layout({
     { name: 'test/use-api-sample', href: '/test/use-api-sample' },
     { name: 'test/next-fetch-cache', href: '/test/next-fetch-cache' },
 
+    { name: 'test/promise-to-use', href: '/test/promise-to-use' },
+
     { name: 'test2', href: '/test2' },
     { name: 'test2/t1', href: '/test2/t1' },
   ];

@@ -1,4 +1,3 @@
-import { createFetchInstance } from '@/api-fetcher';
 import { ReactNode } from 'react';
 
 export default async function Layout({ children }: { children: ReactNode }) {
