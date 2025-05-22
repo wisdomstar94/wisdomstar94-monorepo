@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function TestReactNumberFlowPage() {
   const [inputedValue, setInputedValue] = useState<number>(0);
-  const [value, setValue] = useState<number>(0);
+  const [value, setValue] = useState<number>(25700);
 
   return (
     <>

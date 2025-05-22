@@ -21,7 +21,7 @@ export function NumberFlow(props: INumberFlow.Props) {
 
   return (
     <>
-      <div className={styles['container']}>
+      <div className={styles['container']} data-active="true">
         {numberStringArr.map((numStr, index) => {
           const num = Number(numStr);
           const num_1 = getMinusOneNum(num);
