@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import type { INumberFlow } from './number-flow.interface';
 import styles from './number-flow.module.css';
 
