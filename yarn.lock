@@ -5135,6 +5135,7 @@ __metadata:
     "@wisdomstar94/react-joystick": "npm:0.0.5"
     "@wisdomstar94/react-keyboard-manager": "workspace:^"
     "@wisdomstar94/react-multiple-api-manager": "workspace:^"
+    "@wisdomstar94/react-number-flow": "workspace:^"
     "@wisdomstar94/react-promise-interval": "workspace:^"
     "@wisdomstar94/react-request-animation-frame-manager": "workspace:^"
     "@wisdomstar94/react-scroll-effect": "workspace:^"
@@ -5497,6 +5498,25 @@ __metadata:
 "@wisdomstar94/react-multiple-api-manager@workspace:^, @wisdomstar94/react-multiple-api-manager@workspace:repositories/packages/react-packages/react-multiple-api-manager":
   version: 0.0.0-use.local
   resolution: "@wisdomstar94/react-multiple-api-manager@workspace:repositories/packages/react-packages/react-multiple-api-manager"
+  dependencies:
+    "@types/node": "npm:^22.14.0"
+    "@types/react": "npm:^19.1.0"
+    "@types/react-dom": "npm:^19.1.2"
+    "@vitejs/plugin-react": "npm:^4.3.4"
+    "@wisdomstar94/tsconfig-library": "workspace:^"
+    react: "npm:^19.1.0"
+    react-dom: "npm:^19.1.0"
+    typescript: "npm:^5.8.3"
+    vite: "npm:^6.2.5"
+  peerDependencies:
+    react: ^19.1.0
+    react-dom: ^19.1.0
+  languageName: unknown
+  linkType: soft
+
+"@wisdomstar94/react-number-flow@workspace:^, @wisdomstar94/react-number-flow@workspace:repositories/packages/react-packages/react-number-flow":
+  version: 0.0.0-use.local
+  resolution: "@wisdomstar94/react-number-flow@workspace:repositories/packages/react-packages/react-number-flow"
   dependencies:
     "@types/node": "npm:^22.14.0"
     "@types/react": "npm:^19.1.0"

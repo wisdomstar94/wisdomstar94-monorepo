@@ -42,6 +42,7 @@ export default function Layout({
     { name: 'test/react-visible-observer-box', href: '/test/react-visible-observer-box' },
     { name: 'test/xlsx-utils/basic', href: '/test/xlsx-utils/basic' },
     { name: 'test/exceljs-utils/basic', href: 'test/exceljs-utils/basic' },
+    { name: 'test/react-number-flow', href: '/test/react-number-flow' },
 
     // test/vanilla-js-util
     { name: 'test/vanilla-js-util/apply-overlay-scroll', href: '/test/vanilla-js-util/apply-overlay-scroll' },

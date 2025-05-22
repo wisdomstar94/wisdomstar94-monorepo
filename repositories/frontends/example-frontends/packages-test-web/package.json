@@ -25,6 +25,7 @@
     "@wisdomstar94/react-joystick": "0.0.5",
     "@wisdomstar94/react-keyboard-manager": "workspace:^",
     "@wisdomstar94/react-multiple-api-manager": "workspace:^",
+    "@wisdomstar94/react-number-flow": "workspace:^",
     "@wisdomstar94/react-promise-interval": "workspace:^",
     "@wisdomstar94/react-request-animation-frame-manager": "workspace:^",
     "@wisdomstar94/react-scroll-effect": "workspace:^",

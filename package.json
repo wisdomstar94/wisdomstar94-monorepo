@@ -28,6 +28,7 @@
     "@wisdomstar94/react-state-manager": "yarn workspace @wisdomstar94/react-state-manager",
     "@wisdomstar94/react-visible-observer-box": "yarn workspace @wisdomstar94/react-visible-observer-box",
     "@wisdomstar94/react-babylon-canvas": "yarn workspace @wisdomstar94/react-babylon-canvas",
+    "@wisdomstar94/react-number-flow": "yarn workspace @wisdomstar94/react-number-flow",
     "--------------------------------------- monorepo-libraries ---------------------------------------": "",
     "@wisdomstar94/example-frontend-library": "yarn workspace @wisdomstar94/example-frontend-library",
     "@wisdomstar94/example-next-library": "yarn workspace @wisdomstar94/example-next-library",
