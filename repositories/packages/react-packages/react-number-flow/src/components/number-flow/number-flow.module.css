@@ -81,3 +81,11 @@
     }
   }
 }
+
+.normal-transition {
+  transition: all 0.7s cubic-bezier(0.17, 0.67, 0.06, 1.01);
+}
+
+.no-transition {
+  transition: all 0s;
+}

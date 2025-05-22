@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { INumberFlow } from './number-flow.interface';
 import styles from './number-flow.module.css';
 
@@ -21,7 +21,7 @@ export function NumberFlow(props: INumberFlow.Props) {
 
   return (
     <>
-      <div className={styles['container']} data-active="true">
+      <div className={styles['container']} data-active={true}>
         {numberStringArr.map((numStr, index) => {
           const num = Number(numStr);
           const num_1 = getMinusOneNum(num);
@@ -33,19 +33,13 @@ export function NumberFlow(props: INumberFlow.Props) {
           return (
             <span
               key={`${numStr}_${index}`}
-              className={styles['num-unit-container']}
+              className={`${styles['num-unit-container']}`}
               style={{ transitionDelay: transitionDelay }}
             >
               <span style={{ transitionDelay: transitionDelay }}>{numStr}</span>
-              <span style={{ transitionDelay: transitionDelay }} className={styles['num-str-deco']}>
-                {num_1}
-              </span>
-              <span style={{ transitionDelay: transitionDelay }} className={styles['num-str-deco']}>
-                {num_2}
-              </span>
-              <span style={{ transitionDelay: transitionDelay }} className={styles['num-str-deco']}>
-                {num_3}
-              </span>
+              <span style={{ transitionDelay: transitionDelay }}>{num_1}</span>
+              <span style={{ transitionDelay: transitionDelay }}>{num_2}</span>
+              <span style={{ transitionDelay: transitionDelay }}>{num_3}</span>
             </span>
           );
         })}
