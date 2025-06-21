@@ -17,16 +17,16 @@
   },
   "devDependencies": {
     "@types/d3": "^7",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@types/node": "^24.0.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
     "@wisdomstar94/react-add-event-listener": "workspace:^",
     "@wisdomstar94/tsconfig-library": "workspace:^",
     "@wisdomstar94/vanilla-js-util": "workspace:^",
     "d3": "^7.9.0",
     "typescript": "^5.8.3",
-    "vite": "^6.2.5"
+    "vite": "^6.3.5"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
