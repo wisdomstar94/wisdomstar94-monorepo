@@ -1,18 +1,20 @@
-import { testListApiServer } from '@/api-fetcher-v2';
 import { Buttons } from './_components';
 import { Suspense } from 'react';
+import { countErrorApiServer } from '@/api-fetcher';
 
-async function ServerList() {
-  const result = await testListApiServer({
+const ServerList = async () => {
+  const result = await countErrorApiServer({
     payload: {
-      params: {},
+      headers: {
+        'My-Header-Key': 'from server...',
+      },
     },
   });
 
   console.log(`#result`, result);
 
-  return <>서버측에서 가져온 데이터 갯수 : {result.responsePayload?.length}</>;
-}
+  return <>서버측에서 가져온 데이터 : {JSON.stringify(result)}</>;
+};
 
 export default async function Page() {
   return (
