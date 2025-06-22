@@ -35,4 +35,4 @@ export type FetcherFn<T extends ApiPayloadRequired = ApiPayloadRequired> = (para
 export type IndivisualApiCallerFn<T extends ApiPayloadRequired, R> = (params: {
   fetcher: FetcherFn<T>;
   payload: T;
-}) => Promise<{ response: Response; body: R }>;
+}) => Promise<{ responseStatus: number; body: R }>;

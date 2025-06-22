@@ -1,4 +1,5 @@
 import type { IndivisualApiCallerFn, ReqPayload } from '@/api-fetcher';
+import { generateIndivisualApiCallerFnResult } from '@/api-fetcher';
 
 export type CountErrorApiReqPayload = ReqPayload<
   void,
@@ -24,9 +25,5 @@ export const countErrorApi: IndivisualApiCallerFn<CountErrorApiReqPayload, Count
     method: 'GET',
     payload,
   });
-
-  return {
-    response,
-    body: await response.json(),
-  };
+  return generateIndivisualApiCallerFnResult(response);
 };

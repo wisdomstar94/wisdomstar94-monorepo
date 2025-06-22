@@ -1,14 +1,13 @@
 import { createPublicError, isPublicError, PublicError } from './public-error';
 
-export function createServerActionFn<T extends (...args: never[]) => Promise<Awaited<ReturnType<T>>>>(props: {
-  fn: T;
-}) {
+export function createServerActionFn<T extends (...args: never[]) => ReturnType<T>>(props: { fn: T }) {
   const { fn } = props;
 
   return async (...args: Parameters<T>): Promise<Awaited<ReturnType<T>> | PublicError> => {
     try {
       const result = fn(...args);
-      return result instanceof Promise ? await result : result;
+      const value = result instanceof Promise ? await result : result;
+      return value as Awaited<ReturnType<T>>;
     } catch (error) {
       let errorStore = error;
 
