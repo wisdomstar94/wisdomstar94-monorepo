@@ -21,17 +21,9 @@ export const fetcherClient: FetcherFn = async <T extends ApiPayloadRequired>(par
 
   // after action...
   // ...
+
   if (result.status >= 400 && result.status < 600) {
     throw result;
-    // const body = await (async () => {
-    //   try {
-    //     return await result.clone().json();
-    //   } catch (e) {
-    //     return await result.clone().text();
-    //   }
-    // })();
-
-    // throw body;
   }
 
   return result;

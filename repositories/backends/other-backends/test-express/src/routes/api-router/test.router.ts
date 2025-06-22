@@ -91,6 +91,7 @@ router.get('/count-error', async (req, res) => {
 
   console.log('newData', newData);
 
+  res.cookie('my-cookie', '123###', { maxAge: 900000, httpOnly: true });
   res.json(newData);
   return;
 });
