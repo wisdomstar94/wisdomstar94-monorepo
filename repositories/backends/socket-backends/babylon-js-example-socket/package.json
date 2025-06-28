@@ -21,7 +21,7 @@
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@wisdomstar94/react-babylon-utils": "workspace:^",
-    "concurrently": "^9.1.2",
+    "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.10",
     "npm-check-updates": "^18.0.1",

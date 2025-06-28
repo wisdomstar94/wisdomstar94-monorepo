@@ -21,10 +21,10 @@
     }
   },
   "peerDependencies": {
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "tailwindcss": "^4.1.10",
+    "tailwindcss": "^4.1.11",
     "tsc-watch": "7.1.1",
     "typescript": "^5.8.3"
   }

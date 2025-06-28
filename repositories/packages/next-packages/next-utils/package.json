@@ -19,11 +19,11 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.0.3",
+    "@types/node": "^24.0.7",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/set-cookie-parser": "^2.4.10",
-    "@vitejs/plugin-react": "^4.5.2",
+    "@vitejs/plugin-react": "^4.6.0",
     "@wisdomstar94/tsconfig-library": "workspace:^",
     "jose": "^6.0.11",
     "next": "^15.3.4",
@@ -31,7 +31,7 @@
     "react-dom": "^19.1.0",
     "set-cookie-parser": "^2.7.1",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^7.0.0"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
